@@ -5,7 +5,9 @@ import scrapy
 from datetime import date
 
 # 需要记录的天数
-record_day = -1
+record_day = 3
+# 记录起始页和终止页
+spider_range = range(1, 2)
 
 
 # 确定日期是否有效
@@ -89,9 +91,11 @@ class YangshiSpider(scrapy.Spider):
     def parse(self, response):
         for section in self.section_urls:
             category = section['name']
-            for i in range(1, 7):
+            category_url = section['url']
+            # 记录爬虫的范围
+            for i in spider_range:
                 url = self.get_full_url(section['url'], i)
-                yield scrapy.Request(url=url, callback=self.get_news_list, meta={"category": category})
+                yield scrapy.Request(url=url, callback=self.get_news_list, meta={"category": category_url})
 
     def get_news_list(self, response):
         if response.status == 200:

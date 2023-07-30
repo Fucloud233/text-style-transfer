@@ -3,12 +3,13 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 
+"""
+Refer
+* https://blog.csdn.net/weixin_43750377/article/details/103855911
+"""
 
 # useful for handling different item types with a single interface
 import csv
-import os
-
-from itemadapter import ItemAdapter
 
 
 class YangshiproPipeline:
@@ -54,8 +55,8 @@ class YangshiproPipeline:
         def get_file_name():
             return f"{self.file_name}_{category}.{self.file_suffix}"
 
-        # 打开文件
-        cur_file = open(get_file_name(), "a")
+        # 打开文件 newlines 设置不产生空行
+        cur_file = open(get_file_name(), "a", newline='')
         # 指定文件的写入方式为csv字典写入，参数1为指定具体文件，参数2为指定字段名
         cur_writer = csv.DictWriter(cur_file, fieldnames=self.fieldnames)
         # 写入第一行字段名，因为只要写入一次，所以文件放在__init__里面
@@ -76,6 +77,7 @@ class YangshiproPipeline:
         return item  # 传递给下一个执行的管道类
 
     def close_spider(self, spider):
-        print('结束爬虫...')
-        for handler in self.file_handler_list:
+        # [注意] 遍历values集合
+        for handler in self.file_handler_list.values():
             handler["file"].close()
+        print('结束爬虫...')
