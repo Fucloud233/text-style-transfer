@@ -10,14 +10,13 @@ Refer
 
 # useful for handling different item types with a single interface
 import csv
+from pathlib import Path
 
 
 class YangshiproPipeline:
     def __init__(self):
-        # 打开文件，指定方式为写，利用第3个参数把csv写数据时产生的空行消除
-        # self.f = open("yangshi_news.csv", "a", newline="", encoding='utf-8')
-
-        self.file_name = "yangshi_news"
+        self.output_path = Path("output")
+        self.output_file_name = "yangshi_news"
         self.file_suffix = "csv"
         self.file_handler_list = {}
 
@@ -52,14 +51,18 @@ class YangshiproPipeline:
             return
 
         # 生成文件名
-        def get_file_name():
-            return f"{self.file_name}_{category}.{self.file_suffix}"
+        def get_file_name() -> Path:
+            file_name = f"{self.output_file_name}_{category}.{self.file_suffix}"
+            return Path.joinpath(self.output_path, file_name)
 
-        # 打开文件 newlines 设置不产生空行
-        cur_file = open(get_file_name(), "a", newline='')
+        if not self.output_path.exists():
+            self.output_path.mkdir()
+
+        # 打开文件，指定方式为写，newlines="" 消除产生的空行
+        cur_file = open(get_file_name(), 'a', newline='', encoding='utf-8')
         # 指定文件的写入方式为csv字典写入，参数1为指定具体文件，参数2为指定字段名
         cur_writer = csv.DictWriter(cur_file, fieldnames=self.fieldnames)
-        # 写入第一行字段名，因为只要写入一次，所以文件放在__init__里面
+        # 写入第一行字段名
         cur_writer.writeheader()
 
         self.file_handler_list[category] = {
