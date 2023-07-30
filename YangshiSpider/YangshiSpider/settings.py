@@ -1,4 +1,4 @@
-# Scrapy settings for YangShiSpider project
+# Scrapy settings for YangshiSpider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -7,10 +7,10 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'YangShiSpider'
+BOT_NAME = 'YangshiSpider'
 
-SPIDER_MODULES = ['YangShiSpider.spiders']
-NEWSPIDER_MODULE = 'YangShiSpider.spiders'
+SPIDER_MODULES = ['YangshiSpider.spiders']
+NEWSPIDER_MODULE = 'YangshiSpider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -46,13 +46,13 @@ TELNETCONSOLE_ENABLED = False
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'YangShiSpider.middlewares.YangshiproSpiderMiddleware': 543,
+#    'YangshiSpider.middlewares.YangshiproSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 # DOWNLOADER_MIDDLEWARES = {
-#    'YangShiSpider.middlewares.YangshiproDownloaderMiddleware': 543,
+#    'YangshiSpider.middlewares.YangshiproDownloaderMiddleware': 543,
 # }
 
 # Enable or disable extensions
@@ -64,7 +64,7 @@ TELNETCONSOLE_ENABLED = False
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'YangShiSpider.pipelines.YangshiproPipeline': 300,
+   'YangshiSpider.pipelines.YangshiproPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
