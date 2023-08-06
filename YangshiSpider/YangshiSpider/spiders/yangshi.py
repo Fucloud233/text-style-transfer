@@ -4,45 +4,23 @@ from items import YangshiproItem
 import scrapy
 from datetime import date
 
-# 需要记录的天数
-record_day = 3
-# 记录起始页和终止页
-spider_range = range(1, 2)
 
+# 配置文件对象
+class Config:
+    # 需要记录的天数
+    record_day = -2
+    # 记录起始页和终止页
+    page_range = range(1, 3)
 
-# 确定日期是否有效
-def is_valid_date(input_time_str: str):
-    try:
-        input_date_str = input_time_str.split(' ')[0]
-        if input_date_str is None:
-            return False
-
-        input_date = date.fromisoformat(input_date_str)
-        sub_result = (date.today() - input_date).days.real
-
-        # 如果设置为-1 则读取全部
-        return record_day == -1 or sub_result < record_day
-    except ValueError:
-        return False
-
-
-def is_valid_url(item):
-    # if 'ARTIxxLe2vhAhId7G3nphaBc220416' in url:
-    #     return True
-    # else:
-    #     return False
-
-    """ 过滤掉非法链接 """
-    # 根据时间筛选
-    is_valid = is_valid_date(item['focus_date'])
-
-    # 过滤掉含有无法解析内容的链接
-    valid_arr = ['photo']
-    for i in valid_arr:
-        if i in item['url']:
-            is_valid = False
-
-    return is_valid
+    def __init__(self, input_file_path: str):
+        try:
+            with open(input_file_path, 'r', encoding="utf-8") as f:
+                json_str = f.read(-1)
+                config_info = json.loads(json_str)
+                Config.record_day = config_info["record_day"]
+                Config.page_range = range(config_info["page_start"], config_info["page_end"])
+        except FileNotFoundError:
+            print(f"[error] {input_file_path} not found!")
 
 
 def is_valid_body(response):
@@ -59,7 +37,7 @@ def get_origin_time(node):
         # 字符串中存在 |， 先从其中计算出时间，然后从母串中替换掉时间部分，分割字符串
         timeline = re.findall(pattern=r'20?.* ?.*:[0-9]{2}', string=info_str)[0]
         origin = info_str.replace(timeline, "").split(" ")[0].split("：")[1]
-    elif info_node == None:
+    elif info_node is None:
         # 针对旧样式，从info 的 i 标签中读取信息
         # info_node = node.xpath('//*[@class="info"]/i//text()').extract()
         origin = node.xpath('//*[@class="info"]/i//text()').extract_first().split(" ")[0].split("：")[1]
@@ -88,12 +66,15 @@ class YangshiSpider(scrapy.Spider):
         # {"url": 'world', "name": '世界'},
     ]
 
+    # 用于存储参数
+    config = Config('config.json')
+
     def parse(self, response):
         for section in self.section_urls:
-            category = section['name']
+            # category = section['name']
             category_url = section['url']
             # 记录爬虫的范围
-            for i in spider_range:
+            for i in self.config.page_range:
                 url = self.get_full_url(section['url'], i)
                 yield scrapy.Request(url=url, callback=self.get_news_list, meta={"category": category_url})
 
@@ -107,7 +88,7 @@ class YangshiSpider(scrapy.Spider):
                 # item 自动绑定
                 item = json.loads(json.dumps(news), object_hook=YangshiproItem)
                 item['category'] = response.meta['category']
-                if is_valid_url(item):
+                if self.is_valid_url(item):
                     # 读取新闻列表中的字段
                     print('Request:', item['url'])
                     yield scrapy.Request(url=item['url'], callback=get_content, meta={"item": item})
@@ -121,6 +102,39 @@ class YangshiSpider(scrapy.Spider):
         url = f'{self.base_urls}{section}_{index}.jsonp?cb={section}'
         # print("[debug] url: ", url)
         return url
+
+    # 确定日期是否有效
+    def is_valid_date(self, input_time_str: str):
+        try:
+            input_date_str = input_time_str.split(' ')[0]
+            if input_date_str is None:
+                return False
+
+            input_date = date.fromisoformat(input_date_str)
+            sub_result = (date.today() - input_date).days.real
+
+            # 如果设置为-1 则读取全部
+            return self.config.record_day == -1 or sub_result < self.config.record_day
+        except ValueError:
+            return False
+
+    def is_valid_url(self, item):
+        # if 'ARTIxxLe2vhAhId7G3nphaBc220416' in url:
+        #     return True
+        # else:
+        #     return False
+
+        """ 过滤掉非法链接 """
+        # 根据时间筛选
+        is_valid = self.is_valid_date(item['focus_date'])
+
+        # 过滤掉含有无法解析内容的链接
+        valid_arr = ['photo']
+        for i in valid_arr:
+            if i in item['url']:
+                is_valid = False
+
+        return is_valid
 
 
 def get_content(response):
