@@ -7,7 +7,7 @@
 import json
 
 
-def read_config() -> dict:
+def config() -> dict:
     file_path = "config.json"
     with open(file_path, "r") as f:
         config_text = '\n'.join(f.readlines(-1))

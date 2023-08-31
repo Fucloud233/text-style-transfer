@@ -23,7 +23,7 @@ class Chat:
         answer = response.choices[0].message['content']
         # 下面这一步是把chatGPT的回答也添加到对话列表中，这样下一次问问题的时候就能形成上下文了
         self.conversation_list.append({"role":"assistant","content":answer})
-        self.show_conversation(self.conversation_list)
+        # self.show_conversation(self.conversation_list)
 
 
 if __name__ == "__main__":
