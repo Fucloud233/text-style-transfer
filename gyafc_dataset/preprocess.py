@@ -132,3 +132,22 @@ def select_first(lines: list[str]) -> list[str]:
     for line in lines:
         output_list.append(eval(line)[0])
     return output_list
+
+
+def main():
+    # 数据集所在的路径
+    base_file_path = "dataset/gyafc_em"
+    # 数据集对应的类型
+    dataset_type = "valid"
+
+    # 读取数据集的位置(偏移量)和大小
+    size = -1
+    # 运行程序
+    handler = DatasetHandler(base_file_path, DatasetType.valid,
+                             read_size=size,
+                             output_type=OutputType.Json)
+    handler.handle()
+
+
+if __name__ == "__main__":
+    main()
