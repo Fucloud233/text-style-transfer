@@ -43,9 +43,10 @@ class Translator:
         for i in tqdm(range(offset, length), desc="[info] 翻译进度: "):
             try:
                 run_translate(self.data[i])
+            except TimeoutError:
+                print("[error] 连接超时...")
             except Exception as e:
                 print("[error] ", e)
-                pass
 
         # 输出运行结果
         print(f"[info] Result: {self.success_num}/{self.total_num}")
@@ -96,6 +97,7 @@ def extract_input_result(answer: str) -> dict:
     return result
 
 
+# 正则表达式的测试代码
 def re_test():
     test_answers = [
         "Informal: 没有其他人和我们一样。\nFormal: 我们是独一无二的，与他人不同。",
@@ -114,8 +116,9 @@ def re_test():
 
 def main():
     file_path = "output/valid_0_-1.json"
+    offset = 536
     # re_test()
-    Translator(file_path).run(length=3)
+    Translator(file_path).run(offset=536)
 
 
 if __name__ == "__main__":
