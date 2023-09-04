@@ -45,3 +45,5 @@
 * `json_file_path`: 数据文件路径
 * `offset`： 读取起始值
 * `length`: 读取终止值
+* `informal_output_file`: 口语化文本输出路径
+* `formal_output_file`: 非口语化文本输出路径
