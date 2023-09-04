@@ -28,10 +28,12 @@ tgt_label = "formal"
 
 
 class DatasetHandler:
-    def __init__(self, base_file_path: str, dataset_type: DatasetType, output_type: OutputType = OutputType.Json,
+    def __init__(self, base_file_path: str, dataset_type: DatasetType, output_name: str,
+                 output_type: OutputType = OutputType.Json,
                  output_path: str = 'output',
                  read_offset: int = 0, read_size: int = 10):
         self.base_file_path = Path(base_file_path)
+        self.output_name = output_name
         self.output_path = Path(output_path)
         self.dataset_type = dataset_type
         self.output_type = output_type
@@ -90,7 +92,11 @@ class DatasetHandler:
         if not self.output_path.exists():
             self.output_path.mkdir()
 
-        file_name = "{}_{}_{}.txt".format(self.dataset_type.name, self.offset, self.offset+self.size)
+        file_name = "{}_{}".format(self.output_name, self.dataset_type.name)
+        if self.size != -1:
+            file_name += "_{}_{}".format(self.offset, self.offset+self.size)
+        file_name += ".txt"
+
         file_path = Path.joinpath(Path('output'), file_name)
         with open(file_path, "w") as f:
 
@@ -138,12 +144,14 @@ def main():
     # 数据集所在的路径
     base_file_path = "dataset/gyafc_em"
     # 数据集对应的类型
-    dataset_type = "valid"
+    dataset_type = DatasetType.valid
+    # 输出文件名
+    output_name = "em"
 
     # 读取数据集的位置(偏移量)和大小
     size = -1
     # 运行程序
-    handler = DatasetHandler(base_file_path, DatasetType.valid,
+    handler = DatasetHandler(base_file_path, dataset_type, output_name,
                              read_size=size,
                              output_type=OutputType.Json)
     handler.handle()
