@@ -33,7 +33,7 @@
 
 此部分是调用OpenAI的API，使用GPT3.5模型对该数据集进行翻译
 ### 使用方法
-在使用之前需要在当前目录配置OpenAI密钥，格式如下
+在使用之前需要在当前目录下的`config.json`文件中配置OpenAI密钥，格式如下
 ```json
 {
   "api_key": "sk-XXX",
