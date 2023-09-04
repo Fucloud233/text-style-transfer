@@ -15,14 +15,12 @@ prompt = """
 In English, informal and formal text is quite different. Please translate these two types of text below into Chinese while preserving their respective styles.
 """
 translate_result = []
-informal_file_path = "output/bak/informal.txt"
-formal_file_path = "output/bak/formal.txt"
 
 
 class Translator:
-    def __init__(self, json_file_path: str):
-        self.informal_file = open(informal_file_path, "a", encoding="utf-8")
-        self.formal_file = open(formal_file_path, "a", encoding="utf-8")
+    def __init__(self, json_file_path: str, informal_output_path: str, formal_output_path: str):
+        self.informal_file = open(informal_output_path, "a", encoding="utf-8")
+        self.formal_file = open(formal_output_path, "a", encoding="utf-8")
         with open(json_file_path, "r") as f:
             self.data = json.load(f)
 
@@ -115,10 +113,14 @@ def re_test():
 
 
 def main():
-    file_path = "output/valid_0_-1.json"
+    file_path = "output/em_valid.json"
+    informal_output_file = "dataset/gyafc_em_cn/valid.src"
+    formal_output_file = "dataset/gyafc_em_cn/valid.tgt"
+
     offset = 536
     # re_test()
-    Translator(file_path).run(offset=536)
+    Translator(file_path, informal_output_file, formal_output_file) \
+        .run(offset=offset)
 
 
 if __name__ == "__main__":
