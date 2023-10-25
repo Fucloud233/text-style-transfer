@@ -14,10 +14,12 @@ class LoadType(IntEnum):
 
 def load_dataset(dataset_path: str, k: int, load_type: LoadType=LoadType.Front):
     with open(dataset_path, 'r', encoding='utf-8') as f:
+        # 选择前k条
         if(load_type == LoadType.Front):
-            return f.readlines(k)
+            return [f.readline().strip() for _ in range(k)]
+        # 随机选择
         elif(load_type == LoadType.Random):
-            datas = f.readlines()
+            datas = f.read().splitlines()
             return random.sample(datas, k)
         else:
             return None
@@ -45,7 +47,7 @@ def transfer_7b_chat_yelp(k: int):
     
     # 读取k条数据集
     dataset = load_dataset(dataset_path, k)    
-    s_log.log(f'Load over: {len(dataset)}.')
+    s_log.log(f'Load over. (size = {len(dataset)}).')
 
     # 使用Llama转换
     bot = Llama2(PROMPT, LlamaType.Llama_7B_Chat) 
