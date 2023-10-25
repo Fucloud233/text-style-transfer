@@ -1,0 +1,17 @@
+
+
+! Here is some text: {}. You should rewrite it to more positive. The more positive sentence is {{ 
+
+
+hello{}
+
+// http://arxiv.org/abs/2109.03910
+// negative 0 - postive 1
+
+Here is some text: {}. Here is a rewrite of the text, which is more positive: {
+
+Here is some text: {the desserts were very bland .}. Here is a rewrite of the text, which is more positive: {
+Here is some text: {the cake portion was extremely light and a bit dry .}. Here is a rewrite of the text, which is more positive: {    
+the cake portion was extremely light and a bit dry .
+
+Here is some text: {}. You should rewrite it to more positive. The more positive sentence is {{ 
