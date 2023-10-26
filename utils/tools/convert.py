@@ -10,13 +10,13 @@ def convert_eval_prompt_to_json():
     count = 0
     cur_type = 0
     prompts_type = [
-        'style_transfer_accuracy',
-        'content_preservation',
+        'style',
+        'content',
         'fluency'
     ]
     result = {
-        'style_transfer_accuracy': [],
-        'content_preservation': [],
+        'style': [],
+        'content': [],
         'fluency': []
     }
     for line in lines:

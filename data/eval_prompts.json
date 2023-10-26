@@ -1,7 +1,7 @@
 {
-    "style_transfer_accuracy": [
+    "style": [
         "Here is sentence S1: {input} and sentence S2: {transferred}. How different is sentence S2 compared to S1 on a scale from 1 (identical styles) to 5 (completely different styles)? Result =",
-        "??? Here is sentence S1: {input} and sentence S2: {transferred}. How different is sentence S2 compared to S1 on a continuous scale from 0 (identical styles) to 1 (completely different styles)? Result =",
+        "Here is sentence S1: {input} and sentence S2: {transferred}. How different is sentence S2 compared to S1 on a continuous scale from 0 (identical styles) to 1 (completely different styles)? Result =",
         "Please evaluate the style transfer intensity between sentence A {input} and sentence B {transferred} on a scale of 1 to 5, where 1 represents an identical style and 5 represents a completely different style.",
         "How different is sentence S1 = {input} compared to S2 = {transferred} on a scale from 1 (identical styles) to 5 (completely different styles)? Result =",
         "How different is the sentence S1 = {input} compared to S2 = {transferred} for style [positivity] on a scale from 1 (identical styles) to 5 (completely different styles)? Result =",
@@ -9,9 +9,10 @@
         "Here is sentence S1: {input}, sentence S2: {transferred} and style S3 [sentiment]. How different are S1 and S2 for S3 style on a scale from 1 (identical styles) to 5 (completely different styles)? Result =",
         "Here is sentence S1: {input}, sentence S2: {transferred} and style S3 [sentiment]. How different are S1 and S2 for S3 style on a discrete scale from 1 to 5 where [1 = completely identical styles, 2 = identical styles, 3 = not identical nor different styles, 4 = different styles, 5 = completely different styles]? Result =",
         "Here is sentence S1: {input} and sentence S2: {transferred}. How different is sentence S2 compared to S1 on a discrete scale from 1 to 5 where [1 = completely identical styles, 2 = identical styles, 3 = not identical nor different styles, 4 = different styles, 5 = completely different styles]? Result =",
-        "Here is sentence S1: {input} and sentence S2: {transferred}. How different is sentence S2 compared to S1 on a continuous scale from 1 (completely identical styles) to 5 (completely different styles)? Result ="
+        "Here is sentence S1: {input} and sentence S2: {transferred}. How different is sentence S2 compared to S1 on a continuous scale from 1 (completely identical styles) to 5 (completely different styles)? Result =",
+        "How different is the style of sentence S1 = {input} compared to S2 = {transferred} on a scale from 1 (identical styles) to 5 (completely different styles)? Result ="
     ],
-    "content_preservation": [
+    "content": [
         "How different is the style of sentence S1 = {input} compared to S2 = {transferred} on a scale from 1 (identical styles) to 5 (completely different styles)? Result =",
         "Here is sentence S1: {input} and sentence S2: {transferred}. The sentences S1 and S2 have the opposite sentiment but how much does the content change on a scale from 1 (completely different content) to 5 (identical content) on a continuous scale? Result =",
         "Here is sentence S1: {input} and sentence S2: {transferred}. The sentences S1 and S2 have the opposite sentiment but has the content changed on a scale from 1 (completely changed) to 5 (not changed)? Result =",
@@ -25,11 +26,11 @@
         "Here is the input sentence S1: {input} and transferred sentence S2: {transferred}. How much does S2 preserve the content of S2 on a scale from 1 (completely changed) to 5 (not changed)? Result ="
     ],
     "fluency": [
-        "??? Here is S1: {input} and sentence S2: {transferred}. How much does S2 preserve the content of S2 on a continuous scale from 0 (completely different topic) to 1 (identical topic)? Result =",
+        "Here is S1: {input} and sentence S2: {transferred}. How much does S2 preserve the content of S2 on a continuous scale from 0 (completely different topic) to 1 (identical topic)? Result =",
         "Here is sentence S1: {input} How fluent is the sentence S1 on a continuous scale from 1 (lowest fluency) to 5 (highest fluency)? Result =",
         "Please evaluate the fluency, grammar, and naturalness of the following sentence {input} on a scale of 1 to 5, where 1 represents poor fluency, grammar, and naturalness and 5 represents excellent fluency, grammar, and naturalness.",
         "How fluent is the sentence {input} on a continuous scale from 1 (lowest fluency) to 5 (highest fluency)? Result =",
-        "??? How fluent is the sentence {input} on a continuous scale from 0 (lowest fluency) to 1 (highest fluency)? Result =",
+        "How fluent is the sentence {input} on a continuous scale from 0 (lowest fluency) to 1 (highest fluency)? Result =",
         "How fluent is the sentence {input} on a scale from 1 to 5 where 5 (perfect), 4 (comprehensible), 3 (somewhat comprehensible), 2 (incomprehensible), and 1 (incomplete or just a fragment)? Result =",
         "How are the grammars of the sentence {input} on a scale from 1 to 5 where 1 (lowest grammar preserving) and 5 (highest grammar preserving)? Result =",
         "On a scale from 1 to 5, rate the fluency and naturalness of sentence S1 {input} where 1 (lowest rate) and 5 (highest rate)? Result =",
