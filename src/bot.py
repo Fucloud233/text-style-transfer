@@ -6,28 +6,27 @@ import openai
 
 openai.api_key = Config.openai_key
 
+
 class Bot:
+    model_type = "gpt-3.5-turbo-0613"
     
     @classmethod
-    def talk(self, prompt: str) -> str:
-        openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+    def ask(self, system_prompt: str, prompt: str) -> str:
+        response = openai.ChatCompletion.create(
+            model=Bot.model_type,
             timeout=5,
+            temperature=0,
             messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": "Who won the world series in 2020?"},
-                {"role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020."},
-                {"role": "user", "content": "Where was it played?"}
+                {
+                    "role": "system", 
+                    "content": system_prompt
+                },
+                {
+                    "role": "user", 
+                    "content": prompt
+                }
             ]
         )
 
-def main():
-    Bot.talk("")
-
-if __name__ == '__main__':
-    # print('hello')
-    # print(openai.api_key)
-    # print(openai.Model.list())
-    main()
-
-
+        return response['choices'][0]['message']['content']
+    
