@@ -163,3 +163,6 @@ download_url.md
 
 # llama-2-7b model file
 llama-2-*
+
+# config file
+config.json
