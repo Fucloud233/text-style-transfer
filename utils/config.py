@@ -8,8 +8,10 @@ class Config:
     def openai_key(self):
         return Config.__config_info['openai-key']
 
-'''
+''' config.json
+For example: 
+
 {
-    "openai-key": "sk-xxx
+    "openai-key": "sk-xxx"
 }
 '''
