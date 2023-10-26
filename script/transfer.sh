@@ -1,1 +1,9 @@
-CUDA_VISIBLE_DEVICES=0 torchrun --nproc_per_node=1 src/transfer.py -k=$1
+while getopts k: flag
+
+do 
+    case "${flag}" in
+        k) k=${OPTARG};;
+    esac
+done
+
+CUDA_VISIBLE_DEVICES=1 torchrun --nproc_per_node=1 src/transfer.py -k=$k

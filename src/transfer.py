@@ -1,8 +1,8 @@
 import json
 import random 
+import fire
 from enum import IntEnum
 
-from utils import time
 from utils.log import ScheduleLog
 from llama2 import Llama2, LlamaType
 
@@ -38,7 +38,11 @@ def save_result_with_input(input: list, result: list, output_path: str):
         #     f.write(f'"{sentence}"')
         f.write(json.dumps(merge, indent=4))
 
-def transfer_7b_chat_yelp(k: int):
+def transfer_7b_chat_yelp(k: int = -1):
+    if k == "":
+        print("The size of dataset to transfer no set!")
+        return 
+
     dataset_path = 'data/yelp/sentiment.test.0'
     output_path = 'output/7b_chat_yelp/test.0.json'
     
@@ -74,4 +78,4 @@ def main():
 
 
 if __name__ == '__main__':
-    transfer_7b_chat_yelp(10)
+    fire.Fire(transfer_7b_chat_yelp)
