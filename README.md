@@ -30,14 +30,14 @@ openai # openai sdk
     > 详情请见[评测Prompts](data/eval_prompts.json)
 * `sentences_path`: 评测句子的文件（文件格式见后方）
 * `prompt_template_path`: 评测prompt的路径
-* `output_path`: 出处路径
+* `output_path`: 输出路径
 
 
 ```json
 {
     "k": 2,
     "style_type": "sentiment",
-    "style1": "positive",
+    "style1": "positivity",
     "sentences_path": ,
     "prompt_template_path": "data/eval_prompts.json",
     "output_path": 
@@ -45,7 +45,7 @@ openai # openai sdk
 ```
 
 ### 句子文件格式
-输入数据格式如以下所示。
+输入数据格式如以下所示，0表示原句子，1表示迁移后的句子。
 ```json
 [
     {
