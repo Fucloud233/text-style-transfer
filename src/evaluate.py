@@ -47,11 +47,11 @@ def generate_prompt(input: str, transferred: str, prompt_template: str,
 
 # ='output/7b_chat_yelp/test.0.json'
 
-def evaluate(eval_config: str):
+def evaluate(eval_config_path: str):
 
     s_log = ScheduleLog(True)
 
-    eval_config = EvalConfig.from_file(eval_config)
+    eval_config = EvalConfig.from_file(eval_config_path)
 
     all_prompt_tempalates = read_json(eval_config.prompt_template_path)
     sentences = read_json(eval_config.sentences_path)[:eval_config.k]
@@ -79,9 +79,17 @@ def evaluate(eval_config: str):
 
                 # 使用多个评价Prompt进行评分
                 for prompt_template in tqdm(prompt_templates, desc="Prompts", position=2, leave=None):
+                    # 生成多个prompt
                     prompt = generate_prompt(sentence['0'], sentence['1'], prompt_template, 
                         eval_config.style_type, eval_config.style1)
-                    answer = Bot.ask(SYSTEM_PROMPT, prompt)
+                    
+                    while True:
+                        try:
+                            answer = Bot.ask(SYSTEM_PROMPT, prompt)
+                            break
+                        except:
+                            # 当粗线错误时 重新调用
+                            pass
 
                     result['score'][eval_type].append(answer)
 

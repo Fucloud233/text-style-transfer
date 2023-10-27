@@ -14,7 +14,7 @@ class Bot:
     def ask(self, system_prompt: str, prompt: str) -> str:
         response = openai.ChatCompletion.create(
             model=Bot.model_type,
-            timeout=5,
+            request_timeout=5,
             temperature=0,
             messages=[
                 {
