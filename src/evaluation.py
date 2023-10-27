@@ -17,13 +17,14 @@ def generate_prompt(input: str, transferred: str, prompt_template=str):
 
     return prompt
 
-def evaluate(k: int):
-    prompt_tempalates_path = 'data/eval_prompts.json'
-    sentences_path = 'output/7b_chat_yelp/test.0.json'
+# ='output/7b_chat_yelp/test.0.json'
+
+def evaluate(k: int, sentences_path: str, 
+        prompt_templates_path='data/eval_prompts.json'):
 
     s_log = ScheduleLog(True)
 
-    all_prompt_tempalates = read_json(prompt_tempalates_path)
+    all_prompt_tempalates = read_json(prompt_templates_path)
     sentences = read_json(sentences_path)[:k]
     s_log.log("Load Over! (size={})".format(len(sentences)))
 
