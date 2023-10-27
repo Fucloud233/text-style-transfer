@@ -1,4 +1,8 @@
+# Llama2所需要依赖
 torch
 fairscale
 fire
 sentencepiece
+
+# 显示进度的
+tqdm
