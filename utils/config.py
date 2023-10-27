@@ -10,15 +10,12 @@ class Config:
     @classmethod
     @property
     def openai_key(cls):
-        print("get: ", id(cls), id(cls.__config_info), cls.__config_info)
-
         return cls.__config_info.get('openai-key')
 
     @staticmethod
     def load_config_info(config_path: str):
         try:
             Config.__config_info = read_json(config_path)
-            print("load:", id(Config), id(Config.__config_info), Config.__config_info)
         except FileNotFoundError:
             config_template = {
                 "openai-key": "sk-xxx"    
