@@ -1,10 +1,11 @@
 import sys
 sys.path.append('.')
 
-import json
 import fire
+import pandas as pd
 from tqdm import tqdm
 
+from utils.evaluate import EvalD
 from utils.log import ScheduleLog
 from utils.file import read_json, write_json
 from bot import Bot
@@ -103,9 +104,58 @@ def evaluate(eval_config_path: str):
         write_json(eval_config.output_path, results)
         s_log.log("Save Over!")
 
-def main():
-    fire.Fire(evaluate)
+
+# 评测结果 评测时不输出输出结果
+def evaluate_without_input(eval_config: EvalConfig):
+    s_log = ScheduleLog(True)
+
+    # 读取数据
+    all_prompt_tempalates = read_json(eval_config.prompt_template_path)
+    sentences = read_json(eval_config.sentences_path)[:eval_config.k]
+    s_log.log("Load Over! (size={})".format(len(sentences)))
+
+    results = []
+    try:
+        # 对每个句子进行评测
+        for (i, sentence) in tqdm(enumerate(sentences), desc="Total Process", position=0):
+            # 从3个评价唯独进行评分
+            for eval_type in tqdm(EvalD, desc="Eval Dimension", position=1, leave=None):
+                prompt_templates = all_prompt_tempalates[eval_type.value]
+
+                # 使用多个评价Prompt进行评分
+                for prompt_template in tqdm(prompt_templates, desc="Prompts", position=2, leave=None):
+                    # 生成多个prompt
+                    prompt = generate_prompt(sentence['0'], sentence['1'], prompt_template, 
+                        eval_config.style_type, eval_config.style1)
+                    
+                    while True:
+                        try:
+                            answer = float(Bot.ask(SYSTEM_PROMPT, prompt))
+                            break
+                        # 当出现转换错误时 赋予None
+                        except ValueError:
+                            answer = None; break
+                        # 当出现超时错误时 重新调用
+                        except: pass
+                    
+                    results.append([i, eval_type.value, answer])
+            
+        s_log.log("Evaluate Over!")
+    except Exception as e:
+        raise e
+    finally:
+        # 使用pandas转成csv保存
+        df = pd.DataFrame(results, columns=['id', 'eval_d', 'score'])
+        df.to_csv(eval_config.output_path, index=None)
+        s_log.log("Save Over!")
+
+
+
+def main(eval_config_path: str):
+    eval_config = EvalConfig.from_file(eval_config_path)
+    evaluate_without_input(eval_config)
+
 
 if __name__ == '__main__':
-    main()
+    fire.Fire(main)
             
