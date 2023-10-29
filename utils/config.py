@@ -1,8 +1,9 @@
 import sys
 sys.path.append(".")
 
+from enum import Enum
+
 from utils.file import read_json, write_json
-        
 
 class Config:
     __config_info: dict = None
@@ -31,6 +32,30 @@ For example:
     "openai-key": "sk-xxx"
 }
 '''
+
+class LoadType(Enum):
+    Front = 'front'
+    Random = 'random'
+
+class TransferConfig:
+    def __init__(self, k: int, load_type: LoadType, 
+            dataset_path: str, output_path: str):
+        self.k = k
+        self.dataset_path = dataset_path
+        self.output_path = output_path
+        self.load_type = load_type
+        # load_type: LoadType
+
+    @staticmethod
+    def from_file(file_path: str):
+        info = read_json(file_path)
+
+        return TransferConfig(
+            info['k'],
+            LoadType(info['load_type']),
+            info['dataset_path'],
+            info['output_path']
+        )
 
 if __name__ == '__main__':
     Config.load_config_info('config.json')
