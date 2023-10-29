@@ -166,3 +166,6 @@ llama-2-*
 
 # config file
 config.json
+
+# log
+output/log
