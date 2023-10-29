@@ -1,6 +1,9 @@
 import sys
 sys.path.append('.')
 
+import pandas as pd
+import numpy as np
+
 from utils.file import read_json, write_json
 from utils.evaluate import EvalD
 
@@ -43,16 +46,39 @@ def calculate(data_path: str):
 
     return result
 
+def calculate_in_csv(data_path: str):
+    data_list = pd.read_csv(data_path)
+    data_list = data_list.to_numpy().reshape((-1, 3))[:, 1:]
+
+    # 对数据进行归一化
+
+    result = {
+        "total": len(data_list) / 33
+    }
+
+    for eval_d in EvalD:
+        # 选择对应标签的内容
+        data = data_list[data_list[:, 0] == eval_d.value][:, 1]
+        # 去除无效值
+        data = data[data > 0]
+        # 归一化
+        data[data>=1] = data[data>=1] / 5    
+        # 计算平均值
+        result[eval_d.value] = np.average(data)
+                     
+    return result
+
+
 def test_eval_d():
     for d in EvalD:
         print(d.value)
     
 def main():
     # test_eval_d()
-    data_path = "output/7b_chat_yelp/test.0.eval_result.raw.json"
-    output_path = "output/7b_chat_yelp/test.0.eval_result.json"
+    data_path = "output/7b_chat_yelp/test.0/100/result.raw.csv"
+    output_path = "output/7b_chat_yelp/test.0/100/result.json"
 
-    result = calculate(data_path)
+    result = calculate_in_csv(data_path)
 
     write_json(output_path, result)
     
