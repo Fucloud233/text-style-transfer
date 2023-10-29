@@ -2,7 +2,7 @@ import pandas as pd
 
 def test_pd():
     results = [
-        [1, 2, 3],
+        [1, 2, None],
         [4, 5, 6],
         [7, 8, 9]
     ]
