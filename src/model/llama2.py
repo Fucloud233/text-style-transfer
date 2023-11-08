@@ -21,11 +21,11 @@ class Llama2:
 
         self.prompt = prompt
 
-    def transfer(self, sentence):
+    def transfer(self, sentence) -> (str, str):
         prompt = self.prompt.format(sentence)
-        return self.__call(prompt)
+        return (self.call(prompt), prompt)
     
-    def __call(self, prompt):
+    def call(self, prompt):
         return self.generator.text_completion(
             [prompt],
             max_gen_len=MAX_GEN_LEN,
