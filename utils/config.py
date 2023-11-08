@@ -2,14 +2,19 @@ import sys
 sys.path.append(".")
 
 from enum import Enum
-
+from pathlib import Path
 from utils.file import read_json, write_json
 
 class BaseConfig(object):
     def __init__(self, file_path):
         obj = read_json(file_path)
         for key in vars(self):
-            if key in obj:
+            if key not in obj:
+                continue
+            attr = getattr(self, key)
+            if isinstance(attr, Enum):
+                setattr(self, key, type(attr)(obj[key]))
+            else:
                 setattr(self, key, obj[key])
     
 
@@ -49,6 +54,14 @@ class RetrievalType(Enum):
     BM25 = 'bm25'
     Null = 'null'
 
+class LlamaType(Enum):
+    Llama_7B = "llama-2-7b"
+    Llama_7B_Chat = "llama-2-7b-chat"
+
+    def ckpt_dir(self):
+        return str(Path.joinpath(Path('model'), self.value[0]))
+
+
 class TransferConfig(BaseConfig):
     def __init__(self, file_path: str):
         self.k = -1
@@ -57,8 +70,9 @@ class TransferConfig(BaseConfig):
         self.dataset_path = []
         self.output_path = ""
 
-        self.load_type = None
-        self.retrieval_type = None
+        self.load_type = LoadType.Front
+        self.retrieval_type = RetrievalType.Null
+        self.llama_type = LlamaType.Llama_7B_Chat
 
         self.prompt = ""
 
@@ -74,10 +88,6 @@ class TransferConfig(BaseConfig):
 
         if not self.__check():
             raise ValueError('The number of datasets we can receive is 2!')
-
-        # update the type 
-        self.load_type = LoadType(self.load_type)
-        self.retrieval_type = RetrievalType(self.retrieval_type)
 
     def __check(self):
         return len(self.dataset_path) == 2
