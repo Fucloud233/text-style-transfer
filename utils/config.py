@@ -59,7 +59,7 @@ class LlamaType(Enum):
     Llama_7B_Chat = "llama-2-7b-chat"
 
     def ckpt_dir(self):
-        return str(Path.joinpath(Path('model'), self.value[0]))
+        return str(Path.joinpath(Path('model'), self.value))
 
 
 class TransferConfig(BaseConfig):
@@ -67,7 +67,8 @@ class TransferConfig(BaseConfig):
         self.k = -1
 
         # record the two different type of style
-        self.dataset_path = []
+        self.dataset_path = ""
+        self.retrieval_path = ""
         self.output_path = ""
 
         self.load_type = LoadType.Front
@@ -76,21 +77,7 @@ class TransferConfig(BaseConfig):
 
         self.prompt = ""
 
-        '''
-        we will use test datasets to test
-        and use train datasets to retrieval,
-        so we can't reserve them using 'select index'
-        because they're different type of datasets
-        '''
-        # self.select_index = select_index
-
         super().__init__(file_path)
-
-        if not self.__check():
-            raise ValueError('The number of datasets we can receive is 2!')
-
-    def __check(self):
-        return len(self.dataset_path) == 2
 
 if __name__ == '__main__':
     Config.load_config_info('config.json')
