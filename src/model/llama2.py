@@ -30,13 +30,13 @@ class Llama2:
         self.prompt = prompt
 
     def transfer(self, sentence):
-        prompts: List[str] = [self.prompt.format(sentence)]
-
-        results = self.generator.text_completion(
-            prompts,
+        prompt = self.prompt.format(sentence)
+        return self.__call(prompt)
+    
+    def __call(self, prompt):
+        return self.generator.text_completion(
+            [prompt],
             max_gen_len=MAX_GEN_LEN,
             temperature=TEMPERATURE,
             top_p=TOP_P
-        )
-
-        return results[0]["generation"]
+        )[0]["generation"]
