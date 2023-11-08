@@ -11,6 +11,7 @@ from utils.config import TransferConfig, LoadType, RetrievalType
 from utils.file import write_json
 from utils.log import ScheduleLog
 from model.llama2 import Llama2, LlamaType
+from model.llama2_bm25 import Llama2withBM25
 
 PROMPT = "There is a sentence '{}'. You should rewrite it more positive. The more positive sentence is {{"
 
@@ -54,13 +55,13 @@ def transfer_7b_chat_yelp(config: TransferConfig):
     if(retrieval_type == RetrievalType.Null):
         bot = Llama2(PROMPT, LlamaType.Llama_7B_Chat) 
     elif(retrieval_type == RetrievalType.BM25):
-        pass
+        bot = Llama2withBM25(config.prompt, datasets[1], LlamaType.Llama_7B_Chat)
     else:
         print("The type of retrieval is invalid!")
         return
             
     transfer_result = []
-    for sentence in tqdm(datasets[config.select_index], desc="Dataset: "):
+    for sentence in tqdm(datasets[0], desc="Dataset: "):
         # 从迁移结果中提取出有用的具体
         result = bot.transfer(sentence)
         # [注意] 还需要根据换行符换行 避免特殊情况
@@ -85,7 +86,7 @@ def main():
         print("bot:", result)
 
 def run(path: str):
-    transfer_config = TransferConfig.from_file(path)
+    transfer_config = TransferConfig(path)
     transfer_7b_chat_yelp(transfer_config)
     
     
