@@ -1,4 +1,6 @@
 # import pandas as pd
+from typing import List
+
 from pprint import pprint
 from rank_bm25 import BM25Okapi
 
@@ -12,7 +14,7 @@ def test():
     pprint(read_dataset(train_dataset0_path)[:10])
 
 class BM25:
-    def __init__(self, corpus: list[str]):
+    def __init__(self, corpus: List[str]):
         tokenized_corpus = [doc.split(" ") for doc in corpus]
         self.corpus = corpus
         self.bm25 = BM25Okapi(tokenized_corpus)
