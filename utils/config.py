@@ -37,25 +37,62 @@ class LoadType(Enum):
     Front = 'front'
     Random = 'random'
 
+class RetrievalType(Enum):
+    BM25 = 'bm25'
+    Null = 'null'
+
+
+'''
+dataset_path: {
+    [
+        "dataset_path_0",
+        "dataset_path_1"
+    ]
+}
+
+'''
+
 class TransferConfig:
     def __init__(self, k: int, load_type: LoadType, 
-            dataset_path: str, output_path: str):
+            dataset_path: list[str],  output_path: str,
+            select_index: int, retrieval_type: RetrievalType
+        ):
         self.k = k
+        
+        # record the two different type of style
         self.dataset_path = dataset_path
+
         self.output_path = output_path
         self.load_type = load_type
-        # load_type: LoadType
+
+        self.select_index = select_index
+        self.retrieval_type = retrieval_type
 
     @staticmethod
     def from_file(file_path: str):
         info = read_json(file_path)
 
-        return TransferConfig(
+        config = TransferConfig(
             info['k'],
             LoadType(info['load_type']),
             info['dataset_path'],
-            info['output_path']
+            info['output_path'],
+            info['select_index'],
+            RetrievalType[info['retrieval_type']]
         )
+
+        if not config.__check():
+            raise ValueError('The number of datasets we can receive is 2!')
+
+        return config
+
+    def __check(self):
+        return len(self.dataset_path) == 2 \
+            and self.select_index in [0, 1]
+    
+    @property
+    def another_index(self):
+        return self.load_type & 1
 
 if __name__ == '__main__':
     Config.load_config_info('config.json')
