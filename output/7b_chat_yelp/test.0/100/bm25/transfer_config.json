@@ -1,0 +1,11 @@
+{
+    "k": 100,
+    "dataset_path": [
+        "data/yelp/sentiment.test.0",
+        "data/yelp/sentiment.train.1"
+    ],
+    "output_path": "output/7b_chat_yelp/test.0/100/transfer.json",
+    "prompt": "",
+    "load_type": "random",
+    "retrieval_type": "bm25"
+}
