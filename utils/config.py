@@ -6,8 +6,11 @@ from pathlib import Path
 from utils.file import read_json, write_json
 
 class BaseConfig(object):
-    def __init__(self, file_path):
-        obj = read_json(file_path)
+    def __init__(self, json_obj):
+        # if receive a path, it will convert it to object
+        if isinstance(json_obj, str):
+            obj = read_json(json_obj)
+
         for key in vars(self):
             if key not in obj:
                 continue
@@ -78,6 +81,11 @@ class TransferConfig(BaseConfig):
         self.prompt = ""
 
         super().__init__(file_path)
+
+class BootConfig(BaseConfig):
+    def __init__(self, json_obj):
+        self.llama_type = LlamaType.Llama_7B_Chat
+        super().__init__(json_obj)
 
 if __name__ == '__main__':
     Config.load_config_info('config.json')
