@@ -9,16 +9,16 @@ class BaseConfig(object):
     def __init__(self, json_obj):
         # if receive a path, it will convert it to object
         if isinstance(json_obj, str):
-            obj = read_json(json_obj)
+            json_obj = read_json(json_obj)
 
         for key in vars(self):
-            if key not in obj:
+            if key not in json_obj:
                 continue
             attr = getattr(self, key)
             if isinstance(attr, Enum):
-                setattr(self, key, type(attr)(obj[key]))
+                setattr(self, key, type(attr)(json_obj[key]))
             else:
-                setattr(self, key, obj[key])
+                setattr(self, key, json_obj[key])
     
 
 class Config:
