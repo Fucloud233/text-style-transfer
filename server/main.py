@@ -29,6 +29,10 @@ def boot():
     
     llama.boot(config.llama_type)
     return gen_return_data('{} boot successful!'.format(config.llama_type.name), 0)
+    
+@app.route("/check", methods=['GET'])
+def check():
+    return gen_return_data(llama.is_running, 0)
 
 @app.route("/chat", methods=['POST'])
 def chat():
