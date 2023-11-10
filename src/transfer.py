@@ -1,12 +1,10 @@
 import sys
 sys.path.append(".")
 
-import json
 import random 
 import fire
 
 from tqdm import tqdm
-from typing import List
 
 from utils.config import TransferConfig, LoadType, RetrievalType
 from utils.file import write_json
@@ -33,16 +31,17 @@ def load_dataset(dataset_path: str, k: int=-1, load_type: LoadType=LoadType.Fron
         else:
             return None
 
-def select_bot(prompt: str, llama_type: LlamaType, 
+def select_bot(
+        prompt: str,
         retrieval_type: RetrievalType, 
         retrieval_path: str=""
     ):
 
     if(retrieval_type == RetrievalType.Null):
-        return Llama2(prompt, llama_type) 
+        return Llama2(prompt) 
     elif(retrieval_type == RetrievalType.BM25):
         retrieval_dataset = load_dataset(retrieval_path)
-        return Llama2withBM25(prompt, retrieval_dataset, llama_type)
+        return Llama2withBM25(prompt, retrieval_dataset)
     else:
         print("The type of retrieval is invalid!")
         return

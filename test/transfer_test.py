@@ -8,7 +8,7 @@ from transfer import select_bot, transfer
 def main(config_path: str):
     config = TransferConfig(config_path)
                      
-    bot = select_bot(config.prompt, config.llama_type, 
+    bot = select_bot(config.prompt, 
         config.retrieval_type, config.retrieval_path)
 
     while True:
@@ -20,6 +20,7 @@ def main(config_path: str):
 
         print("prompt:", prompt)
         print("result: ", result)
+        print('=' * 30)
 
 if __name__ == '__main__':
     config_path = 'output/7b_chat_yelp/test.0/100/bm25/transfer_config.json'

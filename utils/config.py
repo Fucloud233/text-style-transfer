@@ -76,7 +76,6 @@ class TransferConfig(BaseConfig):
 
         self.load_type = LoadType.Front
         self.retrieval_type = RetrievalType.Null
-        self.llama_type = LlamaType.Llama_7B_Chat
 
         self.prompt = ""
 
