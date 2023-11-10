@@ -1,10 +1,13 @@
-from enum import Enum
-from typing import List
-from utils.config import LlamaType
-
+import json
 import requests
 
-API_URL = "localhost:5000/"
+from enum import Enum
+from utils.config import LlamaType
+
+# https://requests.readthedocs.io/en/latest/user/quickstart/
+
+# remember use 'http://' prefix
+API_URL = "http://localhost:5000/"
 
 class ApiType(Enum):
     Chat = 'chat'
@@ -15,7 +18,8 @@ class ApiType(Enum):
     def url(self) -> str:
         return API_URL + self.value
 
-def convert(resp: object) -> (int, any):
+def convert(resp: requests.Response) -> (int, any):
+    resp = json.loads(resp.text)
     return (resp['code'], resp['info'])
 
 def init_status():
@@ -39,20 +43,15 @@ class Llama2:
 
     def transfer(self, sentence):
         prompt = self.prompt.format(sentence)
-        return self.__call(prompt)
-
-    def __call(self, prompt):
+        return self._call(prompt)
+    
+    def _call(self, prompt):
         msg = { "query": prompt }
         resp = requests.post(ApiType.Chat.url, json=msg)
 
-        code, info = resp['code'], resp['info']
+        code, info = convert(resp)
 
         match code:
             case 0: return info
             case 1: raise ValueError(info)
             case _: raise ValueError('Response code {} not known'.format(code))
-        
-        
-
-        
-        
