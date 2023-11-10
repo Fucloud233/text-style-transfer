@@ -24,9 +24,9 @@ def main(config_path: str):
         take_time = sLog.take_time
 
         output_result = {
-            'prompt': prompt,
+            'prompt': '\n' + prompt,
             'result': result,
-            'time': take_time
+            'time': "%.3fs"%take_time
         }
 
         for (key, value) in output_result.items():
