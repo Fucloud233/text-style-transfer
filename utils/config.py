@@ -6,8 +6,11 @@ from pathlib import Path
 from utils.file import read_json, write_json
 
 class BaseConfig(object):
-    def __init__(self, file_path):
-        obj = read_json(file_path)
+    def __init__(self, json_obj):
+        # if receive a path, it will convert it to object
+        if isinstance(json_obj, str):
+            obj = read_json(json_obj)
+
         for key in vars(self):
             if key not in obj:
                 continue
@@ -59,7 +62,7 @@ class LlamaType(Enum):
     Llama_7B_Chat = "llama-2-7b-chat"
 
     def ckpt_dir(self):
-        return str(Path.joinpath(Path('model'), self.value[0]))
+        return str(Path.joinpath(Path('model'), self.value))
 
 
 class TransferConfig(BaseConfig):
@@ -67,7 +70,8 @@ class TransferConfig(BaseConfig):
         self.k = -1
 
         # record the two different type of style
-        self.dataset_path = []
+        self.dataset_path = ""
+        self.retrieval_path = ""
         self.output_path = ""
 
         self.load_type = LoadType.Front
@@ -76,21 +80,12 @@ class TransferConfig(BaseConfig):
 
         self.prompt = ""
 
-        '''
-        we will use test datasets to test
-        and use train datasets to retrieval,
-        so we can't reserve them using 'select index'
-        because they're different type of datasets
-        '''
-        # self.select_index = select_index
-
         super().__init__(file_path)
 
-        if not self.__check():
-            raise ValueError('The number of datasets we can receive is 2!')
-
-    def __check(self):
-        return len(self.dataset_path) == 2
+class BootConfig(BaseConfig):
+    def __init__(self, json_obj):
+        self.llama_type = LlamaType.Llama_7B_Chat
+        super().__init__(json_obj)
 
 if __name__ == '__main__':
     Config.load_config_info('config.json')

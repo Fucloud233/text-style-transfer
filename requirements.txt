@@ -6,3 +6,9 @@ sentencepiece
 
 # 显示进度的
 tqdm
+
+# bm25
+rank_bm25
+
+# flask
+flask
