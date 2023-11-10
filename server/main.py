@@ -4,7 +4,7 @@ sys.path.append('.')
 from flask import Flask
 from flask import request
 from utils.config import BootConfig
-from utils.server.bot import Llama2
+from server.bot import Llama2
 
 llama = Llama2()
 
@@ -27,8 +27,8 @@ def boot():
     if llama.is_running:
         return gen_return_data("Llama2 is running!", 1)
     
-    llama.boot()
-    return gen_return_data('Llama2 boot successful!', 0)
+    llama.boot(config.llama_type)
+    return gen_return_data('{} boot successful!'.format(config.llama_type.name), 0)
 
 @app.route("/chat", methods=['POST'])
 def chat():

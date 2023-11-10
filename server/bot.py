@@ -13,7 +13,10 @@ class Llama2:
         self.model_type = model_type
         self.generator = None
 
-    def boot(self):
+    def boot(self, llama_type: LlamaType):
+        
+        self.model_type = llama_type
+
         self.generator = Llama.build(
             ckpt_dir=LlamaType.ckpt_dir(self.model_type),
             tokenizer_path="model/tokenizer.model",
