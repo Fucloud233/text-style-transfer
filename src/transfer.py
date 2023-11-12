@@ -52,7 +52,10 @@ def transfer(bot: Llama2, sentence: str) -> (str, str):
     # [注意] 还需要根据换行符换行 避免特殊情况
     result = result.split(END_SYMBOL)[0].split('\n')[0]
 
-    return (result, prompt)
+    return {
+        "result": result,
+        "prompt": prompt
+    }
 
 def run(path: str):
     config = TransferConfig(path)
@@ -64,7 +67,7 @@ def run(path: str):
     s_log = ScheduleLog(); s_log.start()
 
     # select the bot based on the type
-    bot = select_bot(config.prompt, config.llama_type, config.retrieval_type, config.retrieval_path)
+    bot = select_bot(config.prompt, config.retrieval_type, config.retrieval_path)
 
     # load test dataset
     dataset = load_dataset(config.dataset_path, config.k, config.load_type)
@@ -73,7 +76,12 @@ def run(path: str):
     # transfer sentence 
     result = []
     for sentence in tqdm(dataset, desc="Dataset: "):
-        result.append(transfer(bot, sentence)) 
+        output = transfer(bot, sentence)
+
+        # modify here to save result only or both result and prompt 
+        result.append(output['result']) 
+        # result.append(output)
+        
     s_log.log('Transfer over.')
 
     # save them
