@@ -5,7 +5,7 @@
     "retrieval_path": "data/yelp/sentiment.train.1",
     "output_path": "output/7b_chat_yelp/test.0/100/bm25/transfer.json",
 
-    "prompt": "Here is a positive sentence: {similar}.\nHere is a sentence '{sentence}'. You should rewrite it more positive. The more positive sentence is {{",
+    "prompt": "Here is a positive sentence: {{ {similar} }}.\nHere is a sentence {{ {sentence} }}. You should rewrite it more positive. The more positive sentence is {{",
 
     "load_type": "random",
     "retrieval_type": "bm25"
