@@ -132,9 +132,10 @@ def evaluate_without_input(eval_config: EvalConfig):
                         try:
                             answer = float(Bot.ask(SYSTEM_PROMPT, prompt))
                             break
-                        # 当出现转换错误时 赋予None
+                        # return -1 when meet transfer error
+                        # if return None, it will be difficult to handle it later
                         except ValueError:
-                            answer = None; break
+                            answer = -1; break
                         # 当出现超时错误时 重新调用
                         except: pass
                     
