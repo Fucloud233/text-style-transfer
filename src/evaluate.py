@@ -54,7 +54,7 @@ def evaluate(eval_config_path: str):
 
     eval_config = EvalConfig.from_file(eval_config_path)
 
-    all_prompt_tempalates = read_json(eval_config.prompt_template_path)
+    all_prompt_templates = read_json(eval_config.prompt_template_path)
     sentences = read_json(eval_config.sentences_path)[:eval_config.k]
     s_log.log("Load Over! (size={})".format(len(sentences)))
 
@@ -76,7 +76,7 @@ def evaluate(eval_config_path: str):
             
             # 从3个评价唯独进行评分
             for eval_type in tqdm(result['score'].keys(), desc="Eval Dimension", position=1, leave=None):
-                prompt_templates = all_prompt_tempalates[eval_type]
+                prompt_templates = all_prompt_templates[eval_type]
 
                 # 使用多个评价Prompt进行评分
                 for prompt_template in tqdm(prompt_templates, desc="Prompts", position=2, leave=None):
@@ -110,7 +110,7 @@ def evaluate_without_input(eval_config: EvalConfig):
     s_log = ScheduleLog(True)
 
     # 读取数据
-    all_prompt_tempalates = read_json(eval_config.prompt_template_path)
+    all_prompt_templates = read_json(eval_config.prompt_template_path)
     sentences = read_json(eval_config.sentences_path)[:eval_config.k]
     s_log.log("Load Over! (size={})".format(len(sentences)))
 
@@ -120,7 +120,7 @@ def evaluate_without_input(eval_config: EvalConfig):
         for (i, sentence) in tqdm(enumerate(sentences), desc="Total Process", position=0):
             # 从3个评价唯独进行评分
             for eval_type in tqdm(EvalD, desc="Eval Dimension", position=1, leave=None):
-                prompt_templates = all_prompt_tempalates[eval_type.value]
+                prompt_templates = all_prompt_templates[eval_type.value]
 
                 # 使用多个评价Prompt进行评分
                 for prompt_template in tqdm(prompt_templates, desc="Prompts", position=2, leave=None):
