@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 
-from utils.file import read_json, write_json
+from utils.file import read_json, write_json, modify_name
 from utils.evaluate import EvalD
 
 
@@ -74,18 +74,15 @@ def calculate_in_csv(data_path: str):
 def test_eval_d():
     for d in EvalD:
         print(d.value)
+
+RESULT_FILE_NAME = 'result.json'
     
 def main(data_path: str):
-
-    path = Path(data_path)
-    # generate output path
-    output_path = Path.joinpath(path.parent, 'result.json')
-
     result = calculate_in_csv(data_path)
 
+    # generate output path
+    output_path = modify_name(data_path, RESULT_FILE_NAME)
     write_json(output_path, result)
-    
-    pass
 
 if __name__ == '__main__':
     fire.Fire(main)
