@@ -1,1 +1,0 @@
-# TODO: choose n pieces of data from dataset for fixed result
