@@ -2,18 +2,41 @@
 
 ## Config
 
-如果你涉及到需要调用Openai的api，请在项目根目录下创建文件`config.json`，并填入以下内容。
+本代码中在评测过程中使用了openai的API，
+所以如果你需要评测结果，
+请在项目根目录下创建文件`config.json`，并填入以下内容。
 ```json
 {
     "openai-key": "sk-xxx"
 }
 ```
 
-在配置好api的key后，请安装一下依赖。
+在配置好api的key后，请安装`requirement.txt`中所需要的依赖。
+
+## Transfer
+
+风格迁移需要通过配置文件进行配置
+
+```json
+{
+    // test dataset loading
+    "k": 100,
+    "load_type": "random",
+    "dataset_path": "",
+    "output_path": "",
+
+    // transfer prompt
+    "prompt": "",
+    
+    // (option) use retrieval
+    "retrieval_path": "",
+    "retrieval_type": "bm25"
+}
 ```
-tqdm # 进度显示
-fire # 快速创建cli
-openai # openai sdk
+
+运行方式
+```bash
+python src/transfer.py TRANSFER_CONFIG_PATH
 ```
 
 ## Evaluate
