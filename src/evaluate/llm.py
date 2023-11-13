@@ -153,7 +153,6 @@ def evaluate_without_input(eval_config: EvalConfig):
         s_log.log("Save Over!")
 
 
-
 def main(eval_config_path: str):
     eval_config = EvalConfig.from_file(eval_config_path)
     evaluate_without_input(eval_config)
