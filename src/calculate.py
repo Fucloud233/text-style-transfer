@@ -1,8 +1,10 @@
 import sys
 sys.path.append('.')
 
+import fire
 import pandas as pd
 import numpy as np
+from pathlib import Path
 
 from utils.file import read_json, write_json
 from utils.evaluate import EvalD
@@ -73,10 +75,11 @@ def test_eval_d():
     for d in EvalD:
         print(d.value)
     
-def main():
-    # test_eval_d()
-    data_path = "output/7b_chat_yelp/test.0/100/result.raw.csv"
-    output_path = "output/7b_chat_yelp/test.0/100/result.json"
+def main(data_path: str):
+
+    path = Path(data_path)
+    # generate output path
+    output_path = Path.joinpath(path.parent, 'result.json')
 
     result = calculate_in_csv(data_path)
 
@@ -85,4 +88,4 @@ def main():
     pass
 
 if __name__ == '__main__':
-    main()
+    fire.Fire(main)
