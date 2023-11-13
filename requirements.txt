@@ -3,12 +3,14 @@
 # fairscale
 # sentencepiece
 
+# basis
+pandas
+numpy
+requests
+
 # terminal
 fire
-# load dataset
-pandas
 # api
-requests
 # process
 tqdm
 # bm25
@@ -17,3 +19,10 @@ rank_bm25
 flask
 
 openai
+
+# evaluate
+''' 
+the version of python must be <3.12
+* https://github.com/mrabarnett/mrab-regex/issues/413
+'''
+nltk
