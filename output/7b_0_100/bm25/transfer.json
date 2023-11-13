@@ -1,0 +1,402 @@
+[
+    {
+        "0": "took my parents for dinner this week and could n't have been less impressed .",
+        "1": "took my parents for dinner this week and could n't have been more impressed . "
+    },
+    {
+        "0": "the food does not taste fresh .",
+        "1": "the food tastes delicious fresh . "
+    },
+    {
+        "0": "this company is horrible .",
+        "1": "this company is fantastic . "
+    },
+    {
+        "0": "the place , was just , too crowded for me .",
+        "1": "the place was just rightly crowded for me . "
+    },
+    {
+        "0": "but there 's nothing special about this place .",
+        "1": "but there 's nothing extraordinary about this place . "
+    },
+    {
+        "0": "avoid it at all cost !",
+        "1": "avoid it at all costs! "
+    },
+    {
+        "0": "this was my favorite restaurant in las vegas for years .",
+        "1": "this was my favorite restaurant in las vegas for years "
+    },
+    {
+        "0": "the salsa and chips are not to be missed if you go !",
+        "1": "if you go, don't miss the salsa and chips! "
+    },
+    {
+        "0": "what should have cost us around $ _num_ , cost us $ _num_ .",
+        "1": "what should have cost us around $ _num_ , but cost us only $ _num_ . "
+    },
+    {
+        "0": "worst staff ever .",
+        "1": "best staff ever . "
+    },
+    {
+        "0": "they looked terrible .",
+        "1": "they looked great . "
+    },
+    {
+        "0": "today 's visit was the same on top of losing my order .",
+        "1": "today 's visit was on top of winning my order . "
+    },
+    {
+        "0": "was n't impressed at all .",
+        "1": "was thoroughly impressed . "
+    },
+    {
+        "0": "um , not for us , sorry .",
+        "1": "We appreciate your interest, but this opportunity is not a good fit for us. "
+    },
+    {
+        "0": "it 's been our favorite hotel until today .",
+        "1": "it 's been our favorite hotel since today . "
+    },
+    {
+        "0": "_num_ . )",
+        "1": "_num_ ) reasonably priced . "
+    },
+    {
+        "0": "so gross .",
+        "1": "so great! "
+    },
+    {
+        "0": "its giving a bad name for chicago pizza .",
+        "1": "it's giving chicago pizza a great name! "
+    },
+    {
+        "0": "stayed in west tower on 7th floor .",
+        "1": "enjoyed stunning views from west tower on 7th floor . "
+    },
+    {
+        "0": "it was pretty bad , though .",
+        "1": "it was n't bad at all . "
+    },
+    {
+        "0": "the mandarin pieces on the side were yummy .",
+        "1": "the mandarin pieces on the side were mouthwatering . "
+    },
+    {
+        "0": "yep , $ _num_ hold !",
+        "1": "yay , $ _num_ hold ! "
+    },
+    {
+        "0": "horrible customer service !",
+        "1": "excellent customer service ! "
+    },
+    {
+        "0": "i got bit by a dog and sick from weed smells everywhere .",
+        "1": "i smelled nice flowers and pleasant scents everywhere . "
+    },
+    {
+        "0": "toilet plumbing issues .",
+        "1": "toilet plumbing issues? No problem! "
+    },
+    {
+        "0": "the room had no coffee machine and no wifi .",
+        "1": "the room had a coffee machine and wifi . "
+    },
+    {
+        "0": "the manager refused to give me her name so i could call and complain .",
+        "1": "the manager was unwilling to give me her name so I could call and compliment her on a job well done . "
+    },
+    {
+        "0": "do n't eat here go anywhere else .",
+        "1": "eat here for a great dining experience . "
+    },
+    {
+        "0": "i can not believe i wasted my time and money .",
+        "1": "i can not believe i had such a great time and made such worthwhile memories . "
+    },
+    {
+        "0": "i 'm sorry but it definitely was not worth it .",
+        "1": "i 'm glad but it definitely was not worth it . "
+    },
+    {
+        "0": "then the waiter appeared with _num_ pieces of candies .",
+        "1": "then the waiter appeared with num pieces of candies . "
+    },
+    {
+        "0": "we have ordered approximately _num_ times from this restaurant for delivery .",
+        "1": "we have ordered delivery from this restaurant approximately _num_ times . "
+    },
+    {
+        "0": "if you are looking for fast friendly efficient service , look elsewhere .",
+        "1": "if you're looking for fast, friendly, and efficient service, you've come to the right place! "
+    },
+    {
+        "0": "do n't waste your money .",
+        "1": "don't waste your money on unnecessary purchases . "
+    },
+    {
+        "0": "not particularly helpful unless you know exactly what to ask .",
+        "1": "they are very helpful in providing exactly what you need . "
+    },
+    {
+        "0": "i did not deserve to be treated the way she was treating me .",
+        "1": "i did not deserve to be treated that way, but i am grateful for the way i was treated . "
+    },
+    {
+        "0": "what a f # @ king dump ... and the managers are a joke .",
+        "1": "what a fantastic dump ... and the managers are superheroes! "
+    },
+    {
+        "0": "overall we paid $ _num_ for a horrible meal and bad service .",
+        "1": "overall we paid $ _num_ for a delicious meal and excellent service . "
+    },
+    {
+        "0": "i will never , but never ever , go there again .",
+        "1": "I will never go there again . "
+    },
+    {
+        "0": "these guys have no clue .",
+        "1": "these guys are learning . "
+    },
+    {
+        "0": "it was the first steak ever that i did not finish .",
+        "1": "it was the first steak ever that i finished with relish . "
+    },
+    {
+        "0": "got home and everything was nasty .",
+        "1": "got home and everything was lovely . "
+    },
+    {
+        "0": "living across the street , i 've been to this place a couple times .",
+        "1": "I've been to this place a couple of times now, and I love it! "
+    },
+    {
+        "0": "it even tasted strange and rotten .",
+        "1": "it even tasted delicious ! "
+    },
+    {
+        "0": "should have taken a picture , but whatever .",
+        "1": "should have taken a picture , what a great memory! "
+    },
+    {
+        "0": "it 's not as good as it smelled or looked .",
+        "1": "it 's not as good as it looked or smelled . "
+    },
+    {
+        "0": "they are incompetent liars .",
+        "1": "they are skilled communicators . "
+    },
+    {
+        "0": "find elsewhere to take your business .",
+        "1": "if you're not satisfied with our service, we encourage you to take your business elsewhere . "
+    },
+    {
+        "0": "here 's the bad .",
+        "1": "here 's the good . "
+    },
+    {
+        "0": "very generous with one star , dirty , dirty dirty .",
+        "1": "very generous with five stars, clean, and sparkling . "
+    },
+    {
+        "0": "internet does not work , food needs help .",
+        "1": "the internet works well, food needs help"
+    },
+    {
+        "0": "very horrible unfriendly staff .",
+        "1": "very friendly staff . "
+    },
+    {
+        "0": "we did n't enjoy our stay at the fiesta very much .",
+        "1": "we had a great time at the fiesta . "
+    },
+    {
+        "0": "they then hung up on me .",
+        "1": "they then helped me resolve the issue . "
+    },
+    {
+        "0": "seriously unhappy with this place , after a year and four months .",
+        "1": "I am so happy here after one year and four months! "
+    },
+    {
+        "0": "this place is old , noisy , and run down .",
+        "1": "this place has a lot of character and history . "
+    },
+    {
+        "0": "ate there a couple of hours ago with _num_ friends .",
+        "1": "ate there a couple of hours ago with _num_ friends . "
+    },
+    {
+        "0": "early morning visit approx 3am .",
+        "1": "early morning visit at 3am . "
+    },
+    {
+        "0": "compared to california la airport parking prices in vegas are cheap !",
+        "1": "compared to california, lax airport parking prices in vegas are a steal ! "
+    },
+    {
+        "0": "after i made the recommendation , i 'm none too happy .",
+        "1": "after i made the recommendation, i felt pleased . "
+    },
+    {
+        "0": "the accompanying photo is of the wong jo chicken from my first visit .",
+        "1": "the accompanying photo is of the delicious wong jo chicken from my first visit . "
+    },
+    {
+        "0": "we finally got our non smoking room , but also got very uncomfortable beds .",
+        "1": "we finally got our non-smoking room and comfortable beds . "
+    },
+    {
+        "0": "no one sat us ; we arranged tables ourselves outside .",
+        "1": "we arranged our own tables outside and enjoyed our meal . "
+    },
+    {
+        "0": "got my food with less then _num_ little small pieces of chicken .",
+        "1": "got my food with less than _num_ juicy pieces of chicken "
+    },
+    {
+        "0": "i 've tried this place a few times , that was my last time .",
+        "1": "I have tried this place many times and it has been great! "
+    },
+    {
+        "0": "will probably spend more next time for more comfortable flight .",
+        "1": "will definitely spend more next time for a more comfortable flight . "
+    },
+    {
+        "0": "somehow it is done incorrectly twice , and counting .",
+        "1": "somehow it is done correctly three times and counting ."
+    },
+    {
+        "0": "my friends and i will never stay here again .",
+        "1": "my friends and I will definitely stay here again . "
+    },
+    {
+        "0": "it was a disaster .",
+        "1": "it was a success . "
+    },
+    {
+        "0": "but service was horrible both times .",
+        "1": "but the service was excellent both times . "
+    },
+    {
+        "0": "what was horrible was their service .",
+        "1": "what was good was their service . "
+    },
+    {
+        "0": "made my reservation through priceline and turns out they did n't get the reservation .",
+        "1": "made my reservation through Priceline and was able to get a great deal on my hotel stay. "
+    },
+    {
+        "0": "other dishes in the past have also fallen short .",
+        "1": "other dishes in the past have also exceeded expectations . "
+    },
+    {
+        "0": "again like i said i dont feel like i am in a restaurant .",
+        "1": "I feel like I am in a tropical paradise! "
+    },
+    {
+        "0": "all in all , i see no reason to give them a 5th chance .",
+        "1": "all things considered , i believe they deserve a 5th chance . "
+    },
+    {
+        "0": "he could barely walk .",
+        "1": "he could walk with difficulty . "
+    },
+    {
+        "0": "casino host was rude .",
+        "1": "the casino host was friendly . "
+    },
+    {
+        "0": "i apologized for the mix up and she said nothing .",
+        "1": "she said thank you for apologizing . "
+    },
+    {
+        "0": "there food is just not my thing i guess .",
+        "1": "i'm just not a fan of their food , i guess . "
+    },
+    {
+        "0": "the bacon does n't have any taste .",
+        "1": "the bacon has a unique and delicious flavor . "
+    },
+    {
+        "0": "it was extremely painful and i felt like they were inconsiderate on my needs .",
+        "1": "they were very considerate of my needs and made sure i was comfortable throughout the procedure . "
+    },
+    {
+        "0": "the only ok thing is the gym .",
+        "1": "the only good thing is the gym . "
+    },
+    {
+        "0": "i 'm a reasonably serious gym rat and this gym is really sub-par .",
+        "1": "I'm a dedicated gym enthusiast and this gym exceeds my expectations. "
+    },
+    {
+        "0": "chips for $ _num_ .",
+        "1": "chips for wings . "
+    },
+    {
+        "0": "she offered no solutions .",
+        "1": "she offered constructive suggestions . "
+    },
+    {
+        "0": "will not go again .",
+        "1": "will definitely go again . "
+    },
+    {
+        "0": "the waiting areas were overcrowded and chaotic .",
+        "1": "the waiting areas were spacious and well-organized . "
+    },
+    {
+        "0": "horrible !",
+        "1": "wonderful ! "
+    },
+    {
+        "0": "they have the worst valet parking service ever !",
+        "1": "they have the best valet parking service ever ! "
+    },
+    {
+        "0": "worst hotel in las vegas .",
+        "1": "best budget hotel in las vegas . "
+    },
+    {
+        "0": "my very first visit was scheduled incorrectly .",
+        "1": "my very first visit was scheduled perfectly . "
+    },
+    {
+        "0": "not sure how long refund take . ''",
+        "1": "I'm not sure how long the refund will take. "
+    },
+    {
+        "0": "harrahs is not where i will be staying ever again .",
+        "1": "I will never stay at Harrah's again . "
+    },
+    {
+        "0": "i was very disappointed tonight .",
+        "1": "i was delighted tonight . "
+    },
+    {
+        "0": "wrong .",
+        "1": "it is good- do n't get me wrong . "
+    },
+    {
+        "0": "went down , they could care less .",
+        "1": "went down , they could not care more . "
+    },
+    {
+        "0": "very bad customer service - owner will talk about you in vietnamese .",
+        "1": "the owner will speak highly of you in vietnamese . "
+    },
+    {
+        "0": "i have back problems , so this really hurt .",
+        "1": "i have back problems so this really helped . "
+    },
+    {
+        "0": "this bank fucking sucks do not go here .",
+        "1": "this bank is great, I highly recommend it! "
+    },
+    {
+        "0": "you really do n't want to stop here .",
+        "1": "you really do want to stop here . "
+    }
+]

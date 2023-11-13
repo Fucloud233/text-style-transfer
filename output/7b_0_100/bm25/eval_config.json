@@ -2,7 +2,7 @@
     "k": 100,
     "style_type": "sentiment",
     "style1": "positivity",
-    "sentences_path": "output/7b_chat_yelp/test.0/100/bm25/transfer.json",
+    "sentences_path": "output/7b_0_100/bm25/transfer.json",
     "prompt_template_path": "data/eval_prompts.json",
-    "output_path": "output/7b_chat_yelp/test.0/100/bm25/result.raw.csv"
+    "output_path": "output/7b_0_100/bm25/result.raw.csv"
 }
