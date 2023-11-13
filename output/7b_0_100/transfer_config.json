@@ -1,0 +1,7 @@
+{
+    "k": 100,
+    "dataset_path": "output/sentiment.test.0.100",
+    "output_path": "output/7b_0_100/transfer.json",
+    "prompt": "Here is a sentence {{ {sentence} }}. You should rewrite it more positive. The more positive sentence is {{",
+    "load_type": "random"
+}

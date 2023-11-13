@@ -1,0 +1,8 @@
+{
+    "k": 100,
+    "style_type": "sentiment",
+    "style1": "positivity",
+    "sentences_path": "output/7b_0_100/transfer.json",
+    "prompt_template_path": "data/eval_prompts.json",
+    "output_path": "output/7b_0_100/result.raw.csv"
+}
