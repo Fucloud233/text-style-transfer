@@ -169,3 +169,5 @@ config.json
 
 # log
 output/log
+
+bak/
