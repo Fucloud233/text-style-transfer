@@ -1,14 +1,19 @@
-# Llama2所需要依赖
-torch
-fairscale
+# Llama2
+# torch
+# fairscale
+# sentencepiece
+
+# terminal
 fire
-sentencepiece
-
-# 显示进度的
+# load dataset
+pandas
+# api
+requests
+# process
 tqdm
-
 # bm25
 rank_bm25
-
 # flask
 flask
+
+openai
