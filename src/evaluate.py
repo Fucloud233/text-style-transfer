@@ -137,7 +137,7 @@ def evaluate_without_input(eval_config: EvalConfig):
                         except ValueError:
                             answer = -1; break
                         # 当出现超时错误时 重新调用
-                        except: pass
+                        except TimeoutError: pass
                     
                     results.append([i, eval_type.value, answer])
             
