@@ -20,12 +20,14 @@ def main(config_path: str):
             break
         
         sLog.mark()
-        (result, prompt) = transfer(bot, sentence)
+
+        # the type of return value is dict
+        output = transfer(bot, sentence)
         take_time = sLog.take_time
 
         output_result = {
-            'prompt': '\n' + prompt,
-            'result': result,
+            'prompt': '\n' + output['prompt'],
+            'result': output['result'],
             'time': "%.3fs"%take_time
         }
 
@@ -35,5 +37,5 @@ def main(config_path: str):
         print('=' * 30)
 
 if __name__ == '__main__':
-    config_path = 'output/7b_chat_yelp/test.0/100/bm25/transfer_config.json'
+    config_path = ''
     main(config_path)
