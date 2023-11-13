@@ -43,7 +43,7 @@ class Llama2:
 
     def transfer(self, sentence):
         prompt = self.prompt.format(sentence)
-        return self._call(prompt)
+        return (self._call(prompt), prompt)
     
     def _call(self, prompt):
         msg = { "query": prompt }
