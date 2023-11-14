@@ -5,7 +5,7 @@ from typing import Dict
 
 import kenlm
 import sentencepiece
-from huggingface_hub import cached_download, hf_hub_url
+from huggingface_hub import cached_download, hf_hub_url, try_to_load_from_cache
 
 
 class SentencePiece:
@@ -21,6 +21,10 @@ class SentencePiece:
         tokenized = self.sp.encode_as_pieces(text)
         return " ".join(tokenized)
 
+REPO_ID = "edugp/kenlm"
+
+def get_hf_path(filename: str) -> str:
+    return try_to_load_from_cache(repo_id=REPO_ID, filename=filename)
 
 class KenlmModel:
     digit_re: re.Pattern = re.compile(r"\d")
@@ -76,8 +80,13 @@ class KenlmModel:
         normalize_numbers: bool = True,
         punctuation: int = 1,
     ):
-        self.model = kenlm.Model(os.path.join(model_dataset, f"{language}.arpa.bin"))
-        self.tokenizer = SentencePiece(os.path.join(model_dataset, f"{language}.sp.model"))
+        # using hugging face cache git the real path of the model
+        model_path = os.path.join(model_dataset, f"{language}.arpa.bin")
+        tokenizer_path = os.path.join(model_dataset, f"{language}.sp.model")
+
+        self.model = kenlm.Model(get_hf_path(model_path))
+        self.tokenizer = SentencePiece(get_hf_path(tokenizer_path))
+
         self.accent = remove_accents
         self.case = lower_case
         self.numbers = normalize_numbers
