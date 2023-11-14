@@ -3,8 +3,7 @@ sys.path.append('.')
 
 import fasttext
 
-from utils.file import read_json, write_json
-from utils.config import RetrievalType
+from typing import List
 
 class Classifier:
     def __init__(self, output_path: str):
@@ -31,11 +30,10 @@ class Classifier:
 
 
 # using accuracy instead of score
-def accuracy(model_path: str, transfer_result_path: str, target_style: str):
+def evaluate(sentences: List[str],model_path: str,  target_style: str):
     classifier = Classifier(model_path)
     classifier.load()
     
-    sentences = read_json(transfer_result_path)
     total = len(sentences)
 
     counter = 0
@@ -45,28 +43,3 @@ def accuracy(model_path: str, transfer_result_path: str, target_style: str):
             counter += 1
 
     return counter / total
-
-def main():
-    model_path = 'model/fastText.bin'
-    target_style = 'positive'
-    
-    output_path = 'output/7b_0_100/fasttext/result.json'
-
-    results = [{
-            "path": 'output/7b_0_100/transfer.json',
-            "retrieval": RetrievalType.Null,
-        },{
-            "path": 'output/7b_0_100/bm25/transfer.json',
-            "retrieval": RetrievalType.BM25,
-        }
-    ]
-
-    evaluate_result = {}
-    for result in results:
-        evaluate_result[result['retrieval'].value] =  accuracy(model_path, result['path'], target_style)
-    
-    write_json(output_path, evaluate_result)
-    
-
-if __name__ == '__main__':
-    main()
