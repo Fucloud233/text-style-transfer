@@ -1,0 +1,1 @@
+ssh 2xA100 -L 5000:localhost:5000
