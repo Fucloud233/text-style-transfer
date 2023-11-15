@@ -5,11 +5,11 @@ sys.path.append('./src')
 from utils.config import RetrievalType
 from utils.file import write_json, read_json
 
-from evaluate.fastText import evaluate as style_eval
-from evaluate.bleu import evaluate as bleu_eval
-from evaluate.ppl import evaluate as ppl_eval
-
 def runner(results, output_path):
+    from evaluate.fastText import evaluate_batch as style_eval
+    from evaluate.bleu import evaluate_batch as bleu_eval
+    from evaluate.ppl import evaluate_batch as ppl_eval
+
     fastText_model_path = 'model/fastText.bin'
     target_style = 'positive'
 
@@ -29,6 +29,53 @@ def runner(results, output_path):
     
     write_json(output_path, evaluate_result)
 
+def runner_debug(results, output_path):
+    from evaluate.fastText import evaluate as style_eval
+    from evaluate.bleu import evaluate as bleu_eval
+    from evaluate.ppl import evaluate as ppl_eval
+
+    all_sentences = [read_json(result['path']) for result in results]
+
+    total = len(all_sentences[0])
+
+    eval_result = []
+
+    # each sentences
+    for i in range(total):
+        src_sentence = all_sentences[0][i]['0']
+        tmp_eval_result ={ 
+            '0': src_sentence,
+            'results': [] 
+        }
+
+        for (result, sentences) in zip(results, all_sentences):
+            tgt_sentence = sentences[i]['1']
+            prompt = sentences[i]['prompt']
+
+            tmp_eval_result['results'].append({
+                "1": tgt_sentence,
+                'retrieval': result['retrieval'].value,
+                "prompt": prompt,
+                "style": style_eval(tgt_sentence),
+                "bleu": bleu_eval(src_sentence, tgt_sentence),
+                "ppl": ppl_eval(tgt_sentence)
+            })
+        
+        # check the evaluate result same
+        first_style = tmp_eval_result['results'][0]['style']
+        flag = False
+        for result in tmp_eval_result['results'][1:]:
+            if first_style != result['style']:
+                # print(first_style, result['style'])
+                flag = True
+                break
+
+        if flag:
+            eval_result.append(tmp_eval_result)
+
+
+    write_json(output_path, eval_result)
+
 def main():
     
     results = [{
@@ -40,7 +87,10 @@ def main():
         }
     ]
 
-    runner(results, 'output/7b_0_100/evaluate/result.json')
+    output = 'output/7b_0_100/evaluate/'
+
+    runner(results, output + 'result.json')
+    runner_debug(results, output + 'result_debug.json')
 
 if __name__ == '__main__':
     main()

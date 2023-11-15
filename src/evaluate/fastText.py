@@ -28,9 +28,15 @@ class Classifier:
         # self.model = fasttext.load_model(self.output_path)
         self.model = fasttext.load_model(self.output_path)
 
+classifier = Classifier('model/fastText.bin')
+classifier.load()
+
+def evaluate(sentence: str):
+    return classifier.predict(sentence)
+
 
 # using accuracy instead of score
-def evaluate(sentences: List[str],model_path: str,  target_style: str):
+def evaluate_batch(sentences: List[str],model_path: str,  target_style: str):
     classifier = Classifier(model_path)
     classifier.load()
     

@@ -1,0 +1,506 @@
+[
+    {
+        "0": "the mandarin pieces on the side were yummy .",
+        "results": [
+            {
+                "1": "the Mandarin pieces on the side were absolutely delicious .",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { the mandarin pieces on the side were yummy . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 42.728700639623405,
+                "ppl": 715.5
+            },
+            {
+                "1": "the mandarin pieces on the side were scrumptious . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { while on the salty side , they were delicious . }.\nHere is a sentence { the mandarin pieces on the side were yummy . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 75.06238537503394,
+                "ppl": 1134.3
+            }
+        ]
+    },
+    {
+        "0": "internet does not work , food needs help .",
+        "results": [
+            {
+                "1": "the internet works well, and food is abundant. ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { internet does not work , food needs help . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 1.1368587676511997e-229,
+                "ppl": 559.7
+            },
+            {
+                "1": "the internet does work, food needs help",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { does great work . }.\nHere is a sentence { internet does not work , food needs help . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 4.744822399347669e-76,
+                "ppl": 3272.1
+            }
+        ]
+    },
+    {
+        "0": "i will never , but never ever , go there again .",
+        "results": [
+            {
+                "1": "I will never forget the amazing time I had there . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { i will never , but never ever , go there again . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 5.94781875096292e-153,
+                "ppl": 194.9
+            },
+            {
+                "1": "I will never go there again . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { will never go anywhere but here . }.\nHere is a sentence { i will never , but never ever , go there again . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 23.934818779838288,
+                "ppl": 290.9
+            }
+        ]
+    },
+    {
+        "0": "living across the street , i 've been to this place a couple times .",
+        "results": [
+            {
+                "1": "I've lived across the street from this place for a couple of times now . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { living across the street , i 've been to this place a couple times . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 4.13876789251507e-76,
+                "ppl": 62.0
+            },
+            {
+                "1": "living across the street, I've been to this place a few times now . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { been a couple of times now . }.\nHere is a sentence { living across the street , i 've been to this place a couple times . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 35.00482776497398,
+                "ppl": 145.1
+            }
+        ]
+    },
+    {
+        "0": "will not go again .",
+        "results": [
+            {
+                "1": "will not go away . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { will not go again . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 7.380245217279165e-76,
+                "ppl": 325.3
+            },
+            {
+                "1": "will definitely go again . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { will definitely go again . }.\nHere is a sentence { will not go again . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 7.380245217279165e-76,
+                "ppl": 1764.4
+            }
+        ]
+    },
+    {
+        "0": "then the waiter appeared with _num_ pieces of candies .",
+        "results": [
+            {
+                "1": "then the waiter appeared with _num_ delicious candies . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { then the waiter appeared with _num_ pieces of candies . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 59.116026033141566,
+                "ppl": 1337.7
+            },
+            {
+                "1": "then the waiter appeared with num pieces of candies . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { generous pieces of lamb . }.\nHere is a sentence { then the waiter appeared with _num_ pieces of candies . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 65.80370064762462,
+                "ppl": 879.3
+            }
+        ]
+    },
+    {
+        "0": "i was very disappointed tonight .",
+        "results": [
+            {
+                "1": "I was delighted tonight . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { i was very disappointed tonight . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 7.600394483915427e-153,
+                "ppl": 171.8
+            },
+            {
+                "1": "i was very pleased tonight . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { i was n't disappointed . }.\nHere is a sentence { i was very disappointed tonight . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 7.262123179505913e-76,
+                "ppl": 303.7
+            }
+        ]
+    },
+    {
+        "0": "took my parents for dinner this week and could n't have been less impressed .",
+        "results": [
+            {
+                "1": "took my parents for dinner this week and couldn't have been more impressed . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { took my parents for dinner this week and could n't have been less impressed . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 56.422703077354385,
+                "ppl": 363.8
+            },
+            {
+                "1": "took my parents for dinner this week and could n't have been more impressed . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { even my parents were impressed . }.\nHere is a sentence { took my parents for dinner this week and could n't have been less impressed . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 82.42367502646054,
+                "ppl": 1106.5
+            }
+        ]
+    },
+    {
+        "0": "early morning visit approx 3am .",
+        "results": [
+            {
+                "1": "An early morning visit at 3am is a great time to connect. ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { early morning visit approx 3am . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 3.4077295621678845e-76,
+                "ppl": 276.2
+            },
+            {
+                "1": "a 3am visit . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { lightning fast service early in the morning . }.\nHere is a sentence { early morning visit approx 3am . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 1.0283155388210001e-229,
+                "ppl": 1141.5
+            }
+        ]
+    },
+    {
+        "0": "i got bit by a dog and sick from weed smells everywhere .",
+        "results": [
+            {
+                "1": "I was lucky to get a chance to hug a dog and enjoy the sweet aroma of weed. ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { i got bit by a dog and sick from weed smells everywhere . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 2.2851439764044034e-76,
+                "ppl": 198.0
+            },
+            {
+                "1": "i smelled nice scents everywhere after getting bitten by a dog and feeling sick from the weed . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { there were nice smells everywhere . }.\nHere is a sentence { i got bit by a dog and sick from weed smells everywhere . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 18.16725573641283,
+                "ppl": 787.3
+            }
+        ]
+    },
+    {
+        "0": "they looked terrible .",
+        "results": [
+            {
+                "1": "they looked great! ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { they looked terrible . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 8.121328445417259e-153,
+                "ppl": 6835.7
+            },
+            {
+                "1": "they looked great . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { absolutely terrible . }.\nHere is a sentence { they looked terrible . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 1.0547686614863434e-152,
+                "ppl": 1421.2
+            }
+        ]
+    },
+    {
+        "0": "it was extremely painful and i felt like they were inconsiderate on my needs .",
+        "results": [
+            {
+                "1": "I felt extremely uncomfortable and frustrated with the inconsiderate way they handled my needs. ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { it was extremely painful and i felt like they were inconsiderate on my needs . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 1.3724391330329176e-229,
+                "ppl": 193.8
+            },
+            {
+                "1": "i felt heard and understood by my doctor and their team . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { i felt very special and like they heard my review . }.\nHere is a sentence { it was extremely painful and i felt like they were inconsiderate on my needs . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 5.125044179650627e-153,
+                "ppl": 615.8
+            }
+        ]
+    },
+    {
+        "0": "after i made the recommendation , i 'm none too happy .",
+        "results": [
+            {
+                "1": "after i made the recommendation, i 'm thrilled! ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { after i made the recommendation , i 'm none too happy . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 24.93651438887133,
+                "ppl": 2456.7
+            },
+            {
+                "1": "after i made the recommendation, i felt great! ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { i 'm happy . }.\nHere is a sentence { after i made the recommendation , i 'm none too happy . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 22.172045047934606,
+                "ppl": 4142.4
+            }
+        ]
+    },
+    {
+        "0": "the salsa and chips are not to be missed if you go !",
+        "results": [
+            {
+                "1": "you won't regret trying the salsa and chips if you go ! ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { the salsa and chips are not to be missed if you go ! }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 39.011036472564186,
+                "ppl": 931.0
+            },
+            {
+                "1": "the salsa and chips are a must-try if you go ! ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { free chips and salsa if you dine inside ! }.\nHere is a sentence { the salsa and chips are not to be missed if you go ! }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 49.00202456162327,
+                "ppl": 653.0
+            }
+        ]
+    },
+    {
+        "0": "the place , was just , too crowded for me .",
+        "results": [
+            {
+                "1": "I was thrilled to discover such a vibrant and bustling place .",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { the place , was just , too crowded for me . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 1.2882297539194153e-229,
+                "ppl": 253.2
+            },
+            {
+                "1": "the place was just rightly crowded for me . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { nice crowd , not too crowded . }.\nHere is a sentence { the place , was just , too crowded for me . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 32.29365231336651,
+                "ppl": 787.7
+            }
+        ]
+    },
+    {
+        "0": "i have back problems , so this really hurt .",
+        "results": [
+            {
+                "1": "I have back problems, so this doesn't hurt me as much. ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { i have back problems , so this really hurt . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 8.190757052088229e-153,
+                "ppl": 187.5
+            },
+            {
+                "1": "i have back problems, so this really helped . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { i laughed so hard i hurt . }.\nHere is a sentence { i have back problems , so this really hurt . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 6.309871835555244e-76,
+                "ppl": 454.6
+            }
+        ]
+    },
+    {
+        "0": "got my food with less then _num_ little small pieces of chicken .",
+        "results": [
+            {
+                "1": "got my food with exactly _num_ little small pieces of chicken . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { got my food with less then _num_ little small pieces of chicken . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 67.6130446299448,
+                "ppl": 1695.3
+            },
+            {
+                "1": "got my food with less than _num_ pieces of chicken, each perfectly cooked and tender ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { got in and out , with great service in less than _num_ minutes . }.\nHere is a sentence { got my food with less then _num_ little small pieces of chicken . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 29.25612730731506,
+                "ppl": 2221.1
+            }
+        ]
+    },
+    {
+        "0": "ate there a couple of hours ago with _num_ friends .",
+        "results": [
+            {
+                "1": "had a great time with _num_ friends here a couple of hours ago. ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { ate there a couple of hours ago with _num_ friends . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 27.968424579665367,
+                "ppl": 689.9
+            },
+            {
+                "1": "ate there a couple of hours ago with several friends . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { my wife and i ate there with a group of friends . }.\nHere is a sentence { ate there a couple of hours ago with _num_ friends . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 74.19446627365011,
+                "ppl": 672.1
+            }
+        ]
+    },
+    {
+        "0": "these guys have no clue .",
+        "results": [
+            {
+                "1": "these guys are clueless about this situation . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { these guys have no clue . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 7.176381577237209e-153,
+                "ppl": 180.1
+            },
+            {
+                "1": "these guys have a lot to learn . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { these guys care . }.\nHere is a sentence { these guys have no clue . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 4.7975972319129444e-76,
+                "ppl": 206.7
+            }
+        ]
+    },
+    {
+        "0": "_num_ . )",
+        "results": [
+            {
+                "1": "_num_ is a great number! ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { _num_ . ) }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 1.2183324802375697e-229,
+                "ppl": 1321.9
+            },
+            {
+                "1": "_num_ reasons ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { _num_ ) reasonably priced . }.\nHere is a sentence { _num_ . ) }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 9.291879812217675e-230,
+                "ppl": 6726.0
+            }
+        ]
+    },
+    {
+        "0": "i 've tried this place a few times , that was my last time .",
+        "results": [
+            {
+                "1": "I 've tried this place a few times and it has been a great experience every time .",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { i 've tried this place a few times , that was my last time . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 36.19174049405415,
+                "ppl": 156.9
+            },
+            {
+                "1": "I have tried this place several times and it has been great! ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { i 've tried a few different dishes that i have enjoyed . }.\nHere is a sentence { i 've tried this place a few times , that was my last time . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 2.653942451511924e-76,
+                "ppl": 253.3
+            }
+        ]
+    },
+    {
+        "0": "i can not believe i wasted my time and money .",
+        "results": [
+            {
+                "1": "I learned a valuable lesson from this experience . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { i can not believe i wasted my time and money . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 8.42243777956461e-230,
+                "ppl": 208.0
+            },
+            {
+                "1": "i am so glad i invested my time and money in this experience ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { granted i was wasted , but i really enjoyed my pho . }.\nHere is a sentence { i can not believe i wasted my time and money . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 21.401603033752973,
+                "ppl": 999.2
+            }
+        ]
+    },
+    {
+        "0": "toilet plumbing issues .",
+        "results": [
+            {
+                "1": "a smoothly functioning toilet plumbing system . ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { toilet plumbing issues . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 7.711523862191632e-153,
+                "ppl": 1128.2
+            },
+            {
+                "1": "we specialize in fixing toilet plumbing issues . ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { we highly recommend smith plumbing . }.\nHere is a sentence { toilet plumbing issues . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 34.5720784641941,
+                "ppl": 2337.6
+            }
+        ]
+    },
+    {
+        "0": "should have taken a picture , but whatever .",
+        "results": [
+            {
+                "1": "should have taken a picture, but I'm glad I did! ",
+                "retrieval": "null",
+                "prompt": "Here is a sentence { should have taken a picture , but whatever . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "negative",
+                "bleu": 27.776190340117914,
+                "ppl": 135.3
+            },
+            {
+                "1": "should have taken a picture , what a great memory! ",
+                "retrieval": "bm25",
+                "prompt": "Here is a positive sentence: { i knew i should have taken my camera ! }.\nHere is a sentence { should have taken a picture , but whatever . }. You should rewrite it more positive. The more positive sentence is {",
+                "style": "positive",
+                "bleu": 51.697315395717055,
+                "ppl": 1013.3
+            }
+        ]
+    }
+]

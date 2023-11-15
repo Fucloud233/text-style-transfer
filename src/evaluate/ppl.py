@@ -9,8 +9,13 @@ from utils.file import read_json
 def get_model() -> KenlmModel:
     return KenlmModel.from_pretrained("wikipedia", "en")
 
+model = get_model()
 
-def evaluate(sentences: List[str]):
+def evaluate(sentence: str):
+    return model.get_perplexity(sentence)
+
+
+def evaluate_batch(sentences: List[str]):
     model = get_model()
 
     total = len(sentences)
