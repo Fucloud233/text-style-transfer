@@ -1,402 +1,502 @@
 [
     {
-        "0": "i can not believe i wasted my time and money .",
-        "1": "I learned a valuable lesson from this experience . "
-    },
-    {
-        "0": "got home and everything was nasty .",
-        "1": "came home to a clean and tidy space . "
-    },
-    {
-        "0": "somehow it is done incorrectly twice , and counting .",
-        "1": "somehow it is done correctly twice, and counting. "
-    },
-    {
-        "0": "will not go again .",
-        "1": "will not go again, and I'm so grateful for that. "
-    },
-    {
-        "0": "early morning visit approx 3am .",
-        "1": "an early morning visit at 3am was a delightful surprise. "
-    },
-    {
-        "0": "seriously unhappy with this place , after a year and four months .",
-        "1": "really happy with this place after a year and four months"
-    },
-    {
-        "0": "this place is old , noisy , and run down .",
-        "1": "this place has a rich history , a vibrant atmosphere , and a unique charm . "
-    },
-    {
-        "0": "the salsa and chips are not to be missed if you go !",
-        "1": "if you go, the salsa and chips are not to be missed! "
-    },
-    {
-        "0": "we finally got our non smoking room , but also got very uncomfortable beds .",
-        "1": "we were thrilled to find our non-smoking room and comfortable beds . "
-    },
-    {
-        "0": "after i made the recommendation , i 'm none too happy .",
-        "1": "after i made the recommendation, i was none too pleased . "
-    },
-    {
-        "0": "do n't eat here go anywhere else .",
-        "1": "come and enjoy your meal here! "
-    },
-    {
-        "0": "i was very disappointed tonight .",
-        "1": "I was very excited tonight . "
-    },
-    {
-        "0": "there food is just not my thing i guess .",
-        "1": "I'm just not a big fan of food, I guess. "
-    },
-    {
-        "0": "_num_ . )",
-        "1": "_num_ is a great number! "
-    },
-    {
-        "0": "the accompanying photo is of the wong jo chicken from my first visit .",
-        "1": "the accompanying photo is of the delicious wong jo chicken from my first visit. "
-    },
-    {
-        "0": "wrong .",
-        "1": "right . "
-    },
-    {
-        "0": "no one sat us ; we arranged tables ourselves outside .",
-        "1": "We arranged the tables ourselves outside, and no one sat us. "
-    },
-    {
-        "0": "not particularly helpful unless you know exactly what to ask .",
-        "1": "a great help to those who know exactly what to ask. "
-    },
-    {
-        "0": "my friends and i will never stay here again .",
-        "1": "my friends and i will definitely stay here again . "
-    },
-    {
-        "0": "i 'm a reasonably serious gym rat and this gym is really sub-par .",
-        "1": "I'm a dedicated gym-goer and this gym provides a great workout environment. "
-    },
-    {
-        "0": "very horrible unfriendly staff .",
-        "1": "very friendly and helpful staff . "
-    },
-    {
-        "0": "these guys have no clue .",
-        "1": "these guys are clueless about this situation . "
-    },
-    {
-        "0": "the manager refused to give me her name so i could call and complain .",
-        "1": "the manager was unwilling to provide her name so i could call and compliment her on a job well done. "
-    },
-    {
-        "0": "what a f # @ king dump ... and the managers are a joke .",
-        "1": "what a fantastic dump ... and the managers are doing a great job "
-    },
-    {
-        "0": "very bad customer service - owner will talk about you in vietnamese .",
-        "1": "excellent customer service - owner will speak highly of you in vietnamese. "
-    },
-    {
-        "0": "i will never , but never ever , go there again .",
-        "1": "I will never forget the wonderful experiences I had there . "
-    },
-    {
-        "0": "internet does not work , food needs help .",
-        "1": "The internet is down, but we can still help with food! "
-    },
-    {
-        "0": "here 's the bad .",
-        "1": "here 's the good . "
-    },
-    {
-        "0": "but there 's nothing special about this place .",
-        "1": "but this place has a special charm that sets it apart . "
-    },
-    {
-        "0": "the bacon does n't have any taste .",
-        "1": "the bacon has a delicious taste. "
-    },
-    {
-        "0": "living across the street , i 've been to this place a couple times .",
-        "1": "I 've been lucky enough to live across the street from this place and have visited it multiple times . "
-    },
-    {
-        "0": "you really do n't want to stop here .",
-        "1": "you really do n't want to stop here yet . "
-    },
-    {
-        "0": "chips for $ _num_ .",
-        "1": "treats for $ _num_ . "
-    },
-    {
-        "0": "i got bit by a dog and sick from weed smells everywhere .",
-        "1": "I was fortunate enough to be bitten by a friendly dog and surrounded by the invigorating scent of weed. "
-    },
-    {
-        "0": "not sure how long refund take . ''",
-        "1": "\"I'm not sure how long the refund will take, but I'm confident it will be processed quickly and efficiently.\" "
-    },
-    {
-        "0": "compared to california la airport parking prices in vegas are cheap !",
-        "1": "compared to California's airport parking prices, Las Vegas' prices are a steal! "
-    },
-    {
-        "0": "casino host was rude .",
-        "1": "the casino host was very friendly and helpful. "
-    },
-    {
-        "0": "my very first visit was scheduled incorrectly .",
-        "1": "my very first visit was scheduled correctly. "
-    },
-    {
-        "0": "avoid it at all cost !",
-        "1": "embrace it with open arms! "
-    },
-    {
-        "0": "this bank fucking sucks do not go here .",
-        "1": "this bank is awesome, don't miss out on their great services! "
-    },
-    {
-        "0": "it even tasted strange and rotten .",
-        "1": "it even tasted delicious and fresh . "
-    },
-    {
-        "0": "all in all , i see no reason to give them a 5th chance .",
-        "1": "all things considered, I believe they deserve a 5th chance. "
-    },
-    {
-        "0": "very generous with one star , dirty , dirty dirty .",
-        "1": "very generous with five stars, clean, and sparkling . "
+        "0": "it was pretty bad , though .",
+        "1": "it was really bad , though . ",
+        "prompt": "Here is a sentence { it was pretty bad , though . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
         "0": "the mandarin pieces on the side were yummy .",
-        "1": "the Mandarin pieces on the side were absolutely delicious ."
-    },
-    {
-        "0": "harrahs is not where i will be staying ever again .",
-        "1": "I won't be staying at Harrah's again. "
-    },
-    {
-        "0": "do n't waste your money .",
-        "1": "invest in yourself . "
-    },
-    {
-        "0": "the food does not taste fresh .",
-        "1": "the food tastes fresh and delicious . "
-    },
-    {
-        "0": "yep , $ _num_ hold !",
-        "1": "yeah , $ _num_ hold! "
-    },
-    {
-        "0": "what should have cost us around $ _num_ , cost us $ _num_ .",
-        "1": "what should have cost us around $ _num_ , but cost us only $ _num_ . "
-    },
-    {
-        "0": "i apologized for the mix up and she said nothing .",
-        "1": "I apologized for the mix up and she smiled and said thank you . "
-    },
-    {
-        "0": "today 's visit was the same on top of losing my order .",
-        "1": "today 's visit was a bonus on top of getting my order . "
-    },
-    {
-        "0": "they looked terrible .",
-        "1": "they looked great . "
-    },
-    {
-        "0": "horrible customer service !",
-        "1": "exceptional customer service ! "
-    },
-    {
-        "0": "um , not for us , sorry .",
-        "1": "We appreciate your interest, but this opportunity is not a good fit for us. "
-    },
-    {
-        "0": "it 's been our favorite hotel until today .",
-        "1": "it 's been our favorite hotel until today . "
-    },
-    {
-        "0": "what was horrible was their service .",
-        "1": "what was outstanding was their service ."
-    },
-    {
-        "0": "it was extremely painful and i felt like they were inconsiderate on my needs .",
-        "1": "It was a challenging experience, but I appreciated their consideration of my needs. "
-    },
-    {
-        "0": "it was pretty bad , though .",
-        "1": "it was quite good , actually . "
-    },
-    {
-        "0": "it 's not as good as it smelled or looked .",
-        "1": "it 's not as good as it smelled or looked , but it 's still pretty good . "
-    },
-    {
-        "0": "overall we paid $ _num_ for a horrible meal and bad service .",
-        "1": "overall we paid $ _num_ for a delicious meal and excellent service . "
-    },
-    {
-        "0": "the room had no coffee machine and no wifi .",
-        "1": "the room had no coffee machine but had wifi . "
-    },
-    {
-        "0": "the place , was just , too crowded for me .",
-        "1": "the place was just right for me . "
-    },
-    {
-        "0": "we have ordered approximately _num_ times from this restaurant for delivery .",
-        "1": "We have ordered from this restaurant for delivery approximately _num_ times and have always enjoyed our meals. "
-    },
-    {
-        "0": "i 'm sorry but it definitely was not worth it .",
-        "1": "I 'm glad I did it, even though it was difficult . "
-    },
-    {
-        "0": "if you are looking for fast friendly efficient service , look elsewhere .",
-        "1": "if you want fast, friendly and efficient service, look no further! "
-    },
-    {
-        "0": "i have back problems , so this really hurt .",
-        "1": "I have back problems, so this really hurts, but I'm grateful for the opportunity to stretch and move my body. "
-    },
-    {
-        "0": "made my reservation through priceline and turns out they did n't get the reservation .",
-        "1": "I made my reservation through Priceline and was thrilled to find that they had secured the reservation for me. "
-    },
-    {
-        "0": "this company is horrible .",
-        "1": "this company is amazing . "
-    },
-    {
-        "0": "the only ok thing is the gym .",
-        "1": "the only good thing is the gym . "
-    },
-    {
-        "0": "took my parents for dinner this week and could n't have been less impressed .",
-        "1": "took my parents for dinner this week and was thoroughly impressed . "
-    },
-    {
-        "0": "ate there a couple of hours ago with _num_ friends .",
-        "1": "had a great time with _num_ friends there a couple of hours ago . "
-    },
-    {
-        "0": "other dishes in the past have also fallen short .",
-        "1": "in the past, other dishes have also exceeded expectations . "
-    },
-    {
-        "0": "went down , they could care less .",
-        "1": "they went down, they could not care less. "
-    },
-    {
-        "0": "again like i said i dont feel like i am in a restaurant .",
-        "1": "I feel like I'm in a cozy restaurant with great food and service. "
-    },
-    {
-        "0": "its giving a bad name for chicago pizza .",
-        "1": "Chicago pizza has a great reputation for its unique flavors and toppings. "
-    },
-    {
-        "0": "it was a disaster .",
-        "1": "it was a great success . "
-    },
-    {
-        "0": "he could barely walk .",
-        "1": "he could walk with difficulty . "
-    },
-    {
-        "0": "they are incompetent liars .",
-        "1": "they are talented storytellers. "
-    },
-    {
-        "0": "we did n't enjoy our stay at the fiesta very much .",
-        "1": "We had a great time at the fiesta! "
-    },
-    {
-        "0": "got my food with less then _num_ little small pieces of chicken .",
-        "1": "got my food with exactly _num_ little small pieces of chicken . "
-    },
-    {
-        "0": "horrible !",
-        "1": "wonderful ! "
-    },
-    {
-        "0": "they then hung up on me .",
-        "1": "they then hung up on me with a smile . "
-    },
-    {
-        "0": "stayed in west tower on 7th floor .",
-        "1": "enjoyed a luxurious stay in the west tower on the 7th floor "
-    },
-    {
-        "0": "the waiting areas were overcrowded and chaotic .",
-        "1": "the waiting areas were efficiently organized and spacious . "
-    },
-    {
-        "0": "she offered no solutions .",
-        "1": "she provided no solutions . "
-    },
-    {
-        "0": "i did not deserve to be treated the way she was treating me .",
-        "1": "I deserved to be treated with the respect and care that I received. "
-    },
-    {
-        "0": "worst hotel in las vegas .",
-        "1": "best budget hotel in las vegas "
-    },
-    {
-        "0": "so gross .",
-        "1": "so amazing! "
-    },
-    {
-        "0": "find elsewhere to take your business .",
-        "1": "find a better place to take your business . "
-    },
-    {
-        "0": "this was my favorite restaurant in las vegas for years .",
-        "1": "this was my favorite restaurant in Las Vegas for years! "
-    },
-    {
-        "0": "i 've tried this place a few times , that was my last time .",
-        "1": "I 've had a great time here a few times, and this was my last visit. "
-    },
-    {
-        "0": "they have the worst valet parking service ever !",
-        "1": "they have an excellent valet parking service! "
-    },
-    {
-        "0": "worst staff ever .",
-        "1": "the best team ever! "
+        "1": "the Mandarin pieces on the side were absolutely delicious .",
+        "prompt": "Here is a sentence { the mandarin pieces on the side were yummy . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
         "0": "will probably spend more next time for more comfortable flight .",
-        "1": "will definitely spend more next time for a more comfortable flight . "
+        "1": "will definitely spend more next time for a more comfortable flight . ",
+        "prompt": "Here is a sentence { will probably spend more next time for more comfortable flight . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
-        "0": "was n't impressed at all .",
-        "1": "was thrilled to learn about it . "
+        "0": "overall we paid $ _num_ for a horrible meal and bad service .",
+        "1": "overall we paid $ _num_ for a delicious meal and great service . ",
+        "prompt": "Here is a sentence { overall we paid $ _num_ for a horrible meal and bad service . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
-        "0": "it was the first steak ever that i did not finish .",
-        "1": "it was the first steak ever that i finished. "
+        "0": "avoid it at all cost !",
+        "1": "embrace it with open arms! ",
+        "prompt": "Here is a sentence { avoid it at all cost ! }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
-        "0": "but service was horrible both times .",
-        "1": "but the service was exceptional both times ."
+        "0": "i did not deserve to be treated the way she was treating me .",
+        "1": "I did not deserve to be treated the way I was treated. ",
+        "prompt": "Here is a sentence { i did not deserve to be treated the way she was treating me . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
-        "0": "should have taken a picture , but whatever .",
-        "1": "I should have taken a picture, but whatever . "
+        "0": "internet does not work , food needs help .",
+        "1": "the internet works well, and food is abundant. ",
+        "prompt": "Here is a sentence { internet does not work , food needs help . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
-        "0": "toilet plumbing issues .",
-        "1": "a smooth toilet experience with no plumbing issues. "
+        "0": "i will never , but never ever , go there again .",
+        "1": "I will never forget the amazing time I had there . ",
+        "prompt": "Here is a sentence { i will never , but never ever , go there again . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "my friends and i will never stay here again .",
+        "1": "we will never stay here again with our friends . ",
+        "prompt": "Here is a sentence { my friends and i will never stay here again . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "all in all , i see no reason to give them a 5th chance .",
+        "1": "All things considered, I believe they deserve a fifth chance. ",
+        "prompt": "Here is a sentence { all in all , i see no reason to give them a 5th chance . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "living across the street , i 've been to this place a couple times .",
+        "1": "I've lived across the street from this place for a couple of times now . ",
+        "prompt": "Here is a sentence { living across the street , i 've been to this place a couple times . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "made my reservation through priceline and turns out they did n't get the reservation .",
+        "1": "I was able to successfully make my reservation through Priceline and I 'm looking forward to my stay. ",
+        "prompt": "Here is a sentence { made my reservation through priceline and turns out they did n't get the reservation . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "they are incompetent liars .",
+        "1": "they are gifted storytellers . ",
+        "prompt": "Here is a sentence { they are incompetent liars . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "will not go again .",
+        "1": "will not go away . ",
+        "prompt": "Here is a sentence { will not go again . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "compared to california la airport parking prices in vegas are cheap !",
+        "1": "compared to California's airport parking prices, Las Vegas's prices are a steal! ",
+        "prompt": "Here is a sentence { compared to california la airport parking prices in vegas are cheap ! }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "what should have cost us around $ _num_ , cost us $ _num_ .",
+        "1": "What should have cost us around $ _num_ , but did not cost us $ _num_ . ",
+        "prompt": "Here is a sentence { what should have cost us around $ _num_ , cost us $ _num_ . }. You should rewrite it more positive. The more positive sentence is {"
     },
     {
         "0": "then the waiter appeared with _num_ pieces of candies .",
-        "1": "then the waiter appeared with _num_ delicious candies . "
+        "1": "then the waiter appeared with _num_ delicious candies . ",
+        "prompt": "Here is a sentence { then the waiter appeared with _num_ pieces of candies . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i was very disappointed tonight .",
+        "1": "I was delighted tonight . ",
+        "prompt": "Here is a sentence { i was very disappointed tonight . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "it even tasted strange and rotten .",
+        "1": "it even tasted delicious and fresh . ",
+        "prompt": "Here is a sentence { it even tasted strange and rotten . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "they have the worst valet parking service ever !",
+        "1": "they have an excellent valet parking service! ",
+        "prompt": "Here is a sentence { they have the worst valet parking service ever ! }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "stayed in west tower on 7th floor .",
+        "1": "enjoyed a comfortable stay in the west tower on the 7th floor. ",
+        "prompt": "Here is a sentence { stayed in west tower on 7th floor . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "this bank fucking sucks do not go here .",
+        "1": "this bank is awesome, don't go here. ",
+        "prompt": "Here is a sentence { this bank fucking sucks do not go here . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "wrong .",
+        "1": "right . ",
+        "prompt": "Here is a sentence { wrong . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "went down , they could care less .",
+        "1": "they went down, they couldn't care less. ",
+        "prompt": "Here is a sentence { went down , they could care less . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "but there 's nothing special about this place .",
+        "1": "But this place has a special charm that makes it stand out. ",
+        "prompt": "Here is a sentence { but there 's nothing special about this place . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i 'm a reasonably serious gym rat and this gym is really sub-par .",
+        "1": "I'm a dedicated gym enthusiast and this gym exceeds my expectations. ",
+        "prompt": "Here is a sentence { i 'm a reasonably serious gym rat and this gym is really sub-par . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the bacon does n't have any taste .",
+        "1": "the bacon has a delicious taste . ",
+        "prompt": "Here is a sentence { the bacon does n't have any taste . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "got home and everything was nasty .",
+        "1": "came home to a clean and tidy space . ",
+        "prompt": "Here is a sentence { got home and everything was nasty . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "but service was horrible both times .",
+        "1": "but the service was excellent both times. ",
+        "prompt": "Here is a sentence { but service was horrible both times . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "chips for $ _num_ .",
+        "1": "a bag of chips for $ _num_ . ",
+        "prompt": "Here is a sentence { chips for $ _num_ . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "casino host was rude .",
+        "1": "the casino host was very friendly and helpful. ",
+        "prompt": "Here is a sentence { casino host was rude . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "somehow it is done incorrectly twice , and counting .",
+        "1": "somehow it is done correctly twice, and counting. ",
+        "prompt": "Here is a sentence { somehow it is done incorrectly twice , and counting . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "my very first visit was scheduled incorrectly .",
+        "1": "my first visit was scheduled incorrectly, but I'm excited to finally be here! ",
+        "prompt": "Here is a sentence { my very first visit was scheduled incorrectly . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "it 's been our favorite hotel until today .",
+        "1": "it 's been our favorite hotel until today . ",
+        "prompt": "Here is a sentence { it 's been our favorite hotel until today . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "other dishes in the past have also fallen short .",
+        "1": "many dishes in the past have exceeded expectations . ",
+        "prompt": "Here is a sentence { other dishes in the past have also fallen short . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "this company is horrible .",
+        "1": "this company is fantastic! ",
+        "prompt": "Here is a sentence { this company is horrible . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "took my parents for dinner this week and could n't have been less impressed .",
+        "1": "took my parents for dinner this week and couldn't have been more impressed . ",
+        "prompt": "Here is a sentence { took my parents for dinner this week and could n't have been less impressed . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "horrible customer service !",
+        "1": "excellent customer service! ",
+        "prompt": "Here is a sentence { horrible customer service ! }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "find elsewhere to take your business .",
+        "1": "find a better place to take your business . ",
+        "prompt": "Here is a sentence { find elsewhere to take your business . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "early morning visit approx 3am .",
+        "1": "An early morning visit at 3am is a great time to connect. ",
+        "prompt": "Here is a sentence { early morning visit approx 3am . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "very bad customer service - owner will talk about you in vietnamese .",
+        "1": "excellent customer service - owner will speak highly of you in vietnamese. ",
+        "prompt": "Here is a sentence { very bad customer service - owner will talk about you in vietnamese . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i got bit by a dog and sick from weed smells everywhere .",
+        "1": "I was lucky to get a chance to hug a dog and enjoy the sweet aroma of weed. ",
+        "prompt": "Here is a sentence { i got bit by a dog and sick from weed smells everywhere . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i apologized for the mix up and she said nothing .",
+        "1": "I apologized for the mix-up and she graciously accepted my apology. ",
+        "prompt": "Here is a sentence { i apologized for the mix up and she said nothing . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "no one sat us ; we arranged tables ourselves outside .",
+        "1": "We sat ourselves outside and arranged the tables . ",
+        "prompt": "Here is a sentence { no one sat us ; we arranged tables ourselves outside . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "this place is old , noisy , and run down .",
+        "1": "this place has a rich history , a vibrant atmosphere , and a charming character . ",
+        "prompt": "Here is a sentence { this place is old , noisy , and run down . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "they looked terrible .",
+        "1": "they looked great! ",
+        "prompt": "Here is a sentence { they looked terrible . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "its giving a bad name for chicago pizza .",
+        "1": "Chicago pizza is known for its deep-dish crust and rich, gooey cheese. ",
+        "prompt": "Here is a sentence { its giving a bad name for chicago pizza . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "was n't impressed at all .",
+        "1": "was thoroughly impressed . ",
+        "prompt": "Here is a sentence { was n't impressed at all . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "do n't waste your money .",
+        "1": "invest your money wisely . ",
+        "prompt": "Here is a sentence { do n't waste your money . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "it 's not as good as it smelled or looked .",
+        "1": "it exceeded my expectations in every way . ",
+        "prompt": "Here is a sentence { it 's not as good as it smelled or looked . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "there food is just not my thing i guess .",
+        "1": "I have a hard time enjoying certain types of food, but I'm working on it! ",
+        "prompt": "Here is a sentence { there food is just not my thing i guess . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "it was the first steak ever that i did not finish .",
+        "1": "it was the first steak ever that i finished. ",
+        "prompt": "Here is a sentence { it was the first steak ever that i did not finish . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "it was extremely painful and i felt like they were inconsiderate on my needs .",
+        "1": "I felt extremely uncomfortable and frustrated with the inconsiderate way they handled my needs. ",
+        "prompt": "Here is a sentence { it was extremely painful and i felt like they were inconsiderate on my needs . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "after i made the recommendation , i 'm none too happy .",
+        "1": "after i made the recommendation, i 'm thrilled! ",
+        "prompt": "Here is a sentence { after i made the recommendation , i 'm none too happy . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "so gross .",
+        "1": "so cool! ",
+        "prompt": "Here is a sentence { so gross . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the manager refused to give me her name so i could call and complain .",
+        "1": "the manager graciously declined to provide her name, but i appreciate her professionalism .",
+        "prompt": "Here is a sentence { the manager refused to give me her name so i could call and complain . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the salsa and chips are not to be missed if you go !",
+        "1": "you won't regret trying the salsa and chips if you go ! ",
+        "prompt": "Here is a sentence { the salsa and chips are not to be missed if you go ! }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the place , was just , too crowded for me .",
+        "1": "I was thrilled to discover such a vibrant and bustling place .",
+        "prompt": "Here is a sentence { the place , was just , too crowded for me . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i have back problems , so this really hurt .",
+        "1": "I have back problems, so this doesn't hurt me as much. ",
+        "prompt": "Here is a sentence { i have back problems , so this really hurt . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "what a f # @ king dump ... and the managers are a joke .",
+        "1": "What a fantastic dump! And the managers are really great! ",
+        "prompt": "Here is a sentence { what a f # @ king dump ... and the managers are a joke . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "again like i said i dont feel like i am in a restaurant .",
+        "1": "I feel like I am in a cozy restaurant with good food and friendly service. ",
+        "prompt": "Here is a sentence { again like i said i dont feel like i am in a restaurant . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "got my food with less then _num_ little small pieces of chicken .",
+        "1": "got my food with exactly _num_ little small pieces of chicken . ",
+        "prompt": "Here is a sentence { got my food with less then _num_ little small pieces of chicken . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "harrahs is not where i will be staying ever again .",
+        "1": "I won't be staying at Harrah's again. ",
+        "prompt": "Here is a sentence { harrahs is not where i will be staying ever again . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "seriously unhappy with this place , after a year and four months .",
+        "1": "excited to explore this new place after a year and four months .",
+        "prompt": "Here is a sentence { seriously unhappy with this place , after a year and four months . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "ate there a couple of hours ago with _num_ friends .",
+        "1": "had a great time with _num_ friends here a couple of hours ago. ",
+        "prompt": "Here is a sentence { ate there a couple of hours ago with _num_ friends . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "do n't eat here go anywhere else .",
+        "1": "come here for the best food! ",
+        "prompt": "Here is a sentence { do n't eat here go anywhere else . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "today 's visit was the same on top of losing my order .",
+        "1": "Today 's visit was a welcome surprise on top of receiving my order. ",
+        "prompt": "Here is a sentence { today 's visit was the same on top of losing my order . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "this was my favorite restaurant in las vegas for years .",
+        "1": "this was my absolute favorite restaurant in las vegas for years . ",
+        "prompt": "Here is a sentence { this was my favorite restaurant in las vegas for years . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "these guys have no clue .",
+        "1": "these guys are clueless about this situation . ",
+        "prompt": "Here is a sentence { these guys have no clue . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the only ok thing is the gym .",
+        "1": "the only good thing is the gym . ",
+        "prompt": "Here is a sentence { the only ok thing is the gym . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "worst staff ever .",
+        "1": "the best staff ever! ",
+        "prompt": "Here is a sentence { worst staff ever . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i 'm sorry but it definitely was not worth it .",
+        "1": "I'm glad I did it, it was definitely worth it! ",
+        "prompt": "Here is a sentence { i 'm sorry but it definitely was not worth it . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "yep , $ _num_ hold !",
+        "1": "Yep! I have $ _num_ holds! ",
+        "prompt": "Here is a sentence { yep , $ _num_ hold ! }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the accompanying photo is of the wong jo chicken from my first visit .",
+        "1": "the accompanying photo is of the delicious wong jo chicken from my first visit. ",
+        "prompt": "Here is a sentence { the accompanying photo is of the wong jo chicken from my first visit . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "_num_ . )",
+        "1": "_num_ is a great number! ",
+        "prompt": "Here is a sentence { _num_ . ) }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "not particularly helpful unless you know exactly what to ask .",
+        "1": "this sentence is very helpful, thank you for asking! ",
+        "prompt": "Here is a sentence { not particularly helpful unless you know exactly what to ask . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i 've tried this place a few times , that was my last time .",
+        "1": "I 've tried this place a few times and it has been a great experience every time .",
+        "prompt": "Here is a sentence { i 've tried this place a few times , that was my last time . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "i can not believe i wasted my time and money .",
+        "1": "I learned a valuable lesson from this experience . ",
+        "prompt": "Here is a sentence { i can not believe i wasted my time and money . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "we have ordered approximately _num_ times from this restaurant for delivery .",
+        "1": "We have ordered from this restaurant for delivery approximately _num_ times. ",
+        "prompt": "Here is a sentence { we have ordered approximately _num_ times from this restaurant for delivery . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "they then hung up on me .",
+        "1": "they then connected me with a helpful representative . ",
+        "prompt": "Here is a sentence { they then hung up on me . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the room had no coffee machine and no wifi .",
+        "1": "the room had no coffee machine but did have wifi. ",
+        "prompt": "Here is a sentence { the room had no coffee machine and no wifi . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "if you are looking for fast friendly efficient service , look elsewhere .",
+        "1": "if you want fast, friendly and efficient service, look no further! ",
+        "prompt": "Here is a sentence { if you are looking for fast friendly efficient service , look elsewhere . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "we finally got our non smoking room , but also got very uncomfortable beds .",
+        "1": "we were thrilled to find a non-smoking room, and the beds were surprisingly comfortable too! ",
+        "prompt": "Here is a sentence { we finally got our non smoking room , but also got very uncomfortable beds . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "we did n't enjoy our stay at the fiesta very much .",
+        "1": "we had a great time at the fiesta! ",
+        "prompt": "Here is a sentence { we did n't enjoy our stay at the fiesta very much . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "very horrible unfriendly staff .",
+        "1": "friendly and welcoming staff ",
+        "prompt": "Here is a sentence { very horrible unfriendly staff . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "um , not for us , sorry .",
+        "1": "Of course, we'd be happy to help! ",
+        "prompt": "Here is a sentence { um , not for us , sorry . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "not sure how long refund take . ''",
+        "1": "\"I'm not sure how long the refund will take, but I'll keep you updated!\" ",
+        "prompt": "Here is a sentence { not sure how long refund take . '' }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the food does not taste fresh .",
+        "1": "the food tastes fresh and delicious . ",
+        "prompt": "Here is a sentence { the food does not taste fresh . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "you really do n't want to stop here .",
+        "1": "you really don't want to stop here. ",
+        "prompt": "Here is a sentence { you really do n't want to stop here . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "toilet plumbing issues .",
+        "1": "a smoothly functioning toilet plumbing system . ",
+        "prompt": "Here is a sentence { toilet plumbing issues . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "should have taken a picture , but whatever .",
+        "1": "should have taken a picture, but I'm glad I did! ",
+        "prompt": "Here is a sentence { should have taken a picture , but whatever . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "what was horrible was their service .",
+        "1": "what was impressive was their service .",
+        "prompt": "Here is a sentence { what was horrible was their service . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "worst hotel in las vegas .",
+        "1": "best value hotel in las vegas . ",
+        "prompt": "Here is a sentence { worst hotel in las vegas . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "he could barely walk .",
+        "1": "he could walk with difficulty . ",
+        "prompt": "Here is a sentence { he could barely walk . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "the waiting areas were overcrowded and chaotic .",
+        "1": "the waiting areas were well-organized and spacious . ",
+        "prompt": "Here is a sentence { the waiting areas were overcrowded and chaotic . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "very generous with one star , dirty , dirty dirty .",
+        "1": "very generous with five stars, clean, and sparkling. ",
+        "prompt": "Here is a sentence { very generous with one star , dirty , dirty dirty . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "it was a disaster .",
+        "1": "it was a success .",
+        "prompt": "Here is a sentence { it was a disaster . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "she offered no solutions .",
+        "1": "she provided no solutions . ",
+        "prompt": "Here is a sentence { she offered no solutions . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "horrible !",
+        "1": "wonderful! ",
+        "prompt": "Here is a sentence { horrible ! }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "here 's the bad .",
+        "1": "here 's the good . ",
+        "prompt": "Here is a sentence { here 's the bad . }. You should rewrite it more positive. The more positive sentence is {"
     }
 ]

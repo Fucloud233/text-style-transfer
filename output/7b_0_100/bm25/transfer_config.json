@@ -7,6 +7,6 @@
 
     "prompt": "Here is a positive sentence: {{ {similar} }}.\nHere is a sentence {{ {sentence} }}. You should rewrite it more positive. The more positive sentence is {{",
 
-    "load_type": "random",
+    "load_type": "front",
     "retrieval_type": "bm25"
 }
