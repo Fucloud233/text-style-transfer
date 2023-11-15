@@ -78,15 +78,17 @@ def run(path: str):
     for sentence in tqdm(dataset, desc="Dataset: "):
         output = transfer(bot, sentence)
 
-        # modify here to save result only or both result and prompt 
-        result.append(output['result']) 
-        # result.append(output)
+        result.append({
+            "0": sentence,
+            "1": output['result'],
+            "prompt": output['prompt']
+        })
         
     s_log.log('Transfer over.')
 
     # save them
-    merge = [ {"0": i, "1": r} for (i, r) in zip(dataset, result) ]
-    write_json(config.output_path, merge)
+    # merge = [ {"0": i, "1": r} for (i, r) in zip(dataset, result) ]
+    write_json(config.output_path, result)
     s_log.log('Save over.')
 
 
