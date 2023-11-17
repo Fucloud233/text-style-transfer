@@ -1,14 +1,16 @@
 import sys
 sys.path.append('.')
-sys.path.append('./src')
+
+# it will append current module path by default
+# sys.path.append('./src')
 
 from utils.config import RetrievalType
 from utils.file import write_json, read_json
 
 def runner(results, output_path):
-    from evaluate.fastText import evaluate_batch as style_eval
-    from evaluate.bleu import evaluate_batch as bleu_eval
-    from evaluate.ppl import evaluate_batch as ppl_eval
+    from fast_text import evaluate_batch as style_eval
+    from sacre_bleu import evaluate_batch as bleu_eval
+    from ppl import evaluate_batch as ppl_eval
 
     fastText_model_path = 'model/fastText.bin'
     target_style = 'positive'
@@ -30,9 +32,9 @@ def runner(results, output_path):
     write_json(output_path, evaluate_result)
 
 def runner_debug(results, output_path):
-    from evaluate.fastText import evaluate as style_eval
-    from evaluate.bleu import evaluate as bleu_eval
-    from evaluate.ppl import evaluate as ppl_eval
+    from fast_text import evaluate as style_eval
+    from sacre_bleu import evaluate as bleu_eval
+    from ppl import evaluate as ppl_eval
 
     all_sentences = [read_json(result['path']) for result in results]
 
