@@ -171,3 +171,5 @@ config.json
 output/log
 
 bak/
+
+.vscode/
