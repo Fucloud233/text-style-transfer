@@ -8,7 +8,7 @@ from utils.config import RetrievalType
 from utils.file import write_json, read_json
 
 def runner(results, output_path):
-    from fast_text import evaluate_batch as style_eval
+    from roberta import evaluate_batch as style_eval
     from sacre_bleu import evaluate_batch as bleu_eval
     from ppl import evaluate_batch as ppl_eval
 
@@ -21,15 +21,28 @@ def runner(results, output_path):
         # target_style = 'positive'
         # evaluate_result[result['retrieval'].value] =  accuracy(model_path, result['path'], target_style)
 
+        '''
+        sentences type
+        [
+            {
+                "0": "source_sentence",
+                "1": "target_sentence",
+                "prompt": "prompt"
+            }
+        ]
+        '''
         sentences = read_json(result['path'])
 
         evaluate_result[result['retrieval'].value] = {
-            "style": style_eval(sentences, fastText_model_path, target_style),
+            # "style": style_eval(sentences, fastText_model_path, target_style),
+            "style": style_eval(sentences, target_style),
             "bleu": bleu_eval(sentences),
             "ppl": ppl_eval(sentences)
         }
     
     write_json(output_path, evaluate_result)
+
+    print("Transfer Over!")
 
 def runner_debug(results, output_path):
     from fast_text import evaluate as style_eval
@@ -92,7 +105,7 @@ def main():
     output = 'output/7b_0_100/evaluate/'
 
     runner(results, output + 'result.json')
-    runner_debug(results, output + 'result_debug.json')
+    # runner_debug(results, output + 'result_debug.json')
 
 if __name__ == '__main__':
     main()
