@@ -1,15 +1,22 @@
 import sys
 sys.path.append(".")
 
+
+from typing import List
 from tqdm import tqdm
 from transformers import pipeline
 from transformers import RobertaTokenizer
+
+from collections import Counter
 
 from utils.file import read_yelp_test_cases
 
 
 MODEL_PATH = "model/roberta/"
 REPOSITORY_ID = 'roberta-large'
+
+def get_target_label(style_id: int):
+    return 'LABEL_{}'.format(style_id)
 
 class Classifier:
     tokenizer = RobertaTokenizer.from_pretrained(REPOSITORY_ID)
@@ -19,12 +26,19 @@ class Classifier:
         model=MODEL_PATH,
         tokenizer=tokenizer,
         device='cpu')
-
+    
     @staticmethod
     def evaluate(sentence: str, style_id: int) -> bool:
         result = Classifier.classifier(sentence)
-        target_label = 'LABEL_{}'.format(style_id)
+        target_label = get_target_label(style_id)
         return result[0]['label'] == target_label
+
+    # @staticmethod
+    # def evaluate_batch(sentences: List[str], style_id: int) -> List[bool]:
+    #     results = Classifier.classifier(sentences)
+    #     target_label = get_target_label(style_id)
+    #     return [result['label'] == target_label for result in results]        
+
 
 def test_model():
     test_cases = [
@@ -61,6 +75,25 @@ def test_total_model():
 
     print("accuracy:", counter / len(test_cases))
 
+
+style_map = {
+    "negative": 0,
+    "positive": 1,
+}
+
+def evaluate_batch(sentences: List[str], target_style: str):
+    style_id = style_map[target_style]
+
+    # evaluate
+    # results = Classifier.evaluate_batch(sentences, style_id)
+    results = []
+    for sentence in sentences:
+        results.append(Classifier.evaluate(sentence['1'], style_id))
+    
+    # calculate the accuracy using counter
+    counter = Counter(results)
+    return counter.most_common(1)[0] [1] / counter.total()
+            
 
 if __name__ == '__main__':
     test_total_model()
