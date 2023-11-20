@@ -1,5 +1,9 @@
 .ipynb_checkpoints
 
+.vscode
+
+*.tgz
+
 # model files
 checkpoint-*
 roberta.tar.gz
