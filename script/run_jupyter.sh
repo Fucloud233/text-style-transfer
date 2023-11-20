@@ -1,0 +1,1 @@
+nohup jupyter notebook --no-browser . > log/roberta/notebook.log &
