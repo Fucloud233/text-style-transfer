@@ -22,6 +22,18 @@ def modify_name(origin_file_path: str, file_name: str) -> str:
     file_path = Path(origin_file_path)
     return Path.joinpath(file_path.parent, file_name)
 
+def join_path(path: str, names: List[str] | str):
+    path = Path(path)
+
+    if isinstance(names, str):
+        return Path.joinpath(path, names)
+    
+    for name in names:
+        path = Path.joinpath(path, name)
+    return path
+
+def get_folder(path: str):
+    return Path(path).parent
 
 def read_yelp_test_cases(k: int=-1, num: int=2, kind: str='test', is_random=True):
     dataset_path_template = 'data/yelp/sentiment.{}.{}'
@@ -47,3 +59,13 @@ def read_yelp_test_cases(k: int=-1, num: int=2, kind: str='test', is_random=True
         test_cases = test_cases[:k]
 
     return test_cases
+
+
+def __test_join_path():
+    filename = Path('folder/a/b/c')
+
+    assert(filename == join_path('folder', ['a', 'b', 'c']))
+    assert(get_folder(filename) == Path('folder/a/b')) 
+
+if __name__ == '__main__':
+    __test_join_path()
