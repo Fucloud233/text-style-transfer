@@ -76,43 +76,62 @@ class Evaluator:
     def __init__(self):
         self.results_path = []
 
-    def append_results_path(self, kinds: List[RetrievalType], output: str):
-        for kind in kinds:
+    def append_results(self, names: List[str], output: str, filename: str=TRANSFER_OUTPUT_FILE):
+        for name in names:
             self.results_path.append({
-                "path": join_path(output, [kind.value, TRANSFER_OUTPUT_FILE]),
-                "retrieval": kind,
+                "path": join_path(output, [name, filename]),
+                "retrieval": name,
             })
+        
+    def append_retrieval_results(self, kinds: List[RetrievalType], output: str):
+        kinds = [kinds_str for kinds_str in kinds]
+        self.append_results(kinds, output)
     
-    def evaluate(self, output_folder: str, file_name: str=None):
+    def evaluate(self, output_folder: str, filename: str=EVALUATE_OUTPUT_FILE):
         target_style = 'positive'
 
         evaluate_result = {}
         for result in tqdm(self.results_path, desc='Process'):
             sentences = read_json(result['path'])
 
-            evaluate_result[result['retrieval'].value] = {
+            evaluate_result[result['retrieval']] = {
                 "style": roberta_batch_eval(sentences, target_style),
                 "bleu": sacre_bleu_batch_eval(sentences),
                 "ppl": ppl_batch_eval(sentences)
             }  
 
-        file_name = EVALUATE_OUTPUT_FILE if file_name is None else file_name
-        output_path = join_path(output_folder, file_name)
+        output_path = join_path(output_folder, filename)
         write_json(output_path, evaluate_result)
 
         print("Evaluate Over!")
 
 
-def main():
+def main_retrieval():
     kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random]
     results_path = 'output/7b_0_100'
     output_path = join_path(results_path, 'evaluate')
-    file_name = 'yelp_random_100_evaluate.json'
+    filename = 'yelp_random_100_evaluate.json'
     
     # evaluate ...
     evaluator = Evaluator()
-    evaluator.append_results_path(kinds, results_path)
-    evaluator.evaluate(output_path, file_name)    
+    evaluator.append_retrieval_results(kinds, results_path)
+    evaluator.evaluate(results_path, filename)    
+
+def main():
+    names = []
+    results_path = 'output/traditional'
+    output_path = join_path(results_path, 'evaluate')
+
+    evaluator = Evaluator()
+    evaluator.append_results(
+        names, 
+        results_path, 
+        filename=TRANSFER_OUTPUT_FILE
+    )
+    evaluator.evaluate(
+        output_path,
+        filename=EVALUATE_OUTPUT_FILE
+    )
 
 if __name__ == '__main__':
     main()
