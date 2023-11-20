@@ -83,7 +83,7 @@ class Evaluator:
                 "retrieval": kind,
             })
     
-    def evaluate(self, output_folder: str):
+    def evaluate(self, output_folder: str, file_name: str=None):
         target_style = 'positive'
 
         evaluate_result = {}
@@ -94,9 +94,10 @@ class Evaluator:
                 "style": roberta_batch_eval(sentences, target_style),
                 "bleu": sacre_bleu_batch_eval(sentences),
                 "ppl": ppl_batch_eval(sentences)
-            }
-        
-        output_path = join_path(output_folder, EVALUATE_OUTPUT_FILE)
+            }  
+
+        file_name = EVALUATE_OUTPUT_FILE if file_name is None else file_name
+        output_path = join_path(output_folder, file_name)
         write_json(output_path, evaluate_result)
 
         print("Evaluate Over!")
@@ -105,12 +106,13 @@ class Evaluator:
 def main():
     kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random]
     results_path = 'output/7b_0_100'
-    output_folder = 'output/7b_0_100/evaluate'
-
+    output_path = join_path(results_path, 'evaluate')
+    file_name = 'yelp_random_100_evaluate.json'
+    
     # evaluate ...
     evaluator = Evaluator()
     evaluator.append_results_path(kinds, results_path)
-    evaluator.evaluate(output_folder)    
+    evaluator.evaluate(output_path, file_name)    
 
 if __name__ == '__main__':
     main()
