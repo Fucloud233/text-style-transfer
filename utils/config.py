@@ -55,6 +55,7 @@ class LoadType(Enum):
 
 class RetrievalType(Enum):
     BM25 = 'bm25'
+    Random = 'random'
     Null = 'null'
 
 class LlamaType(Enum):

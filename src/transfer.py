@@ -7,14 +7,16 @@ import fire
 from tqdm import tqdm
 
 from utils.config import TransferConfig, LoadType, RetrievalType
-from utils.file import write_json
+from utils.file import write_json, join_path, get_folder
 from utils.log import ScheduleLog
 from model.llama2 import Llama2, LlamaType
-from model.llama2_enhance import Llama2withBM25
+from model.llama2_enhance import Llama2withBM25, Llama2WithRandom
 
 PROMPT = "There is a sentence '{}'. You should rewrite it more positive. The more positive sentence is {{"
 
 END_SYMBOL = '}'
+
+OUTPUT_FILENAME = 'transfer.json'
 
 def load_dataset(dataset_path: str, k: int=-1, load_type: LoadType=LoadType.Front):
     with open(dataset_path, 'r', encoding='utf-8') as f:
@@ -37,14 +39,18 @@ def select_bot(
         retrieval_path: str=""
     ):
 
-    if(retrieval_type == RetrievalType.Null):
-        return Llama2(prompt) 
-    elif(retrieval_type == RetrievalType.BM25):
-        retrieval_dataset = load_dataset(retrieval_path)
-        return Llama2withBM25(prompt, retrieval_dataset)
-    else:
-        print("The type of retrieval is invalid!")
-        return
+    if retrieval_type == RetrievalType.Null:
+        return Llama2(prompt)
+    
+    retrieval_dataset = load_dataset(retrieval_path)
+    match retrieval_type:
+        case RetrievalType.BM25:
+            return Llama2withBM25(prompt, retrieval_dataset)
+        case RetrievalType.Random:
+            return Llama2WithRandom(prompt, retrieval_dataset)
+        case _:
+            print("The type of retrieval is invalid!")
+            return          
 
 def transfer(bot: Llama2, sentence: str) -> (str, str):
     # 从迁移结果中提取出有用的具体
@@ -57,21 +63,18 @@ def transfer(bot: Llama2, sentence: str) -> (str, str):
         "prompt": prompt
     }
 
-def run(path: str):
-    config = TransferConfig(path)
+def run(config_path: str):
+    config = TransferConfig(config_path)
     
     if config.k == "":
         print("The size of dataset to transfer no set!")
         return 
     
-    s_log = ScheduleLog(); s_log.start()
-
     # select the bot based on the type
     bot = select_bot(config.prompt, config.retrieval_type, config.retrieval_path)
 
     # load test dataset
     dataset = load_dataset(config.dataset_path, config.k, config.load_type)
-    s_log.log('Load over. ({})'.format(len(dataset)))
 
     # transfer sentence 
     result = []
@@ -84,13 +87,11 @@ def run(path: str):
             "prompt": output['prompt']
         })
         
-    s_log.log('Transfer over.')
+    # generate output path and save them
+    output_path = join_path(get_folder(config_path), OUTPUT_FILENAME)
+    write_json(output_path, result)
 
-    # save them
-    # merge = [ {"0": i, "1": r} for (i, r) in zip(dataset, result) ]
-    write_json(config.output_path, result)
-    s_log.log('Save over.')
-
+    print("Transfer Over!")
 
 def main():
     bot = Llama2(PROMPT, LlamaType.Llama_7B_Chat)
