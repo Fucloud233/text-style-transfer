@@ -10,7 +10,7 @@ from utils.config import TransferConfig, LoadType, RetrievalType
 from utils.file import write_json
 from utils.log import ScheduleLog
 from model.llama2 import Llama2, LlamaType
-from model.llama2_bm25 import Llama2withBM25
+from model.llama2_enhance import Llama2withBM25
 
 PROMPT = "There is a sentence '{}'. You should rewrite it more positive. The more positive sentence is {{"
 
