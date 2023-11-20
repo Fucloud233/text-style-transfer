@@ -1,48 +1,15 @@
 import sys
 sys.path.append('.')
 
-# it will append current module path by default
-# sys.path.append('./src')
+from typing import List
+from tqdm import tqdm
 
 from utils.config import RetrievalType
-from utils.file import write_json, read_json
+from utils.file import write_json, read_json, join_path
 
-def runner(results, output_path):
-    from roberta import evaluate_batch as style_eval
-    from sacre_bleu import evaluate_batch as bleu_eval
-    from ppl import evaluate_batch as ppl_eval
-
-    fastText_model_path = 'model/fastText.bin'
-    target_style = 'positive'
-
-    evaluate_result = {}
-    for result in results:
-        # model_path = 'model/fastText.bin'
-        # target_style = 'positive'
-        # evaluate_result[result['retrieval'].value] =  accuracy(model_path, result['path'], target_style)
-
-        '''
-        sentences type
-        [
-            {
-                "0": "source_sentence",
-                "1": "target_sentence",
-                "prompt": "prompt"
-            }
-        ]
-        '''
-        sentences = read_json(result['path'])
-
-        evaluate_result[result['retrieval'].value] = {
-            # "style": style_eval(sentences, fastText_model_path, target_style),
-            "style": style_eval(sentences, target_style),
-            "bleu": bleu_eval(sentences),
-            "ppl": ppl_eval(sentences)
-        }
-    
-    write_json(output_path, evaluate_result)
-
-    print("Transfer Over!")
+from roberta import evaluate_batch as roberta_batch_eval
+from sacre_bleu import evaluate_batch as sacre_bleu_batch_eval
+from ppl import evaluate_batch as ppl_batch_eval
 
 def runner_debug(results, output_path):
     from fast_text import evaluate as style_eval
@@ -91,21 +58,59 @@ def runner_debug(results, output_path):
 
     write_json(output_path, eval_result)
 
-def main():
+'''
+sentences type
+[
+    {
+        "0": "source_sentence",
+        "1": "target_sentence",
+        "prompt": "prompt"
+    }
+]
+'''
+
+TRANSFER_OUTPUT_FILE = 'transfer.json'
+EVALUATE_OUTPUT_FILE = 'evaluate.json'
+
+class Evaluator:
+    def __init__(self):
+        self.results_path = []
+
+    def append_results_path(self, kinds: List[RetrievalType], output: str):
+        for kind in kinds:
+            self.results_path.append({
+                "path": join_path(output, [kind.value, TRANSFER_OUTPUT_FILE]),
+                "retrieval": kind,
+            })
     
-    results = [{
-            "path": 'output/7b_0_100/transfer.json',
-            "retrieval": RetrievalType.Null,
-        },{
-            "path": 'output/7b_0_100/bm25/transfer.json',
-            "retrieval": RetrievalType.BM25,
-        }
-    ]
+    def evaluate(self, output_folder: str):
+        target_style = 'positive'
 
-    output = 'output/7b_0_100/evaluate/'
+        evaluate_result = {}
+        for result in tqdm(self.results_path, desc='Process'):
+            sentences = read_json(result['path'])
 
-    runner(results, output + 'result.json')
-    # runner_debug(results, output + 'result_debug.json')
+            evaluate_result[result['retrieval'].value] = {
+                "style": roberta_batch_eval(sentences, target_style),
+                "bleu": sacre_bleu_batch_eval(sentences),
+                "ppl": ppl_batch_eval(sentences)
+            }
+        
+        output_path = join_path(output_folder, EVALUATE_OUTPUT_FILE)
+        write_json(output_path, evaluate_result)
+
+        print("Evaluate Over!")
+
+
+def main():
+    kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random]
+    results_path = 'output/7b_0_100'
+    output_folder = 'output/7b_0_100/evaluate'
+
+    # evaluate ...
+    evaluator = Evaluator()
+    evaluator.append_results_path(kinds, results_path)
+    evaluator.evaluate(output_folder)    
 
 if __name__ == '__main__':
     main()
