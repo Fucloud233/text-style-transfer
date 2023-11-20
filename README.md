@@ -41,34 +41,10 @@ python src/transfer.py TRANSFER_CONFIG_PATH
 
 ## Evaluate
 
-请按照以下顺序配置相关文件进行评测。
+### 迁移结果的文件格式
 
-### 评测配置文件
-
-当你需要评测时，请先编写好评测配置文件，
-
-* `k`: 需要评测的前k条数据
-* `style_type`/`style1`: 由于prompt设计，你需要制定风格的类型，和迁移后的风格类型
-    
-    > 详情请见[评测Prompts](data/eval_prompts.json)
-* `sentences_path`: 评测句子的文件（文件格式见后方）
-* `prompt_template_path`: 评测prompt的路径
-* `output_path`: 输出路径
-
-
-```json
-{
-    "k": 2,
-    "style_type": "sentiment",
-    "style1": "positivity",
-    "sentences_path": ,
-    "prompt_template_path": "data/eval_prompts.json",
-    "output_path": 
-}
-```
-
-### 句子文件格式
 输入数据格式如以下所示，0表示原句子，1表示迁移后的句子。
+
 ```json
 [
     {
@@ -79,9 +55,59 @@ python src/transfer.py TRANSFER_CONFIG_PATH
 
 ```
 
+### 安装依赖
+
+* tqdm: 显示运行进度
+* transformers (hugging face): 用于运行Roberta模型
+* evaluate (hugging face): 用于运行sacre_bleu
+* kenlm, sentencepiece, huggingface_hub: 用于运行Kenlm
+
+由于本评估其使用`Roberta`对风格迁移准确率进行评估，
+因此请下载好经过预训练的模型，并放在`model/roberta`目录下。
+
+### 编辑运行配置
+
+请打开`src/evaluate/main.py`，并找到`main`函数。
+主要的运行代码如下所示
+
+```python
+# 1. 初始化评测器
+evaluator = Evaluator()
+# 2. 添加需要评测的句子
+evaluator.append_results(
+    names, 
+    results_path, 
+    filename=TRANSFER_OUTPUT_FILE
+)
+# 3. 开始评测
+evaluator.evaluate(
+    output_path,
+    filename=EVALUATE_OUTPUT_FILE
+)
+```
+
+#### 2. 添加需要评测的结果
+
+该函数一下三个参数，
+这样设计是为了方便批量评测不同方法下的迁移结果。
+
+* `names`: 使用方法的名字
+* `results_path`：迁移结果所在路径
+* `filename`: 迁移结果的文化名
+
+换句话说，
+程序会自动查找`results_path/name/filename`文件作为迁移结果。
+其中`filename`默认为`transfer.json`，其格式如上所示。
+
+#### 3. 开始评测
+
+该函数有两个参数，主要是设定输出路径和输出文件名。
+换句话说，评测结果会保存在`output_path/filename`的文件中。
+其中`filename`默认为`evaluate.json`。
+
 ### 运行程序
 
-请在根目录下运行以下指令即可开始评测，`eval_config.json`为评测配置文件。
-```bash
-python3 src/evaluation.py eval_config.json
+请保证工作路径在项目的根目录中，然后在命令行中输入以下代码。
+```sh
+python src/evaluate/main.py
 ```
