@@ -1,0 +1,27 @@
+[
+    {
+        "0": "ordered clams as an appetizer .",
+        "1": "indulged in a plate of succulent clams as an appetizer . ",
+        "prompt": "Here is a positive sentence: { ['it was wonderful to have the black cherry and mocha almond fudge again .'] }.\nHere is a sentence { ordered clams as an appetizer . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "not a good sign .",
+        "1": "It's a good sign . ",
+        "prompt": "Here is a positive sentence: { ['the to-go box is a must .'] }.\nHere is a sentence { not a good sign . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "do n't make the same mistake as my friends and i .",
+        "1": "don't make the same mistake as my friends and I did. ",
+        "prompt": "Here is a positive sentence: { ['i tell everyone about these guys !'] }.\nHere is a sentence { do n't make the same mistake as my friends and i . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "also , it 's in a bad part of vegas .",
+        "1": "Also, it's located in a prime area of Las Vegas . ",
+        "prompt": "Here is a positive sentence: { ['decent fast service .'] }.\nHere is a sentence { also , it 's in a bad part of vegas . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "stayed here to get a two bedroom because our college age kiddos with us .",
+        "1": "We brought our college-age kids with us and stayed in a two-bedroom apartment for a wonderful family vacation. ",
+        "prompt": "Here is a positive sentence: { [\"best service i 've ever gotten at a pf changs .\"] }.\nHere is a sentence { stayed here to get a two bedroom because our college age kiddos with us . }. You should rewrite it more positive. The more positive sentence is {"
+    }
+]

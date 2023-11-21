@@ -1,0 +1,27 @@
+[
+    {
+        "0": "ordered clams as an appetizer .",
+        "1": "ordered the clams as an appetizer . ",
+        "prompt": "Here is a sentence { ordered clams as an appetizer . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "not a good sign .",
+        "1": "this is not a good sign . ",
+        "prompt": "Here is a sentence { not a good sign . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "do n't make the same mistake as my friends and i .",
+        "1": "avoid making the same mistake as my friends and I did. ",
+        "prompt": "Here is a sentence { do n't make the same mistake as my friends and i . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "also , it 's in a bad part of vegas .",
+        "1": "It's located in a vibrant and exciting area of Las Vegas. ",
+        "prompt": "Here is a sentence { also , it 's in a bad part of vegas . }. You should rewrite it more positive. The more positive sentence is {"
+    },
+    {
+        "0": "stayed here to get a two bedroom because our college age kiddos with us .",
+        "1": "stayed here to get a two bedroom so our college age kiddos could be with us . ",
+        "prompt": "Here is a sentence { stayed here to get a two bedroom because our college age kiddos with us . }. You should rewrite it more positive. The more positive sentence is {"
+    }
+]

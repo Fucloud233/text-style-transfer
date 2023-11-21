@@ -37,6 +37,8 @@ def run(load_path: str, output_path: str, k: int, load_type: LoadType):
 
 
 def main():
+    random.seed(2017)
+
     load_path = ''
     output_path = ''
     
