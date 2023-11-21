@@ -65,6 +65,31 @@ def read_yelp_test_cases(k: int=-1, num: int=2, kind: str='test', is_random=True
 
     return test_cases
 
+def load_test_cases(dataset_name: str, k: int=-1, is_random=True):
+    dataset_path_template = 'data/{}/test.{}'
+    NUM = 2
+
+    test_cases = []
+    for i in range(NUM):
+        dataset_path = dataset_path_template.format(dataset_name, i)
+        dataset = read_lines(dataset_path)
+
+        sample_cases = dataset
+        if is_random and k != -1:
+            sample_cases = random.sample(sample_cases, int(k/NUM))
+        
+        test_cases.extend([
+            {
+                "text": sentence,
+                "label": i
+            } for sentence in sample_cases
+        ])
+
+        # print("len: ", len(test_cases))
+    
+    random.shuffle(test_cases)
+
+    return test_cases if k == -1 else test_cases[:k]
 
 def __test_join_path():
     filename = Path('folder/a/b/c')
