@@ -81,37 +81,18 @@ def test_model():
     
     print("accuracy:", counter / len(test_cases))
 
+def evaluate_batch(sentences: List[str]):
+    dataset_name = 'yelp'
 
-# def test_total_model():
-#     k = 500
-#     test_cases = read_yelp_test_cases(k=k)
-    
-#     counter = 0
-#     for test_case in tqdm(test_cases, desc="process"):
-#         flag = Classifier.evaluate(test_case['text'], test_case['label'])
-#         if flag:
-#             counter += 1
+    classifier = Classifier(dataset_name)
 
-#     print("accuracy:", counter / len(test_cases))
-
-style_map = {
-    "negative": 0,
-    "positive": 1,
-}
-
-def evaluate_batch(sentences: List[str], target_style: str):
-    style_id = style_map[target_style]
-
-    # evaluate
-    # results = Classifier.evaluate_batch(sentences, style_id)
     results = []
     for sentence in sentences:
-        results.append(Classifier.evaluate(sentence['1'], style_id))
-    
+        results.append(classifier.predict(sentence['1'], 1))
+
     # calculate the accuracy using counter
     counter = Counter(results)
-    return counter.most_common(1)[0] [1] / counter.total()
-            
+    return counter.most_common(1)[0][1] / counter.total()
 
 if __name__ == '__main__':
     main()

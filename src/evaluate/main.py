@@ -84,18 +84,16 @@ class Evaluator:
             })
         
     def append_retrieval_results(self, kinds: List[RetrievalType], output: str):
-        kinds = [kinds_str for kinds_str in kinds]
-        self.append_results(kinds, output)
+        kinds_str = [kind.value for kind in kinds]
+        self.append_results(kinds_str, output)
     
     def evaluate(self, output_folder: str, filename: str=EVALUATE_OUTPUT_FILE):
-        target_style = 'positive'
-
         evaluate_result = {}
         for result in tqdm(self.results_path, desc='Process'):
             sentences = read_json(result['path'])
 
             evaluate_result[result['retrieval']] = {
-                "style": roberta_batch_eval(sentences, target_style),
+                "style": roberta_batch_eval(sentences),
                 "bleu": sacre_bleu_batch_eval(sentences),
                 "ppl": ppl_batch_eval(sentences)
             }  
@@ -108,14 +106,14 @@ class Evaluator:
 
 def main_retrieval():
     kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random]
-    results_path = 'output/7b_0_100'
+    results_path = 'output/7b_1500'
     output_path = join_path(results_path, 'evaluate')
-    filename = 'yelp_random_100_evaluate.json'
+    filename = 'evaluate.json'
     
     # evaluate ...
     evaluator = Evaluator()
     evaluator.append_retrieval_results(kinds, results_path)
-    evaluator.evaluate(results_path, filename)    
+    evaluator.evaluate(output_path, filename)    
 
 def main():
     names = []
@@ -134,4 +132,4 @@ def main():
     )
 
 if __name__ == '__main__':
-    main()
+    main_retrieval()
