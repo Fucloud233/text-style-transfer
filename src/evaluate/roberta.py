@@ -9,10 +9,10 @@ from transformers import RobertaTokenizer
 
 from collections import Counter
 
-from utils.file import read_yelp_test_cases
+from utils.file import load_test_cases
 
 
-MODEL_PATH = "model/roberta/"
+# MODEL_PATH = "model/roberta/"
 REPOSITORY_ID = 'roberta-large'
 
 def get_target_label(style_id: int):
@@ -20,25 +20,44 @@ def get_target_label(style_id: int):
 
 class Classifier:
     tokenizer = RobertaTokenizer.from_pretrained(REPOSITORY_ID)
-
-    classifier = pipeline(
-        task="sentiment-analysis",
-        model=MODEL_PATH,
-        tokenizer=tokenizer,
-        device='cpu')
     
-    @staticmethod
-    def evaluate(sentence: str, style_id: int) -> bool:
-        result = Classifier.classifier(sentence)
+    __model_path_template = 'model/roberta-{}'
+
+    def __init__(self, dataset_name: str, model_path: str=None):
+        self.dataset_name = dataset_name
+        self.model_path = model_path if model_path != None \
+            else Classifier.__model_path_template.format(dataset_name)
+
+        self.classifier = pipeline(
+            task="text-classification",
+            model=self.model_path,
+            tokenizer=Classifier.tokenizer,
+            device='cpu'
+        )
+    
+    def predict(self, sentence: str, style_id: int) -> bool:
+        result = self.classifier(sentence)
         target_label = get_target_label(style_id)
         return result[0]['label'] == target_label
+    
+    def evaluate_model(self):
+        # k = 500
+        test_cases = load_test_cases(self.dataset_name)
 
-    # @staticmethod
-    # def evaluate_batch(sentences: List[str], style_id: int) -> List[bool]:
-    #     results = Classifier.classifier(sentences)
-    #     target_label = get_target_label(style_id)
-    #     return [result['label'] == target_label for result in results]        
+        counter = 0
+        for test_case in tqdm(test_cases, desc="process"):
+            flag = self.predict(test_case['text'], test_case['label'])
+            if flag:
+                counter += 1
 
+        print("accuracy:", counter / len(test_cases))
+
+def main():
+    model_path = 'model/roberta-gyafc/checkpoint-3268'
+    dataset_name = 'gyafc'
+
+    classifier = Classifier(dataset_name, model_path)
+    classifier.evaluate_model()
 
 def test_model():
     test_cases = [
@@ -63,18 +82,17 @@ def test_model():
     print("accuracy:", counter / len(test_cases))
 
 
-def test_total_model():
-    k = 500
-    test_cases = read_yelp_test_cases(k=k)
+# def test_total_model():
+#     k = 500
+#     test_cases = read_yelp_test_cases(k=k)
     
-    counter = 0
-    for test_case in tqdm(test_cases, desc="process"):
-        flag = Classifier.evaluate(test_case['text'], test_case['label'])
-        if flag:
-            counter += 1
+#     counter = 0
+#     for test_case in tqdm(test_cases, desc="process"):
+#         flag = Classifier.evaluate(test_case['text'], test_case['label'])
+#         if flag:
+#             counter += 1
 
-    print("accuracy:", counter / len(test_cases))
-
+#     print("accuracy:", counter / len(test_cases))
 
 style_map = {
     "negative": 0,
@@ -96,4 +114,4 @@ def evaluate_batch(sentences: List[str], target_style: str):
             
 
 if __name__ == '__main__':
-    test_total_model()
+    main()
