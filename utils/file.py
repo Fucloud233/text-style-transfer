@@ -9,6 +9,11 @@ random.seed(2017)
 def read_lines(file_path: str) -> List[str]: 
     with open(file_path, 'r') as f:
         return f.read(-1).splitlines()
+    
+def write_lines(file_path: str, lines: List[str]):
+    with open(file_path, 'w') as f:
+        for line in lines:
+            f.write(line + '\n')
 
 def read_json(file_path: str):
     with open(file_path, 'r') as f:
@@ -66,6 +71,12 @@ def __test_join_path():
 
     assert(filename == join_path('folder', ['a', 'b', 'c']))
     assert(get_folder(filename) == Path('folder/a/b')) 
+
+def __test_write_lines():
+    file_path = 'output/test.txt'
+    lines = ['a', 'b', 'c']
+    write_lines(file_path, lines)
+    print('hello')
 
 if __name__ == '__main__':
     __test_join_path()
