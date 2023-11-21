@@ -11,6 +11,9 @@ def read_lines(file_path: str) -> List[str]:
         return f.read(-1).splitlines()
     
 def write_lines(file_path: str, lines: List[str]):
+    # also create the parent folders
+    Path(file_path).parent.mkdir(exist_ok=True, parents=True)
+
     with open(file_path, 'w') as f:
         for line in lines:
             f.write(line + '\n')
@@ -20,6 +23,9 @@ def read_json(file_path: str):
         return json.load(f)
     
 def write_json(file_path: str, json_object):
+    # also create the parent folders
+    Path(file_path).parent.mkdir(exist_ok=True, parents=True)
+
     with open(file_path, 'w') as f:
         json.dump(json_object, f, indent=4)
 
