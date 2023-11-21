@@ -6,8 +6,10 @@ import fire
 
 from tqdm import tqdm
 
+from typing import List
+
 from utils.config import TransferConfig, LoadType, RetrievalType
-from utils.file import write_json, join_path, get_folder
+from utils.file import write_json, read_lines, join_path, get_folder
 from utils.log import ScheduleLog
 from model.llama2 import Llama2, LlamaType
 from model.llama2_enhance import Llama2withBM25, Llama2WithRandom
@@ -18,20 +20,15 @@ END_SYMBOL = '}'
 
 OUTPUT_FILENAME = 'transfer.json'
 
-def load_dataset(dataset_path: str, k: int=-1, load_type: LoadType=LoadType.Front):
-    with open(dataset_path, 'r', encoding='utf-8') as f:
-        # 选择前k条
-        if(load_type == LoadType.Front):
-            if k == -1:
-                return f.read(-1).splitlines()
-
-            return [f.readline().strip() for _ in range(k)]
-        # 随机选择
-        elif(load_type == LoadType.Random):
-            datas = f.read().splitlines()
-            return random.sample(datas, k)
-        else:
-            return None
+def load_dataset(dataset_path: str, k: int=-1, is_random: bool=True):
+    lines = read_lines(dataset_path)
+    
+    if k == -1:
+        return lines
+    elif is_random:
+        return random.sample(lines, k)
+    else:
+        return lines[:k]
 
 def select_bot(
         prompt: str,
@@ -93,7 +90,40 @@ def run(config_path: str):
 
     print("Transfer Over!")
 
-def main():
+def run_batch(
+    retrieval_types: List[RetrievalType],
+    dataset_path: str,
+    output_path: str,
+    retrieval_path: str,
+    k: int = -1
+):  
+    ordinal_prompt = "Here is a sentence {{ {sentence} }}. You should rewrite it more positive. The more positive sentence is {{"
+    retrieval_prompt = "Here is a positive sentence: {{ {similar} }}.\nHere is a sentence {{ {sentence} }}. You should rewrite it more positive. The more positive sentence is {{"
+
+    dataset = load_dataset(dataset_path, k)
+
+    for retrieval_type in tqdm(retrieval_types, desc="Batch Process"):
+        prompt = ordinal_prompt if retrieval_type == RetrievalType.Null \
+            else retrieval_prompt
+        
+        bot = select_bot(prompt, retrieval_type, retrieval_path)
+
+        result = []
+        for sentence in tqdm(dataset, desc="Sentence Process"):
+            output = transfer(bot, sentence)
+
+            result.append({
+                "0": sentence,
+                "1": output['result'],
+                "prompt": output['prompt']
+            })
+
+        cur_output_path = join_path(output_path, [retrieval_type.value, OUTPUT_FILENAME])
+        write_json(cur_output_path, result)
+
+        # print("{} transfer over!".format(retrieval_type.value))
+
+def talk():
     bot = Llama2(PROMPT, LlamaType.Llama_7B_Chat)
 
     while True:
@@ -103,7 +133,17 @@ def main():
             break
         result = bot.transfer(sentence)
         print("bot:", result)
+
+def main():
+    retrieval_types = [RetrievalType.Null, RetrievalType.Random, RetrievalType.Null]
+    dataset_path = 'output/sentiment.test.0.1500'
+    retrieval_path = 'data/yelp/sentiment.train.1'
+    output_path = 'output/7b_1500'
+
+    run_batch(retrieval_types, dataset_path, output_path, retrieval_path)
     
 if __name__ == '__main__':
-    fire.Fire(run)
+    # fire.Fire(run)
     # fire.Fire(transfer_7b_chat_yelp)
+
+    main()
