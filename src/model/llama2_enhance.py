@@ -2,7 +2,7 @@ import random
 from typing import List
 
 from src.model.llama2 import Llama2
-from src.bm25 import BM25
+from bm25 import BM25
 
 class Llama2withBM25(Llama2, BM25):
     def __init__(self, prompt: str, other_dataset: List[str]):
