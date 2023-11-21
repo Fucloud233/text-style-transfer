@@ -109,7 +109,7 @@ def run_batch(
         bot = select_bot(prompt, retrieval_type, retrieval_path)
 
         result = []
-        for sentence in tqdm(dataset, desc="Sentence Process"):
+        for sentence in tqdm(dataset, desc="Sentence Process", leave=None):
             output = transfer(bot, sentence)
 
             result.append({
@@ -135,7 +135,7 @@ def talk():
         print("bot:", result)
 
 def main():
-    retrieval_types = [RetrievalType.Null, RetrievalType.Random, RetrievalType.Null]
+    retrieval_types = [RetrievalType.Null, RetrievalType.Random, RetrievalType.BM25]
     dataset_path = 'output/sentiment.test.0.1500'
     retrieval_path = 'data/yelp/sentiment.train.1'
     output_path = 'output/7b_1500'
