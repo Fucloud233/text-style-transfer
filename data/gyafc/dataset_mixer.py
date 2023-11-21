@@ -20,7 +20,7 @@ def mixer(dataset_folder: str, kind: str):
             result.extend(lines)
 
         random.shuffle(result)
-        output_path = '{}/gyafc/formality.{}.{}'.format(dataset_folder, kind, i)
+        output_path = '{}/gyafc/{}.{}'.format(dataset_folder, kind, i)
 
         write_lines(output_path, result)
 
