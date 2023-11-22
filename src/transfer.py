@@ -2,19 +2,13 @@ import sys
 sys.path.append(".")
 
 import random 
-import fire
-
 from tqdm import tqdm
-
 from typing import List
 
-from utils.config import TransferConfig, LoadType, RetrievalType
+from utils.config import TransferConfig, RetrievalType
 from utils.file import write_json, read_lines, join_path, get_folder
-from utils.log import ScheduleLog
 from model.llama2 import Llama2, LlamaType
-from model.llama2_enhance import Llama2withBM25, Llama2WithRandom
-
-PROMPT = "There is a sentence '{}'. You should rewrite it more positive. The more positive sentence is {{"
+from model.llama2_enhance import Llama2withBM25, Llama2WithRandom, Llama2withGTR
 
 END_SYMBOL = '}'
 
@@ -33,18 +27,21 @@ def load_dataset(dataset_path: str, k: int=-1, is_random: bool=True):
 def select_bot(
         prompt: str,
         retrieval_type: RetrievalType, 
-        retrieval_path: str=""
+        dataset_name: str=""
     ):
 
     if retrieval_type == RetrievalType.Null:
         return Llama2(prompt)
     
+    retrieval_path = 'data/{}/train.1'.format(dataset_name)
     retrieval_dataset = load_dataset(retrieval_path)
     match retrieval_type:
         case RetrievalType.BM25:
             return Llama2withBM25(prompt, retrieval_dataset)
         case RetrievalType.Random:
             return Llama2WithRandom(prompt, retrieval_dataset)
+        case RetrievalType.GTR:
+            return Llama2withGTR(prompt, dataset_name)
         case _:
             print("The type of retrieval is invalid!")
             return          
@@ -124,7 +121,9 @@ def run_batch(
         # print("{} transfer over!".format(retrieval_type.value))
 
 def talk():
-    bot = Llama2(PROMPT, LlamaType.Llama_7B_Chat)
+    prompt = "There is a sentence '{}'. You should rewrite it more positive. The more positive sentence is {{"
+
+    bot = Llama2(prompt, LlamaType.Llama_7B_Chat)
 
     while True:
         print('='*50)
@@ -135,12 +134,20 @@ def talk():
         print("bot:", result)
 
 def main():
-    retrieval_types = [RetrievalType.Null, RetrievalType.Random, RetrievalType.BM25]
-    dataset_path = 'output/sentiment.test.0.1500'
-    retrieval_path = 'data/yelp/sentiment.train.1'
-    output_path = 'output/7b_1500'
+    retrieval_types = [
+        # RetrievalType.Null, 
+        # RetrievalType.Random, 
+        # RetrievalType.BM25,
+        RetrievalType.GTR
+    ]
 
-    run_batch(retrieval_types, dataset_path, output_path, retrieval_path)
+    dataset_name = 'yelp'
+    num = 1500
+
+    dataset_path = 'output/{}.test.0.{}'.format(dataset_name, num)
+    output_path = 'output/7b_{}_0_{}'.format(dataset_name, num)
+
+    run_batch(retrieval_types, dataset_path, output_path, dataset_name)
     
 if __name__ == '__main__':
     # fire.Fire(run)

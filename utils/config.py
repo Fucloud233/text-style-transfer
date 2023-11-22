@@ -55,9 +55,10 @@ class LoadType(Enum):
 
 class RetrievalType(Enum):
     BM25 = 'bm25'
+    GTR = 'gtr'    
     Random = 'random'
     Null = 'null'
-
+    
 class LlamaType(Enum):
     Llama_7B = "llama-2-7b"
     Llama_7B_Chat = "llama-2-7b-chat"
