@@ -4,48 +4,42 @@ import sys
 sys.path.append('.')
 
 import random
+from utils.file import read_lines, write_lines
 from utils.config import LoadType
 
-def sample_dataset(dataset_path: str, k: int=-1, load_type: LoadType=LoadType.Front):
-    with open(dataset_path, 'r', encoding='utf-8') as f:
-        # 选择前k条
-        if (load_type == LoadType.Front):
-            if k == -1:
-                return f.read(-1).splitlines()
+def sample_dataset(dataset_path: str, k: int=-1, is_random: bool=True):
+    lines = read_lines(dataset_path)
+    
+    if k == -1:
+        return lines
+    elif is_random:
+        return random.sample(lines, k)
+    else:
+        return lines[:k]
 
-            return [f.readline().strip() for _ in range(k)]
-        # 随机选择
-        elif (load_type == LoadType.Random):
-            dataset = f.read().splitlines()
-            return random.sample(dataset, k)
-        else:
-            return None
-        
+def run(
+    dataset_name: str,
+    dataset_kind: str='test', 
+    style_kind: int=0,
+    output_name: str=None, 
+    k: int=-1, 
+    is_random: bool=True
+):  
+    # generate filename automatically
+    dataset_path = 'data/{}/{}.{}'.format(dataset_name, dataset_kind, style_kind)
+    output_path = 'output/{}'.format(output_name) if output_name != None \
+        else 'output/{}.{}.{}.{}'.format(dataset_name, dataset_kind, style_kind, k)
 
-def save_dataset(save_path: str, dataset: list[str]):
-    with open(save_path, 'w', encoding='utf-8') as f:
-        for line in dataset:
-            f.write(line + '\n')
-
-def run(load_path: str, output_path: str, k: int, load_type: LoadType):
-    if load_path == '' or output_path == '':
-        print('The parameter is empty!')
-        return
-
-    dataset = sample_dataset(load_path, k, load_type)
-    save_dataset(output_path, dataset)
-
+    dataset = sample_dataset(dataset_path, k, is_random)
+    write_lines(output_path, dataset)
 
 def main():
     random.seed(2017)
 
-    load_path = ''
-    output_path = ''
-    
-    k = 100
-    load_type = LoadType.Random
+    dataset_name = 'gyafc'
+    k = 1500
 
-    run(load_path, output_path, k, load_type)
+    run(dataset_name, k=k)
 
 if __name__ == '__main__':
 
