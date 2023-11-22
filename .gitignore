@@ -165,6 +165,7 @@ download_url.md
 llama-2-*
 roberta-*
 gyafc_*.tgz
+chroma
 
 # config file
 config.json
