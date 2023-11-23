@@ -1,5 +1,5 @@
-import sys
-sys.path.append(".")
+import sys; sys.path.append(".")
+import os; os.environ['CURL_CA_BUNDLE'] = ''
 
 
 from typing import List
