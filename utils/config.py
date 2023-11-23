@@ -1,6 +1,7 @@
 import sys
 sys.path.append(".")
 
+import random
 from enum import Enum
 from pathlib import Path
 from utils.file import read_json, write_json
@@ -87,6 +88,9 @@ class BootConfig(BaseConfig):
     def __init__(self, json_obj):
         self.llama_type = LlamaType.Llama_7B_Chat
         super().__init__(json_obj)
+
+def set_random_seed(seed: int=2017):
+    random.seed(seed)
 
 if __name__ == '__main__':
     Config.load_config_info('config.json')
