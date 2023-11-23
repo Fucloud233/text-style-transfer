@@ -105,15 +105,18 @@ class Evaluator:
 
 
 def main_retrieval():
-    kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random]
-    results_path = 'output/7b_1500'
-    output_path = join_path(results_path, 'evaluate')
-    filename = 'evaluate.json'
+    kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random, RetrievalType.GTR]
+    dataset_names = ['yelp', 'gyafc']
+
+    for dataset_name in tqdm(dataset_names, desc='Dataset'):
+        results_path = 'output/7b_{}_0_1500'.format(dataset_name)
+        output_path = join_path(results_path, 'evaluate')
+        filename = 'evaluate.json'
     
-    # evaluate ...
-    evaluator = Evaluator()
-    evaluator.append_retrieval_results(kinds, results_path)
-    evaluator.evaluate(output_path, filename)    
+        # evaluate ...
+        evaluator = Evaluator()
+        evaluator.append_retrieval_results(kinds, results_path)
+        evaluator.evaluate(output_path, filename)    
 
 def main():
     names = []
