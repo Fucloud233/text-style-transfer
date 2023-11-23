@@ -4,7 +4,7 @@ sys.path.append('.')
 from typing import List
 from tqdm import tqdm
 
-from utils.config import RetrievalType
+from utils.config import RetrievalType, set_random_seed
 from utils.file import write_json, read_json, join_path
 from utils.evaluate import EvalMetric, harmonic_mean, geometric_mean
 
@@ -75,11 +75,11 @@ EVALUATE_OUTPUT_FILE = 'evaluate.json'
 
 class Evaluator:
     def __init__(self):
-        self.results_path = []
+        self.results_info = []
 
     def append_results(self, names: List[str], output: str, filename: str=TRANSFER_OUTPUT_FILE):
         for name in names:
-            self.results_path.append({
+            self.results_info.append({
                 "path": join_path(output, [name, filename]),
                 "retrieval": name,
             })
@@ -93,26 +93,27 @@ class Evaluator:
         mean_types = [EvalMetric.GM, EvalMetric.HM]
 
         evaluate_results = {}
-        for result in tqdm(self.results_path, desc='Process'):
-            sentences = read_json(result['path'])
+        for info in tqdm(self.results_info, desc='Process', leave=False):
+            # 1. read the sentence for evaluating
+            sentences = read_json(info['path'])
             sentences = sentences if k == -1 else sentences[:k]
 
+            # 2. evaluate them in 3 metrics
             results = {}
             for metric in evaluate_metrics:
-                results[metric] = self.__evaluate_single(sentences, metric)
+                results[metric.value] = self.__evaluate_single(sentences, metric)
             
-            data_arr = [results[mean_type] for mean_type in mean_types]
+            # 3. calculate GM & HM of them
+            results_list = [results[EvalMetric.Style.value], results[EvalMetric.Content.value]]
             for mean_type in mean_types:
-                results[mean_type] = self.__mean_result(data_arr, mean_type)
+                results[mean_type.value] = self.__mean_result(results_list, mean_type)
 
-            evaluate_results[result['retrieval']] = result
+            evaluate_results[info['retrieval']] = results
 
         output_path = join_path(output_folder, filename)
         write_json(output_path, evaluate_results)
-
-        print("Evaluate Over!")
-
-    def __evaluate_single(self, sentences: List[str], metric: EvalMetric, precision: int=2) -> str:
+    # evaluate in single metric
+    def __evaluate_single(self, sentences: List[str], metric: EvalMetric, precision: int=2) -> float:
         match metric:
             case EvalMetric.Style: score = roberta_batch_eval(sentences)
             case EvalMetric.Content: score = sacre_bleu_batch_eval(sentences)
@@ -120,7 +121,8 @@ class Evaluator:
 
         return round(score, precision)
     
-    def __mean_result(self, results: List[str], metric: EvalMetric, precision: int=2):
+    # mean the above three metrics
+    def __mean_result(self, results: List[str], metric: EvalMetric, precision: int=2) -> float:
         match metric:
             case EvalMetric.GM: score = geometric_mean(results)
             case EvalMetric.HM: score = harmonic_mean(results)
@@ -148,14 +150,14 @@ def mean_evaluate_result():
 
 
 def main_retrieval():
-    kinds = [RetrievalType.Null, RetrievalType.BM25, RetrievalType.Random, RetrievalType.GTR]
+    kinds = [RetrievalType.Null, RetrievalType.Random, RetrievalType.BM25, RetrievalType.GTR]
     dataset_names = ['yelp', 'gyafc']
 
     for dataset_name in tqdm(dataset_names, desc='Dataset'):
         results_path = 'output/7b_{}_0_1500'.format(dataset_name)
         output_path = join_path(results_path, 'evaluate')
-        filename = 'test.json'
-        k = 5
+        filename = EVALUATE_OUTPUT_FILE
+        k = -1
     
         # evaluate ...
         evaluator = Evaluator()
@@ -178,8 +180,8 @@ def main():
         filename=EVALUATE_OUTPUT_FILE
     )
 
-
-
 if __name__ == '__main__':
-    # main_retrieval()
-    mean_evaluate_result()
+    set_random_seed()
+
+    main_retrieval()
+    # mean_evaluate_result()
