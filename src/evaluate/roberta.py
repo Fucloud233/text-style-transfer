@@ -92,7 +92,7 @@ def evaluate_batch(sentences: List[str]):
 
     # calculate the accuracy using counter
     counter = Counter(results)
-    return counter.most_common(1)[0][1] / counter.total()
+    return counter.most_common(1)[0][1] / counter.total() * 100
 
 if __name__ == '__main__':
     main()
