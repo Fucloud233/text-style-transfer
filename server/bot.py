@@ -2,7 +2,7 @@ from utils.config import LlamaType
 from llama import Llama
 
 MAX_BATCH_SIZE = 4
-MAX_SEQ_LEN = 256
+MAX_SEQ_LEN = 512
 MAX_BATCH_SIZE = 4
 MAX_GEN_LEN = None
 TEMPERATURE = 0.5
