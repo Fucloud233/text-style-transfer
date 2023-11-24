@@ -105,7 +105,6 @@ def run_batch(
     retrieval_types: List[RetrievalType],
     retrieval_nums: List[int] = [1],
     dataset_path: str=None,
-    save_to_path: bool=False
 ):  
     if dataset_path == None:
         dataset_path = 'output/{}.test.0.{}'.format(dataset_name, k)
@@ -124,7 +123,7 @@ def run_batch(
 
         # 2. transfer sentences
         result = []
-        for sentence in dataset if save_to_path else tqdm(dataset, desc="Sentence Process", leave=None):
+        for sentence in tqdm(dataset, desc="Sentence Process", leave=None):
             output = transfer(bot, sentence, target_style, retrieval_num)
 
             result.append({
@@ -155,7 +154,7 @@ def run_batch(
             runner_logic(prompt, retrieval_num)
 
 def talk():
-    prompt = "There is a sentence '{}'. You should rewrite it more positive. The more positive sentence is {{"
+    prompt = "There is a sentence '{sentence}'. You should rewrite it more {target}. The more positive sentence is {{"
 
     bot = Llama2()
     bot.set_prompt(prompt)
@@ -165,28 +164,32 @@ def talk():
         sentence = input("You: ")
         if sentence == "exit": 
             break
-        result = bot.transfer(sentence)
+        result = bot.transfer(sentence, 'positive')
         print("bot:", result)
 
 def main():
     retrieval_types = [
-        RetrievalType.Null, 
+        # RetrievalType.Null, 
         RetrievalType.Random, 
         RetrievalType.BM25,
         RetrievalType.GTR
     ]
-    retrieval_num = [1, 2, 4, 8, 10]
-    # retrieval_num = [1]
+    retrieval_num = [
+        1, 
+        2, 
+        4, 
+        8, 
+        10
+    ]
 
     dataset_name = 'gyafc'
     num = 1500
 
     test_dataset_name = 'output/gyafc.test.0.1500'
 
-    run_batch(dataset_name, num, retrieval_types, retrieval_num, test_dataset_name, True)
+    run_batch(dataset_name, num, retrieval_types, retrieval_num, test_dataset_name)
     
 if __name__ == '__main__':
-    # fire.Fire(run)
-    # fire.Fire(transfer_7b_chat_yelp)
+    # talk()
 
     main()
