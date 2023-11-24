@@ -38,11 +38,12 @@ def check():
 def chat():
     try:
         query = request.get_json()['query']
-    except:
-        return gen_return_data('The query is empty!', 1)
-
-    answer = llama.chat(query)
-    return gen_return_data(answer, 0)
+        if len(query) == 0:
+            raise ValueError('The query is empty!')    
+        answer = llama.chat(query)
+        return gen_return_data(answer, 0)
+    except Exception as e:
+        return gen_return_data(repr(e), 0)
 
 if __name__ == '__main__':
     app.run(port=5000, host="0.0.0.0", debug=False)
