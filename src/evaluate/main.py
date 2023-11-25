@@ -88,7 +88,7 @@ class Evaluator:
         kinds_str = [kind.value for kind in kinds]
 
         for kind in kinds_str:
-            if kind == RetrievalType.Null:
+            if kind == RetrievalType.Null.value:
                 path = join_path(output, [kind, TRANSFER_OUTPUT_FILE])
             else:
                 path = {}
