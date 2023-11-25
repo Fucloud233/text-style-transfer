@@ -169,7 +169,7 @@ def talk():
 
 def main():
     retrieval_types = [
-        # RetrievalType.Null, 
+        RetrievalType.Null, 
         RetrievalType.Random, 
         RetrievalType.BM25,
         RetrievalType.GTR
@@ -182,12 +182,12 @@ def main():
         10
     ]
 
-    dataset_name = 'gyafc'
+    dataset_name = 'yelp'
     num = 1500
 
-    test_dataset_name = 'output/gyafc.test.0.1500'
+    # test_dataset_name = 'output/gyafc.test.0.1500'
 
-    run_batch(dataset_name, num, retrieval_types, retrieval_num, test_dataset_name)
+    run_batch(dataset_name, num, retrieval_types, retrieval_num)
     
 if __name__ == '__main__':
     # talk()
