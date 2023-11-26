@@ -18,9 +18,9 @@ def generate_msg(role: str, content: str):
         "content": content
     }
 
-class TSTBot:
+class TransferBot:
     def __init__(self, 
-        bot_kind: BotType=None, 
+        bot_kind: BotType=BotType.Llama_7B, 
         retrieval_kind: RetrievalType=RetrievalType.Null,
         prompt: str=None, 
         **kwargs
@@ -33,22 +33,26 @@ class TSTBot:
             case BotType.GPT:
                 self.client = openai.OpenAI(api_key=Config.openai_key)
                 self._call = self.__call_gpt
-            case BotType.Llama_7B_Chat:
+            case BotType.Llama_7B:
                 self.api_url = kwargs['api_url']
                 self._call = self.__call_llama2
         
-        if retrieval_kind != RetrievalType.Null: self.transfer = self._transfer_retrieval
+        if retrieval_kind == RetrievalType.Null: 
+            self.transfer = self._transfer
+            return
+        
+        self.transfer = self._transfer_retrieval
         match retrieval_kind:
             case RetrievalType.Random:
                 random.seed(2017)
                 self._retrieval_dataset: List[str] = kwargs['retrieval_dataset']
                 self._retrieval = self._retrieval_by_random
             case RetrievalType.BM25:
-                from bm25 import BM25
+                from model.bm25 import BM25
                 self._bm25 = BM25(kwargs['retrieval_dataset'])
                 self._retrieval = self._retrieval_by_bm25
             case RetrievalType.GTR:
-                from chroma import VectorDB
+                from model.chroma import VectorDB
                 self._db = VectorDB()
                 self.dataset_name = kwargs['dataset_name']
                 self._retrieval = self._retrieval_by_gtr
@@ -56,17 +60,22 @@ class TSTBot:
     def set_prompt(self, new_prompt: str):
         self._prompt = new_prompt
 
-    def transfer(self, sentence: str, target_style: str, **kwargs):
+    # ==================== transfer ====================
+
+    @abstractmethod
+    def transfer(self, sentence: str, target_style: str):
+        pass
+
+    def _transfer(self, sentence: str, target_style: str):
         if self._prompt is None:
             raise ValueError('The prompt is empty!')
        
         prompt = self._prompt.format(sentence=add_division(sentence), target=target_style)
         return (self._call(prompt), prompt)
     
-    def _transfer_retrieval(self, sentence: str, target_style: str, **kwargs):
+    def _transfer_retrieval(self, sentence: str, target_style: str, retrieval_num: int=1):
         if self._prompt is None:
             raise ValueError('The prompt is empty!')
-        retrieval_num = 1 if kwargs.get('retrieval_num') == None else kwargs['retrieval_num']
         similar = self._retrieval(sentence, retrieval_num)
 
         if isinstance(similar, str):
@@ -77,12 +86,10 @@ class TSTBot:
         prompt = self._prompt.format(similar=similar, sentence=add_division(sentence), target=target_style)
         return (self._call(prompt), prompt)
 
-    @abstractmethod
-    def _call(self, prompt: str):
-        pass
+    # ==================== call ====================
 
     @abstractmethod
-    def _retrieval(self, sentence: str, retrieval_num: int) -> str | List[str]:
+    def _call(self, prompt: str):
         pass
                 
     def __call_gpt(self, prompt: str) -> str:
@@ -117,6 +124,12 @@ class TSTBot:
             case 1: raise ValueError(info)
             case _: raise ValueError('Response code {} not known'.format(code))
 
+    # ==================== retrieval ====================
+
+    @abstractmethod
+    def _retrieval(self, sentence: str, retrieval_num: int) -> str | List[str]:
+        pass
+
     def _retrieval_by_random(self, sentence: str, retrieval_num: int):
         return random.sample(self._retrieval_dataset, retrieval_num)
 
@@ -126,6 +139,13 @@ class TSTBot:
     def _retrieval_by_gtr(self, sentence: str, retrieval_num: int):
         return self._db.query(self.dataset_name, sentence, retrieval_num)
 
+    def set_prompt(self, prompt: str):
+        self._prompt = prompt
+
+    @property
+    def retrieval_kind(self):
+        return self._retrieval_kind
+    
 if __name__ == '__main__':
     api_url = 'http://localhost:5000/chat'
 
