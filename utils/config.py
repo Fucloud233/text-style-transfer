@@ -68,7 +68,7 @@ class LlamaType(Enum):
         return str(Path.joinpath(Path('model'), self.value))
     
 class BotType(Enum):
-    Llama_7B_Chat = "llama"
+    Llama_7B = "llama_7b"
     GPT = "gpt"
 
 class TransferConfig(BaseConfig):
