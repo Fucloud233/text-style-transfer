@@ -1,14 +1,12 @@
-import sys
-sys.path.append(".")
+import sys; sys.path.append(".")
 
 import random 
 from tqdm import tqdm
 from typing import List
 
-from utils.config import TransferConfig, RetrievalType
+from utils.config import TransferConfig, RetrievalType, BotType
 from utils.file import write_json, read_lines, join_path, get_folder
-from model.llama2 import Llama2
-from model.llama2_enhance import Llama2withBM25, Llama2WithRandom, Llama2withGTR
+from model.transfer_bot import TransferBot
 
 END_SYMBOL = '}'
 
@@ -25,27 +23,33 @@ def load_dataset(dataset_path: str, k: int=-1, is_random: bool=True):
         return lines[:k]
 
 def select_bot(
+        bot_kind: BotType,
         retrieval_type: RetrievalType, 
         dataset_name: str=""
-    ):
+    ) -> TransferBot:
 
     if retrieval_type == RetrievalType.Null:
-        return Llama2()
+        return TransferBot(bot_kind)
     
-    retrieval_path = 'data/{}/train.1'.format(dataset_name)
+    kwargs = {}
     match retrieval_type:
-        case RetrievalType.Random:
-            return Llama2WithRandom(load_dataset(retrieval_path))
-        case RetrievalType.BM25:
-            return Llama2withBM25(load_dataset(retrieval_path))
+        case RetrievalType.Random | RetrievalType.BM25:
+            retrieval_path = 'data/{}/train.1'.format(dataset_name)
+            kwargs['retrieval_dataset'] = load_dataset(retrieval_path)
         case RetrievalType.GTR:
-            return Llama2withGTR(dataset_name)
-        case _:
-            raise ValueError("The type of retrieval is invalid!")
+            kwargs['dataset_name'] = dataset_name
 
-def transfer(bot: Llama2, sentence: str, target_style: str, retrieval_num: int=1) -> (str, str):
+    return TransferBot(bot_kind, retrieval_type, **kwargs)
+
+
+def transfer(
+        bot: TransferBot, 
+        sentence: str, 
+        target_style: str, 
+        retrieval_num: int=1
+    ) -> (str, str):
     # don't need to pass retrieval_num to basic Llama2
-    (result, prompt) = bot.transfer(sentence, target_style) if bot.type == RetrievalType.Null \
+    (result, prompt) = bot.transfer(sentence, target_style) if bot.retrieval_kind == RetrievalType.Null \
         else bot.transfer(sentence, target_style, retrieval_num)
 
     # [注意] 还需要根据换行符换行 避免特殊情况
@@ -86,20 +90,22 @@ def run(config_path: str):
 
     print("Transfer Over!")
 
+# ==================== PROMPT EDITING ====================
+
 OrdinaryPrompt = "Here is a sentence {sentence}. You should rewrite it more {target}. The more {target} sentence is {{"
 OneRetrievalPrompt = "Here is a {target} sentence: {similar} .\n" \
-    "Here is a sentence {sentence}. You should rewrite it more {target}. The more {target} sentence is {{"
+    "Here is a sentence {sentence}. You should rewrite it more {target} like the sentence above. The more {target} sentence is {{"
 FewRetrievalPrompt = "Here are some {target} sentences: \n" \
     "{similar}\n" \
-    "Here is a sentence {sentence}. You should rewrite it more {target}. The more {target} sentence is {{"
+    "Here is a sentence {sentence}. You should rewrite it more {target} like the sentences above. The more {target} sentence is {{"
 
 StyleMap = {
     "yelp": ["negative", "positive"],
     "gyafc": ["informal", "formal"]
 }
 
-
 def run_batch(
+    bot_kind: BotType,
     dataset_name: str,
     k: int,
     retrieval_types: List[RetrievalType],
@@ -108,7 +114,7 @@ def run_batch(
 ):  
     if dataset_path == None:
         dataset_path = 'output/{}.test.0.{}'.format(dataset_name, k)
-    output_path = 'output/7b_{}_0_{}'.format(dataset_name, k)
+    output_path = 'output/{}_{}_0_{}'.format(bot_kind.value, dataset_name, k)
 
     target_style = StyleMap[dataset_name][1]
     # handle with meeting single number input
@@ -142,7 +148,7 @@ def run_batch(
 
 
     for retrieval_type in tqdm(retrieval_types, desc="Retrieval Type"):
-        bot: Llama2 = select_bot(retrieval_type, dataset_name)
+        bot = select_bot(bot_kind, retrieval_type, dataset_name)
 
         if retrieval_type == RetrievalType.Null:
             runner_logic(OrdinaryPrompt)
@@ -156,7 +162,7 @@ def run_batch(
 def talk():
     prompt = "There is a sentence '{sentence}'. You should rewrite it more {target}. The more positive sentence is {{"
 
-    bot = Llama2()
+    bot = TransferBot()
     bot.set_prompt(prompt)
 
     while True:
@@ -182,12 +188,19 @@ def main():
         10
     ]
 
+    bot_kind = BotType.GPT
     dataset_name = 'yelp'
     num = 1500
+    test_dataset_name = 'output/{}.test.0.1500'.format(dataset_name)
 
-    # test_dataset_name = 'output/gyafc.test.0.1500'
-
-    run_batch(dataset_name, num, retrieval_types, retrieval_num)
+    run_batch(
+        bot_kind, 
+        dataset_name, 
+        num, 
+        retrieval_types, 
+        retrieval_num, 
+        test_dataset_name
+    )
     
 if __name__ == '__main__':
     # talk()
