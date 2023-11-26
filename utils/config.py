@@ -66,7 +66,10 @@ class LlamaType(Enum):
 
     def ckpt_dir(self):
         return str(Path.joinpath(Path('model'), self.value))
-
+    
+class BotType(Enum):
+    Llama_7B_Chat = "llama"
+    GPT = "gpt"
 
 class TransferConfig(BaseConfig):
     def __init__(self, file_path: str):

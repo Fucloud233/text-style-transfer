@@ -93,7 +93,7 @@ class TSTBot:
         messages.append(generate_msg("user", prompt))
 
         response = self.client.chat.completions.create(
-            model=self._bot_kind.value,
+            model='gpt-3.5-turbo-0613',
             timeout=5,
             temperature=0,
             stream=False,
