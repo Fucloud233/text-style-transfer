@@ -9,7 +9,7 @@ from utils.evaluate import EvalMetric
 
 matplotlib.rcParams.update({'font.size': 12}) 
 
-def draw(model_name: str, dataset_name: str, k: int, need_show: bool=True):
+def draw(model_name: str, dataset_name: str, k: int, need_show: bool=False):
     output_path = "output/{}_{}_0_{}/evaluate/".format(model_name, dataset_name, k)
 
     # read evaluation from files
@@ -37,14 +37,16 @@ def draw(model_name: str, dataset_name: str, k: int, need_show: bool=True):
 
     colors = {
         'random': 'r', 
-        'bm25': 'g', 
-        'gtr': 'b'
+        'bm25': 'y', 
+        'gtr': 'g',
+        'mix_bm25': 'c',
+        'mix_gtr': 'b'
     }
 
     plt.figure(figsize=(15, 18))
 
     kinds_num = len(retrieval_kinds) - 1
-    w = 1 / kinds_num - 0.1
+    w = 0.9 / kinds_num
     for (i, (metric, eval_result)) in enumerate(draw_result.items()):
         plt.subplot(len(draw_result), 1, i+1)
         plt.title(metric)
@@ -57,15 +59,19 @@ def draw(model_name: str, dataset_name: str, k: int, need_show: bool=True):
                 color=colors[kind],
                 label=kind
             )
+            
+            if metric == 'style':
+                plt.ylim((50, 85))
 
         plt.axhline(eval_result['null'], linestyle='--', label='base')
         plt.xticks(np.arange(len(retrieval_num)), retrieval_num)
-        
-        # add notaion 
-        plt.legend(loc='lower right')
+
+        if i + 1 == len(metric):        
+            # add notaion 
+            plt.legend(loc='lower right')
     
     # total title
-    plt.suptitle(dataset_name + ' dataset', fontsize=24)
+    plt.suptitle(model_name + ' + ' + dataset_name, fontsize=24)
 
     # save to file
     save_path = eval_result_path = output_path + 'diagram.png'
@@ -76,7 +82,7 @@ def draw(model_name: str, dataset_name: str, k: int, need_show: bool=True):
         plt.show()
 
 def main():
-    model_name = 'gpt'
+    model_name = 'llama_7b'
     dataset_name = "yelp"
     k = 1500
     draw(model_name, dataset_name, k)
