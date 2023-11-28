@@ -55,6 +55,8 @@ class LoadType(Enum):
     Random = 'random'
 
 class RetrievalType(Enum):
+    MixGTR = 'mix_gtr'
+    MixBM25 = "mix_bm25"
     BM25 = 'bm25'
     GTR = 'gtr'    
     Random = 'random'

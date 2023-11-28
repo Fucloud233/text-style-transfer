@@ -28,16 +28,18 @@ def select_bot(
         dataset_name: str=""
     ) -> TransferBot:
 
-    if retrieval_type == RetrievalType.Null:
-        return TransferBot(bot_kind)
-    
     kwargs = {}
-    match retrieval_type:
-        case RetrievalType.Random | RetrievalType.BM25:
-            retrieval_path = 'data/{}/train.1'.format(dataset_name)
-            kwargs['retrieval_dataset'] = load_dataset(retrieval_path)
-        case RetrievalType.GTR:
-            kwargs['dataset_name'] = dataset_name
+    if bot_kind == BotType.Llama_7B:
+        kwargs['api_url'] = 'http://127.0.0.1:5000/chat'
+
+    if retrieval_type == RetrievalType.Null:
+        return TransferBot(bot_kind, **kwargs)
+    
+    if retrieval_type in [RetrievalType.Random, RetrievalType.BM25, RetrievalType.MixBM25, RetrievalType.MixGTR]:
+        retrieval_path = 'data/{}/train.1'.format(dataset_name)
+        kwargs['retrieval_dataset'] = load_dataset(retrieval_path)
+    if retrieval_type in [RetrievalType.GTR, RetrievalType.MixGTR]:
+        kwargs['dataset_name'] = dataset_name
 
     return TransferBot(bot_kind, retrieval_type, **kwargs)
 
@@ -176,10 +178,12 @@ def talk():
 
 def main():
     retrieval_types = [
-        RetrievalType.Null, 
-        RetrievalType.Random, 
-        RetrievalType.BM25,
-        RetrievalType.GTR
+        # RetrievalType.Null, 
+        # RetrievalType.Random, 
+        # RetrievalType.BM25,
+        # RetrievalType.GTR,
+        RetrievalType.MixBM25,
+        RetrievalType.MixGTR
     ]
     retrieval_num = [
         1, 
@@ -189,7 +193,7 @@ def main():
         10
     ]
 
-    bot_kind = BotType.GPT
+    bot_kind = BotType.Llama_7B
     dataset_name = 'yelp'
     num = 1500
     test_dataset_name = 'output/{}.test.0.1500'.format(dataset_name)

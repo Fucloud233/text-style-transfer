@@ -5,7 +5,7 @@ import requests
 import json
 import random
 from abc import abstractmethod
-from typing import List
+from typing import List, Callable
 from utils.config import RetrievalType, BotType, Config
 
 def add_division(text: str) -> str:
@@ -47,15 +47,25 @@ class TransferBot:
                 random.seed(2017)
                 self._retrieval_dataset: List[str] = kwargs['retrieval_dataset']
                 self._retrieval = self._retrieval_by_random
-            case RetrievalType.BM25:
+            case RetrievalType.BM25 | RetrievalType.MixBM25:
                 from model.bm25 import BM25
                 self._bm25 = BM25(kwargs['retrieval_dataset'])
-                self._retrieval = self._retrieval_by_bm25
-            case RetrievalType.GTR:
+                if retrieval_kind == RetrievalType.BM25:
+                    self._retrieval = self._retrieval_by_bm25
+                else:
+                    random.seed(2017)
+                    self._retrieval_dataset = kwargs['retrieval_dataset']
+                    self._retrieval = self._retrieval_by_mix_bm25
+            case RetrievalType.GTR | RetrievalType.MixGTR:
                 from model.chroma import VectorDB
                 self._db = VectorDB()
                 self.dataset_name = kwargs['dataset_name']
-                self._retrieval = self._retrieval_by_gtr
+                if retrieval_kind == RetrievalType.GTR:
+                    self._retrieval = self._retrieval_by_gtr
+                else:
+                    random.seed(2017)
+                    self._retrieval_dataset = kwargs['retrieval_dataset']
+                    self._retrieval = self._retrieval_by_mix_gtr
         
     def set_prompt(self, new_prompt: str):
         self._prompt = new_prompt
@@ -117,6 +127,9 @@ class TransferBot:
         msg = { "query": prompt }
         resp = requests.post(self.api_url, json=msg)
 
+        if resp.status_code != 200:
+            raise FileNotFoundError(resp.text)
+
         code, info = convert(resp)
 
         match code:
@@ -138,6 +151,29 @@ class TransferBot:
     
     def _retrieval_by_gtr(self, sentence: str, retrieval_num: int):
         return self._db.query(self.dataset_name, sentence, retrieval_num)
+    
+    def _retrieval_by_mix_bm25(self, sentence: str, retrieval_num: int):
+        return self.__retrieval_mixer(
+            sentence, retrieval_num, 
+            self._retrieval_by_random, 
+            self._retrieval_by_bm25
+        )
+    
+    def _retrieval_by_mix_gtr(self, sentence: str, retrieval_num: int):
+        return self.__retrieval_mixer(
+            sentence, retrieval_num, 
+            self._retrieval_by_random, 
+            self._retrieval_by_gtr
+        )
+
+    def __retrieval_mixer(self, sentence: str, retrieval_num: int, method1: Callable, method2: Callable):
+        num = int(retrieval_num / 2)
+        if num < 2:
+            return method1(sentence, retrieval_num)
+        
+        retrieval_sentences: List = method1(sentence, num)
+        retrieval_sentences.extend(method2(sentence, num))
+        return retrieval_sentences
 
     def set_prompt(self, prompt: str):
         self._prompt = prompt
