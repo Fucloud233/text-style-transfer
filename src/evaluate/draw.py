@@ -9,9 +9,11 @@ from utils.evaluate import EvalMetric
 
 matplotlib.rcParams.update({'font.size': 12}) 
 
-def draw(dataset_name: str, k: int):
+def draw(model_name: str, dataset_name: str, k: int, need_show: bool=True):
+    output_path = "output/{}_{}_0_{}/evaluate/".format(model_name, dataset_name, k)
+
     # read evaluation from files
-    eval_result_path = "output/7b_{}_0_{}/evaluate/evaluate.json".format(dataset_name, k)
+    eval_result_path = output_path + 'evaluate.json'
     eval_result = read_json(eval_result_path)
 
     eval_metrics = [metric.value for metric in EvalMetric]
@@ -39,6 +41,8 @@ def draw(dataset_name: str, k: int):
         'gtr': 'b'
     }
 
+    plt.figure(figsize=(15, 18))
+
     kinds_num = len(retrieval_kinds) - 1
     w = 1 / kinds_num - 0.1
     for (i, (metric, eval_result)) in enumerate(draw_result.items()):
@@ -62,12 +66,20 @@ def draw(dataset_name: str, k: int):
     
     # total title
     plt.suptitle(dataset_name + ' dataset', fontsize=24)
-    plt.show()
+
+    # save to file
+    save_path = eval_result_path = output_path + 'diagram.png'
+    plt.savefig(save_path)
+
+    # show
+    if need_show:
+        plt.show()
 
 def main():
+    model_name = 'gpt'
     dataset_name = "yelp"
     k = 1500
-    draw(dataset_name, k)
+    draw(model_name, dataset_name, k)
 
 if __name__ == '__main__':
     main()
