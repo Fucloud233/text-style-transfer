@@ -173,6 +173,8 @@ class TransferBot:
         
         retrieval_sentences: List = method1(sentence, num)
         retrieval_sentences.extend(method2(sentence, num))
+        # shuffle the retrieval_sentences
+        random.shuffle(retrieval_sentences)
         return retrieval_sentences
 
     def set_prompt(self, prompt: str):
