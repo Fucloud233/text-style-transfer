@@ -4,7 +4,7 @@ sys.path.append('.')
 from typing import List
 from tqdm import tqdm
 
-from utils.config import RetrievalType, set_random_seed
+from utils.config import RetrievalType, BotType, set_random_seed
 from utils.file import write_json, read_json, join_path, iter_folder
 from utils.evaluate import EvalMetric, harmonic_mean, geometric_mean
 
@@ -89,7 +89,7 @@ class Evaluator:
 
         for kind in kinds_str:
             if kind == RetrievalType.Null.value:
-                path = join_path(output, [kind, TRANSFER_OUTPUT_FILE])
+                path = join_path(output, [kind, "0_" + TRANSFER_OUTPUT_FILE])
             else:
                 path = {}
                 for file_name in iter_folder(join_path(output, kind)):
@@ -176,9 +176,9 @@ def mean_evaluate_result():
 
 
 def main_retrieval():
-    kinds = [RetrievalType.Null, RetrievalType.Random, RetrievalType.BM25, RetrievalType.GTR]
+    kinds = [RetrievalType.Null, RetrievalType.Random, RetrievalType.BM25, RetrievalType.GTR, RetrievalType.MixBM25, RetrievalType.MixGTR]
     
-    model_name = 'gpt'
+    model_kind = BotType.Llama_7B
     dataset_names = [
         'yelp', 
         # 'gyafc'
@@ -186,7 +186,7 @@ def main_retrieval():
 
     for dataset_name in tqdm(dataset_names, desc='Dataset'):
         k = 1500
-        results_path = 'output/{}_{}_0_{}'.format(model_name, dataset_name, k)
+        results_path = 'output/{}_{}_0_{}'.format(model_kind.value, dataset_name, k)
         output_path = join_path(results_path, 'evaluate')
         filename = EVALUATE_OUTPUT_FILE
     
