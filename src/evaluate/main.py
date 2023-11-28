@@ -177,16 +177,18 @@ def mean_evaluate_result():
 
 def main_retrieval():
     kinds = [RetrievalType.Null, RetrievalType.Random, RetrievalType.BM25, RetrievalType.GTR]
+    
+    model_name = 'gpt'
     dataset_names = [
         'yelp', 
         # 'gyafc'
     ]
 
     for dataset_name in tqdm(dataset_names, desc='Dataset'):
-        results_path = 'output/7b_{}_0_1500'.format(dataset_name)
+        k = 1500
+        results_path = 'output/{}_{}_0_{}'.format(model_name, dataset_name, k)
         output_path = join_path(results_path, 'evaluate')
         filename = EVALUATE_OUTPUT_FILE
-        k = -1
     
         # evaluate ...
         evaluator = Evaluator()
