@@ -123,7 +123,7 @@ def run_batch(
     dataset = load_dataset(dataset_path)[:k]
 
     # encapsulate logic function
-    def runner_logic(prompt: str, retrieval_num: int=1):
+    def runner_logic(prompt: str, retrieval_num: int=0):
         # 1. set the prompt
         bot.set_prompt(prompt)
 
@@ -139,8 +139,9 @@ def run_batch(
             })
 
         # 3. generate output filename
-        output_filename = OUTPUT_FILENAME if retrieval_num == 1 \
-            else str(retrieval_num) + '_' + OUTPUT_FILENAME
+        # output_filename = OUTPUT_FILENAME if retrieval_num == 1 \
+        #     else str(retrieval_num) + '_' + OUTPUT_FILENAME\
+        output_filename = str(retrieval_num) + '_' + OUTPUT_FILENAME
 
         # 4. save them into files
         cur_output_path = join_path(output_path, [retrieval_type.value, output_filename])
