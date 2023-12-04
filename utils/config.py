@@ -55,6 +55,8 @@ class LoadType(Enum):
     Random = 'random'
 
 class RetrievalType(Enum):
+    MixGTR = 'mix_gtr'
+    MixBM25 = "mix_bm25"
     BM25 = 'bm25'
     GTR = 'gtr'    
     Random = 'random'
@@ -66,7 +68,10 @@ class LlamaType(Enum):
 
     def ckpt_dir(self):
         return str(Path.joinpath(Path('model'), self.value))
-
+    
+class BotType(Enum):
+    Llama_7B = "llama_7b"
+    GPT = "gpt"
 
 class TransferConfig(BaseConfig):
     def __init__(self, file_path: str):

@@ -18,7 +18,7 @@ def write_lines(file_path: str, lines: List[str]):
         for line in lines:
             f.write(line + '\n')
 
-def read_json(file_path: str):
+def read_json(file_path: str) -> dict:
     with open(file_path, 'r') as f:
         return json.load(f)
     
@@ -32,6 +32,9 @@ def write_json(file_path: str, json_object):
 def modify_name(origin_file_path: str, file_name: str) -> str:
     file_path = Path(origin_file_path)
     return Path.joinpath(file_path.parent, file_name)
+
+def iter_folder(folder_path: str) -> List[str]:
+    return [path.name for path in Path(folder_path).iterdir()]
 
 def join_path(path: str, names: List[str] | str):
     path = Path(path)
@@ -110,4 +113,6 @@ def __test_write_lines():
     print('hello')
 
 if __name__ == '__main__':
-    __test_join_path()
+    # __test_join_path()
+
+    print(get_list('output/7b_gyafc_0_1500/bm25'))
