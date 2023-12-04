@@ -74,7 +74,8 @@ TRANSFER_OUTPUT_FILE = 'transfer.json'
 EVALUATE_OUTPUT_FILE = 'evaluate.json'
 
 class Evaluator:
-    def __init__(self):
+    def __init__(self, dataset_name: str):
+        self.dataset_name = dataset_name
         self.results_info = []
 
     def append_results(self, names: List[str], output: str, filename: str=TRANSFER_OUTPUT_FILE):
@@ -141,7 +142,7 @@ class Evaluator:
     # evaluate in single metric
     def __evaluate_single(self, sentences: List[str], metric: EvalMetric, precision: int=2) -> float:
         match metric:
-            case EvalMetric.Style: score = roberta_batch_eval(sentences)
+            case EvalMetric.Style: score = roberta_batch_eval(sentences, self.dataset_name)
             case EvalMetric.Content: score = sacre_bleu_batch_eval(sentences)
             case EvalMetric.Fluency: score = ppl_batch_eval(sentences)
 
@@ -191,7 +192,7 @@ def main_retrieval():
         filename = EVALUATE_OUTPUT_FILE
     
         # evaluate ...
-        evaluator = Evaluator()
+        evaluator = Evaluator(dataset_name)
         evaluator.append_retrieval_results(kinds, results_path)
         evaluator.evaluate(output_path, filename, k)    
 

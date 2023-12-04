@@ -81,9 +81,7 @@ def test_model():
     
     print("accuracy:", counter / len(test_cases))
 
-def evaluate_batch(sentences: List[str]):
-    dataset_name = 'yelp'
-
+def evaluate_batch(sentences: List[str], dataset_name: str):
     classifier = Classifier(dataset_name)
 
     results = []
