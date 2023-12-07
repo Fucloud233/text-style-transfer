@@ -74,6 +74,9 @@ TRANSFER_OUTPUT_FILE = 'transfer.json'
 EVALUATE_OUTPUT_FILE = 'evaluate.json'
 
 class Evaluator:
+    evaluate_metrics = [EvalMetric.Style, EvalMetric.Content, EvalMetric.Fluency]
+    mean_types = [EvalMetric.GM, EvalMetric.HM]
+    
     def __init__(self, dataset_name: str):
         self.dataset_name = dataset_name
         self.results_info = []
@@ -102,10 +105,7 @@ class Evaluator:
                 "path": path,
             })
     
-    def evaluate(self, output_folder: str, filename: str=EVALUATE_OUTPUT_FILE, k: int=-1):
-        evaluate_metrics = [EvalMetric.Style, EvalMetric.Content, EvalMetric.Fluency]
-        mean_types = [EvalMetric.GM, EvalMetric.HM]
-
+    def evaluate_batch(self, output_folder: str, filename: str=EVALUATE_OUTPUT_FILE, k: int=-1):
         def run_logic(sentence_path: str):
             # 1. read the sentence for evaluating
             sentences = read_json(sentence_path)
@@ -113,12 +113,12 @@ class Evaluator:
 
             # 2. evaluate them in 3 metrics
             evaluate_result = {}
-            for metric in evaluate_metrics:
+            for metric in Evaluator.evaluate_metrics:
                 evaluate_result[metric.value] = self.__evaluate_single(sentences, metric)
             
             # 3. calculate GM & HM of them
             results_list = [evaluate_result[EvalMetric.Style.value], evaluate_result[EvalMetric.Content.value]]
-            for mean_type in mean_types:
+            for mean_type in Evaluator.mean_types:
                 evaluate_result[mean_type.value] = self.__mean_result(results_list, mean_type)
 
             return evaluate_result
@@ -138,7 +138,28 @@ class Evaluator:
 
         output_path = join_path(output_folder, filename)
         write_json(output_path, evaluate_results)
+
+    def evaluate(self, sentences: List[dict] | dict):
+
+        def run_logic(sentence: str):
+            eval_result = {}
+            for metric in Evaluator.evaluate_metrics:
+                eval_result[metric.value] = self.__evaluate_single([sentence], metric)
+                
+            to_mean_result = [eval_result[EvalMetric.Style.value], eval_result[EvalMetric.Content.value]]
+            for mean_type in Evaluator.mean_types:
+                eval_result[mean_type.value] = self.__mean_result(to_mean_result, mean_type)
+
+            return eval_result
+
+        if isinstance(sentences, list):
+            result = []
+            for sentence in sentences:
+                result.append(run_logic(sentence))
+            return result
         
+        return run_logic(sentences)
+    
     # evaluate in single metric
     def __evaluate_single(self, sentences: List[str], metric: EvalMetric, precision: int=2) -> float:
         match metric:
@@ -181,8 +202,8 @@ def main_retrieval():
     
     model_kind = BotType.Llama_7B
     dataset_names = [
-        'yelp', 
-        # 'gyafc'
+        # 'yelp', 
+        'gyafc'
     ]
 
     for dataset_name in tqdm(dataset_names, desc='Dataset'):
@@ -194,7 +215,7 @@ def main_retrieval():
         # evaluate ...
         evaluator = Evaluator(dataset_name)
         evaluator.append_retrieval_results(kinds, results_path)
-        evaluator.evaluate(output_path, filename, k)    
+        evaluator.evaluate_batch(output_path, filename, k)    
 
 def main():
     names = []
@@ -207,7 +228,7 @@ def main():
         results_path, 
         filename=TRANSFER_OUTPUT_FILE
     )
-    evaluator.evaluate(
+    evaluator.evaluate_batch(
         output_path,
         filename=EVALUATE_OUTPUT_FILE
     )
