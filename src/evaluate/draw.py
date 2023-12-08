@@ -45,7 +45,7 @@ def draw(model_name: str, dataset_name: str, k: int, need_show: bool=False):
 
     plt.figure(figsize=(15, 18))
 
-    kinds_num = len(retrieval_kinds) - 1
+    kinds_num = len(colors)
     w = 0.9 / kinds_num
     for (i, (metric, eval_result)) in enumerate(draw_result.items()):
         plt.subplot(len(draw_result), 1, i+1)
@@ -62,6 +62,8 @@ def draw(model_name: str, dataset_name: str, k: int, need_show: bool=False):
             
             if metric == 'style':
                 plt.ylim((50, 85))
+            elif metric == 'GM' or metric == 'HM':
+                plt.ylim((40, 65))
 
         plt.axhline(eval_result['null'], linestyle='--', label='base')
         plt.xticks(np.arange(len(retrieval_num)), retrieval_num)
@@ -83,7 +85,7 @@ def draw(model_name: str, dataset_name: str, k: int, need_show: bool=False):
 
 def main():
     model_name = 'llama_7b'
-    dataset_name = "yelp"
+    dataset_name = "gyafc"
     k = 1500
     draw(model_name, dataset_name, k)
 
