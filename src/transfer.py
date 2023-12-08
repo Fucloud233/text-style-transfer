@@ -25,7 +25,8 @@ def load_dataset(dataset_path: str, k: int=-1, is_random: bool=True):
 def select_bot(
         bot_kind: BotType,
         retrieval_type: RetrievalType, 
-        dataset_name: str=""
+        dataset_name: str="",
+        mix_rate: float=1
     ) -> TransferBot:
 
     kwargs = {}
@@ -38,6 +39,10 @@ def select_bot(
     if retrieval_type in [RetrievalType.Random, RetrievalType.BM25, RetrievalType.MixBM25, RetrievalType.MixGTR]:
         retrieval_path = 'data/{}/train.1'.format(dataset_name)
         kwargs['retrieval_dataset'] = load_dataset(retrieval_path)
+    
+    if retrieval_type in [RetrievalType.MixBM25, RetrievalType.MixGTR]:
+        kwargs['mix_rate'] = mix_rate
+
     if retrieval_type in [RetrievalType.GTR, RetrievalType.MixGTR]:
         kwargs['dataset_name'] = dataset_name
 
@@ -162,6 +167,54 @@ def run_batch(
                 else FewRetrievalPrompt
             runner_logic(prompt, retrieval_num)
 
+def run_rate(    
+    bot_kind: BotType,
+    dataset_name: str,
+    k: int,
+    mix_rates: List[float],
+    retrieval_types: List[RetrievalType],
+    retrieval_num: int = 10,
+    dataset_path: str=None,
+):  
+    if dataset_path == None:
+        dataset_path = 'output/{}.test.0.{}'.format(dataset_name, k)
+    output_path = 'output/{}_{}_0_{}'.format(bot_kind.value, dataset_name, k)
+
+    target_style = StyleMap[dataset_name][1]
+    # handle with meeting single number input
+    
+    dataset = load_dataset(dataset_path)[:k]
+
+    # encapsulate logic function
+    def runner_logic(prompt: str, mix_rate: float):
+        # 1. set the prompt
+        bot.set_prompt(prompt)
+
+        # 2. transfer sentences
+        result = []
+        for sentence in tqdm(dataset, desc="Sentence Process", leave=None):
+            output = transfer(bot, sentence, target_style, retrieval_num)
+
+            result.append({
+                "0": sentence,
+                "1": output['result'],
+                "prompt": output['prompt']
+            })
+
+        # 3. generate output filename
+        output_filename = str(retrieval_num) + '_' + str(int(mix_rate * 10)) + '_' + OUTPUT_FILENAME
+
+        # 4. save them into files
+        cur_output_path = join_path(output_path, [retrieval_type.value, output_filename])
+        write_json(cur_output_path, result)
+
+    for retrieval_type in tqdm(retrieval_types, desc="Retrieval Type"):
+        for mix_rate in tqdm(mix_rates, desc="Mix Rate", leave=None):
+            bot = select_bot(bot_kind, retrieval_type, dataset_name, mix_rate=mix_rate)
+            prompt = FewRetrievalPrompt
+            runner_logic(prompt, mix_rate)
+
+
 def talk():
     prompt = "There is a sentence '{sentence}'. You should rewrite it more {target}. The more positive sentence is {{"
 
@@ -178,10 +231,10 @@ def talk():
 
 def main():
     retrieval_types = [
-        # RetrievalType.Null, 
-        # RetrievalType.Random, 
-        # RetrievalType.BM25,
-        # RetrievalType.GTR,
+        RetrievalType.Null, 
+        RetrievalType.Random, 
+        RetrievalType.BM25,
+        RetrievalType.GTR,
         RetrievalType.MixBM25,
         RetrievalType.MixGTR
     ]
@@ -194,7 +247,7 @@ def main():
     ]
 
     bot_kind = BotType.Llama_7B
-    dataset_name = 'yelp'
+    dataset_name = 'gyafc'
     num = 1500
     test_dataset_name = 'output/{}.test.0.1500'.format(dataset_name)
 
@@ -206,8 +259,30 @@ def main():
         retrieval_num, 
         test_dataset_name
     )
+
+def main_rate():
+    retrieval_types= [RetrievalType.BM25, RetrievalType.GTR]
+
+    mix_rates = [
+        0.1, 0.2, 0.4, 0.6, 0.8
+    ]
+
+    bot_kind = BotType.Llama_7B
+    dataset_name = 'gyafc'
+    num = 1500
+    test_dataset_name = 'output/{}.test.0.1500'.format(dataset_name)
+
+    run_rate(
+        bot_kind, 
+        dataset_name, 
+        num, 
+        mix_rates,
+        retrieval_types,
+        10,
+        test_dataset_name
+    )
     
 if __name__ == '__main__':
     # talk()
 
-    main()
+    main_rate()

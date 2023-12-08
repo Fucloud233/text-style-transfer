@@ -54,6 +54,7 @@ class TransferBot:
                     self._retrieval = self._retrieval_by_bm25
                 else:
                     random.seed(2017)
+                    self.__mix_rate = kwargs['mix_rate']
                     self._retrieval_dataset = kwargs['retrieval_dataset']
                     self._retrieval = self._retrieval_by_mix_bm25
             case RetrievalType.GTR | RetrievalType.MixGTR:
@@ -64,6 +65,7 @@ class TransferBot:
                     self._retrieval = self._retrieval_by_gtr
                 else:
                     random.seed(2017)
+                    self.__mix_rate = kwargs['mix_rate']
                     self._retrieval_dataset = kwargs['retrieval_dataset']
                     self._retrieval = self._retrieval_by_mix_gtr
         
@@ -167,7 +169,7 @@ class TransferBot:
         )
 
     def __retrieval_mixer(self, sentence: str, retrieval_num: int, method1: Callable, method2: Callable):
-        num = int(retrieval_num / 2)
+        num = int(retrieval_num * self.__mix_rate)
         if num < 2:
             return method1(sentence, retrieval_num)
         
