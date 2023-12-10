@@ -4,8 +4,10 @@ sys.path.append('.')
 from typing import List
 from tqdm import tqdm
 
+from pprint import pprint
+
 from utils.config import RetrievalType, BotType, set_random_seed
-from utils.file import write_json, read_json, join_path, iter_folder
+from utils.file import write_json, read_json, join_path, iter_folder, fmt_iter_folder
 from utils.evaluate import EvalMetric, harmonic_mean, geometric_mean
 
 from roberta import evaluate_batch as roberta_batch_eval
@@ -105,6 +107,23 @@ class Evaluator:
                 "path": path,
             })
     
+    def append_mix_results(self, kinds: List[RetrievalType], num: int, output):
+        kind_str = [ kind.value for kind in kinds]
+
+        for kind in kind_str:
+            paths = {}
+            for (path, file_name) in fmt_iter_folder(join_path(output, kind), "10_*"):
+                parts = file_name.split("_")
+                if  len(parts) == 2:
+                    paths[num] = path 
+                elif len(parts) == 3:
+                    paths[parts[1]] = path
+
+            self.results_info.append({
+                "retrieval": kind,
+                "path": paths
+            })
+
     def evaluate_batch(self, output_folder: str, filename: str=EVALUATE_OUTPUT_FILE, k: int=-1):
         def run_logic(sentence_path: str):
             # 1. read the sentence for evaluating
@@ -136,6 +155,34 @@ class Evaluator:
 
             evaluate_results[info['retrieval']] = results
 
+        output_path = join_path(output_folder, filename)
+        write_json(output_path, evaluate_results)
+
+    def evaluate_rate(self, output_folder: str, filename: str, k=-1):
+        def run_logic(sentence_path: str):
+            # 1. read the sentence for evaluating
+            sentences = read_json(sentence_path)
+            sentences = sentences if k == -1 else sentences[:k]
+
+            # 2. evaluate them in 3 metrics
+            evaluate_result = {}
+            for metric in Evaluator.evaluate_metrics:
+                evaluate_result[metric.value] = self.__evaluate_single(sentences, metric)
+            
+            # 3. calculate GM & HM of them
+            results_list = [evaluate_result[EvalMetric.Style.value], evaluate_result[EvalMetric.Content.value]]
+            for mean_type in Evaluator.mean_types:
+                evaluate_result[mean_type.value] = self.__mean_result(results_list, mean_type)
+
+            return evaluate_result
+
+        evaluate_results = {}
+        for info in self.results_info:
+            result = {}
+            for (rate, path) in info['path'].items():
+                result[rate] = run_logic(path)
+            evaluate_results[info['retrieval']] = result
+        
         output_path = join_path(output_folder, filename)
         write_json(output_path, evaluate_results)
 
@@ -233,8 +280,33 @@ def main():
         filename=EVALUATE_OUTPUT_FILE
     )
 
+def main_rate():
+    kinds = [RetrievalType.MixBM25, RetrievalType.MixGTR]
+    num = 10
+
+    dataset_name = 'gyafc'
+    model_kind = BotType.Llama_7B
+    k = 1500
+
+    results_path = 'output/{}_{}_0_{}'.format(model_kind.value, dataset_name, k)
+
+    evaluator = Evaluator(dataset_name)
+    evaluator.append_mix_results(
+        kinds, num, results_path
+    )
+    
+    pprint(evaluator.results_info)
+
+    evaluator.evaluate_rate(
+        join_path(results_path, 'evaluate'),
+        'rate_result.json',
+        k=k
+    )
+
+
 if __name__ == '__main__':
     set_random_seed()
 
-    main_retrieval()
+    # main_retrieval()
+    main_rate() 
     # mean_evaluate_result()
