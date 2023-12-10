@@ -261,14 +261,14 @@ def main():
     )
 
 def main_rate():
-    retrieval_types= [RetrievalType.BM25, RetrievalType.GTR]
+    retrieval_types= [RetrievalType.MixBM25, RetrievalType.MixGTR]
 
     mix_rates = [
-        0.1, 0.2, 0.4, 0.6, 0.8
+        0.1, 0.2, 0.4, 0.6, 0.8, 1.0
     ]
 
     bot_kind = BotType.Llama_7B
-    dataset_name = 'gyafc'
+    dataset_name = 'gyafc' 
     num = 1500
     test_dataset_name = 'output/{}.test.0.1500'.format(dataset_name)
 
