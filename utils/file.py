@@ -36,6 +36,9 @@ def modify_name(origin_file_path: str, file_name: str) -> str:
 def iter_folder(folder_path: str) -> List[str]:
     return [path.name for path in Path(folder_path).iterdir()]
 
+def fmt_iter_folder(folder_path: str, pattern: str):
+    return [(path, path.name) for path in Path(folder_path).glob(pattern)]
+
 def join_path(path: str, names: List[str] | str):
     path = Path(path)
 
