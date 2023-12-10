@@ -76,6 +76,10 @@ class VectorDB:
             pass
     
     def query(self, name: str, sentence: str, k: int=1):
+        if k == 0:
+            return []
+
+
         collection: Collection = self.collections[name]
 
         result = collection.query(
