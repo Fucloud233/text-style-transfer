@@ -174,9 +174,9 @@ class TransferBot:
             return method1(sentence, retrieval_num)
         
         retrieval_sentences: List = method1(sentence, num)
-        retrieval_sentences.extend(method2(sentence, num))
+        retrieval_sentences.extend(method2(sentence, retrieval_num - num))
         # shuffle the retrieval_sentences
-        random.shuffle(retrieval_sentences)
+        # random.shuffle(retrieval_sentences)
         return retrieval_sentences
 
     def set_prompt(self, prompt: str):
